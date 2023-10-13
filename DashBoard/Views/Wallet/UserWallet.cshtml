@@ -1,0 +1,47 @@
+﻿@model Data.DTO.Wallet.WalletDTO
+@{
+    ViewData["Title"] = "UserWallet";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var controllerName = this.ViewContext.RouteData.Values["controller"].ToString();
+}
+
+<div class="page-wrapper">
+    @await Html.PartialAsync("_DashboardTitle")
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card card-outline-primary">
+                    <div class="card-header">
+                        <h4 class="m-b-0 text-white">فرم @ViewData["Title"]</h4>
+                    </div>
+                    <div class="card-body">
+                        <form asp-controller="@controllerName" asp-action="ChargeWallet" id="proForm" method="post" enctype="multipart/form-data">
+
+                            <input type="hidden" asp-for="Id" />
+                            <input type="hidden" asp-for="UserId" />
+                            <div class="form-group">
+                                <div class="row mt-4">
+                                    <div class="col-md-6">
+                                        <label asp-for="UserFullName">صاحب کیف پول</label>
+                                        <input asp-for="UserFullName" type="text" readonly class="form-control input-rounded" />
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label asp-for="Balance">مقدار شارژ</label>
+                                        <input asp-for="Balance" type="text" class="form-control input-rounded" />
+                                    </div>
+                                </div>
+                            </div>
+                           
+
+                            <hr />
+                            <div class="row">
+                                <button type="submit" class="btn m-btn--pill m-btn--air btn-success mr-2 color-white cursor-pointer">ثبت</button>
+                                <a asp-controller="@controllerName" asp-action="Index" class="btn m-btn--pill m-btn--air btn-danger color-white cursor-pointer">بازگشت</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

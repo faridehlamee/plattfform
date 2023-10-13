@@ -1,0 +1,31 @@
+﻿@model Data.DTO.Common.SliderDTO
+
+@Html.HiddenFor(c => c.Id)
+@Html.HiddenFor(c => c.IsActive)
+@Html.HiddenFor(c => c.DateInsert)
+@Html.HiddenFor(c => c.Image)
+@Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+
+    <hr />
+    <div class="form-group">
+        <div class="row">
+            <div class="col-md-6">
+                <label asp-for="Title">عنوان</label>
+                <input asp-for="Title" type="text" class="form-control input-rounded" />
+            </div>
+            <div class="col-md-6">
+                <label asp-for="Image">تصویر</label>
+                <input asp-for="Image" type="file" class="form-control input-rounded" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <label asp-for="Url">آدرس</label>
+                <input asp-for="Url" type="text" class="form-control input-rounded" />
+            </div>
+
+        </div>
+    </div>
+</div>

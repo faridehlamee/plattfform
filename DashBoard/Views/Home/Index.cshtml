@@ -1,0 +1,156 @@
+﻿@model DashBoard.Models.Dashboard
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="page-wrapper">
+    <!-- Bread crumb -->
+    @await Html.PartialAsync("_DashboardTitle")
+    <!-- End Bread crumb -->
+    <!-- Container fluid  -->
+    <div class="container-fluid">
+
+        <div class="row">
+
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-title">
+                        <h4>جست و جو سفارشات </h4>
+                    </div>
+                    <div class="card-body">
+
+                        <form asp-controller="Order" asp-action="Index" method="get">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="">نام محصول</label>
+                                        <input type="text" class="form-control " name="refId" value="">
+                                    </div>
+                                </div>
+                                <div class="col-md-1">
+
+                                    <div class="form-group">
+                                        <label>.</label>
+                                        <input type="submit" class="form-control btn btn-primary" value="جست و جو">
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="card p-30">
+                    <div class="media">
+                        <div class="media-left meida media-middle">
+                            <span><i class="fa fa-usd f-s-40 color-primary"></i></span>
+                        </div>
+                        <div class="media-body media-text-right ml-3">
+                            <h2>@Model.AllPriceReport.SumPrice.ToString("N0")</h2>
+                            <p class="m-b-0">@Model.AllPriceReport.Title</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card p-30">
+                    <div class="media">
+                        <div class="media-left meida media-middle">
+                            <span><i class="fa fa-shopping-cart f-s-40 color-success"></i></span>
+                        </div>
+                        <div class="media-body media-text-right ml-3">
+                            <h2>@Model.AllOrderReport.Count</h2>
+                            <p class="m-b-0">@Model.AllOrderReport.Title</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card p-30">
+                    <div class="media">
+                        <div class="media-left meida media-middle">
+                            <span><i class="fa fa-archive f-s-40 color-warning"></i></span>
+                        </div>
+                        <div class="media-body media-text-right ml-3">
+                            <h2>@Model.NewOrderReport.Count</h2>
+                            <p class="m-b-0">@Model.NewOrderReport.Title</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card p-30">
+                    <div class="media">
+                        <div class="media-left meida media-middle">
+                            <span><i class="fa fa-user f-s-40 color-danger"></i></span>
+                        </div>
+                        <div class="media-body media-text-right ml-3">
+                            <h2>@Model.RegisterUserReport.Count</h2>
+                            <p class="m-b-0">@Model.RegisterUserReport.Title</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-title">
+                        <h4>Sales</h4>
+                    </div>
+                    <div class="sales-chart">
+                        <div class="ct-bar-chart" style="height:350px"><svg xmlns:ct="http://gionkunz.github.com/chartist-js/ct" width="100%" height="100%" class="ct-chart-bar" style="width: 100%; height: 100%;"><g class="ct-grids"><line x1="50" x2="50" y1="15" y2="315" class="ct-grid ct-horizontal"></line><line x1="106.79166666666666" x2="106.79166666666666" y1="15" y2="315" class="ct-grid ct-horizontal"></line><line x1="163.58333333333331" x2="163.58333333333331" y1="15" y2="315" class="ct-grid ct-horizontal"></line><line x1="220.375" x2="220.375" y1="15" y2="315" class="ct-grid ct-horizontal"></line><line x1="277.16666666666663" x2="277.16666666666663" y1="15" y2="315" class="ct-grid ct-horizontal"></line><line x1="333.9583333333333" x2="333.9583333333333" y1="15" y2="315" class="ct-grid ct-horizontal"></line><line x1="390.75" x2="390.75" y1="15" y2="315" class="ct-grid ct-horizontal"></line><line x1="447.54166666666663" x2="447.54166666666663" y1="15" y2="315" class="ct-grid ct-horizontal"></line><line x1="504.3333333333333" x2="504.3333333333333" y1="15" y2="315" class="ct-grid ct-horizontal"></line><line x1="561.125" x2="561.125" y1="15" y2="315" class="ct-grid ct-horizontal"></line><line x1="617.9166666666666" x2="617.9166666666666" y1="15" y2="315" class="ct-grid ct-horizontal"></line><line x1="674.7083333333333" x2="674.7083333333333" y1="15" y2="315" class="ct-grid ct-horizontal"></line><line y1="315" y2="315" x1="50" x2="731.5" class="ct-grid ct-vertical"></line><line y1="277.5" y2="277.5" x1="50" x2="731.5" class="ct-grid ct-vertical"></line><line y1="240" y2="240" x1="50" x2="731.5" class="ct-grid ct-vertical"></line><line y1="202.5" y2="202.5" x1="50" x2="731.5" class="ct-grid ct-vertical"></line><line y1="165" y2="165" x1="50" x2="731.5" class="ct-grid ct-vertical"></line><line y1="127.5" y2="127.5" x1="50" x2="731.5" class="ct-grid ct-vertical"></line><line y1="90" y2="90" x1="50" x2="731.5" class="ct-grid ct-vertical"></line><line y1="52.5" y2="52.5" x1="50" x2="731.5" class="ct-grid ct-vertical"></line><line y1="15" y2="15" x1="50" x2="731.5" class="ct-grid ct-vertical"></line></g><g><g class="ct-series ct-series-a"><line x1="73.39583333333333" x2="73.39583333333333" y1="315" y2="165" class="ct-bar" ct:value="5"></line><line x1="130.1875" x2="130.1875" y1="315" y2="195" class="ct-bar" ct:value="4"></line><line x1="186.97916666666666" x2="186.97916666666666" y1="315" y2="225" class="ct-bar" ct:value="3"></line><line x1="243.77083333333334" x2="243.77083333333334" y1="315" y2="105" class="ct-bar" ct:value="7"></line><line x1="300.56249999999994" x2="300.56249999999994" y1="315" y2="165" class="ct-bar" ct:value="5"></line><line x1="357.35416666666663" x2="357.35416666666663" y1="315" y2="15" class="ct-bar" ct:value="10"></line><line x1="414.1458333333333" x2="414.1458333333333" y1="315" y2="225" class="ct-bar" ct:value="3"></line><line x1="470.93749999999994" x2="470.93749999999994" y1="315" y2="195" class="ct-bar" ct:value="4"></line><line x1="527.7291666666666" x2="527.7291666666666" y1="315" y2="75" class="ct-bar" ct:value="8"></line><line x1="584.5208333333334" x2="584.5208333333334" y1="315" y2="15" class="ct-bar" ct:value="10"></line><line x1="641.3125" x2="641.3125" y1="315" y2="135" class="ct-bar" ct:value="6"></line><line x1="698.1041666666666" x2="698.1041666666666" y1="315" y2="75" class="ct-bar" ct:value="8"></line></g><g class="ct-series ct-series-b"><line x1="83.39583333333333" x2="83.39583333333333" y1="315" y2="225" class="ct-bar" ct:value="3"></line><line x1="140.1875" x2="140.1875" y1="315" y2="255" class="ct-bar" ct:value="2"></line><line x1="196.97916666666666" x2="196.97916666666666" y1="315" y2="45" class="ct-bar" ct:value="9"></line><line x1="253.77083333333334" x2="253.77083333333334" y1="315" y2="165" class="ct-bar" ct:value="5"></line><line x1="310.56249999999994" x2="310.56249999999994" y1="315" y2="195" class="ct-bar" ct:value="4"></line><line x1="367.35416666666663" x2="367.35416666666663" y1="315" y2="135" class="ct-bar" ct:value="6"></line><line x1="424.1458333333333" x2="424.1458333333333" y1="315" y2="195" class="ct-bar" ct:value="4"></line><line x1="480.93749999999994" x2="480.93749999999994" y1="315" y2="135" class="ct-bar" ct:value="6"></line><line x1="537.7291666666666" x2="537.7291666666666" y1="315" y2="105" class="ct-bar" ct:value="7"></line><line x1="594.5208333333334" x2="594.5208333333334" y1="315" y2="75" class="ct-bar" ct:value="8"></line><line x1="651.3125" x2="651.3125" y1="315" y2="105" class="ct-bar" ct:value="7"></line><line x1="708.1041666666666" x2="708.1041666666666" y1="315" y2="195" class="ct-bar" ct:value="4"></line></g></g><g class="ct-labels"><foreignObject style="overflow: visible;" x="50" y="320" width="56.791666666666664" height="20"><span class="ct-label ct-horizontal ct-end" style="width: 57px; height: 20px" xmlns="http://www.w3.org/2000/xmlns/">Jan</span></foreignObject><foreignObject style="overflow: visible;" x="106.79166666666666" y="320" width="56.791666666666664" height="20"><span class="ct-label ct-horizontal ct-end" style="width: 57px; height: 20px" xmlns="http://www.w3.org/2000/xmlns/">Feb</span></foreignObject><foreignObject style="overflow: visible;" x="163.58333333333331" y="320" width="56.79166666666667" height="20"><span class="ct-label ct-horizontal ct-end" style="width: 57px; height: 20px" xmlns="http://www.w3.org/2000/xmlns/">Mar</span></foreignObject><foreignObject style="overflow: visible;" x="220.375" y="320" width="56.79166666666666" height="20"><span class="ct-label ct-horizontal ct-end" style="width: 57px; height: 20px" xmlns="http://www.w3.org/2000/xmlns/">Apr</span></foreignObject><foreignObject style="overflow: visible;" x="277.16666666666663" y="320" width="56.79166666666666" height="20"><span class="ct-label ct-horizontal ct-end" style="width: 57px; height: 20px" xmlns="http://www.w3.org/2000/xmlns/">May</span></foreignObject><foreignObject style="overflow: visible;" x="333.9583333333333" y="320" width="56.791666666666686" height="20"><span class="ct-label ct-horizontal ct-end" style="width: 57px; height: 20px" xmlns="http://www.w3.org/2000/xmlns/">Jun</span></foreignObject><foreignObject style="overflow: visible;" x="390.75" y="320" width="56.79166666666663" height="20"><span class="ct-label ct-horizontal ct-end" style="width: 57px; height: 20px" xmlns="http://www.w3.org/2000/xmlns/">Jul</span></foreignObject><foreignObject style="overflow: visible;" x="447.54166666666663" y="320" width="56.791666666666686" height="20"><span class="ct-label ct-horizontal ct-end" style="width: 57px; height: 20px" xmlns="http://www.w3.org/2000/xmlns/">Aug</span></foreignObject><foreignObject style="overflow: visible;" x="504.3333333333333" y="320" width="56.791666666666686" height="20"><span class="ct-label ct-horizontal ct-end" style="width: 57px; height: 20px" xmlns="http://www.w3.org/2000/xmlns/">Sep</span></foreignObject><foreignObject style="overflow: visible;" x="561.125" y="320" width="56.79166666666663" height="20"><span class="ct-label ct-horizontal ct-end" style="width: 57px; height: 20px" xmlns="http://www.w3.org/2000/xmlns/">Oct</span></foreignObject><foreignObject style="overflow: visible;" x="617.9166666666666" y="320" width="56.79166666666663" height="20"><span class="ct-label ct-horizontal ct-end" style="width: 57px; height: 20px" xmlns="http://www.w3.org/2000/xmlns/">Nov</span></foreignObject><foreignObject style="overflow: visible;" x="674.7083333333333" y="320" width="56.79166666666674" height="20"><span class="ct-label ct-horizontal ct-end" style="width: 57px; height: 20px" xmlns="http://www.w3.org/2000/xmlns/">Dec</span></foreignObject><foreignObject style="overflow: visible;" y="277.5" x="10" height="37.5" width="30"><span class="ct-label ct-vertical ct-start" style="height: 38px; width: 30px" xmlns="http://www.w3.org/2000/xmlns/">0</span></foreignObject><foreignObject style="overflow: visible;" y="240" x="10" height="37.5" width="30"><span class="ct-label ct-vertical ct-start" style="height: 38px; width: 30px" xmlns="http://www.w3.org/2000/xmlns/">1.25</span></foreignObject><foreignObject style="overflow: visible;" y="202.5" x="10" height="37.5" width="30"><span class="ct-label ct-vertical ct-start" style="height: 38px; width: 30px" xmlns="http://www.w3.org/2000/xmlns/">2.5</span></foreignObject><foreignObject style="overflow: visible;" y="165" x="10" height="37.5" width="30"><span class="ct-label ct-vertical ct-start" style="height: 38px; width: 30px" xmlns="http://www.w3.org/2000/xmlns/">3.75</span></foreignObject><foreignObject style="overflow: visible;" y="127.5" x="10" height="37.5" width="30"><span class="ct-label ct-vertical ct-start" style="height: 38px; width: 30px" xmlns="http://www.w3.org/2000/xmlns/">5</span></foreignObject><foreignObject style="overflow: visible;" y="90" x="10" height="37.5" width="30"><span class="ct-label ct-vertical ct-start" style="height: 38px; width: 30px" xmlns="http://www.w3.org/2000/xmlns/">6.25</span></foreignObject><foreignObject style="overflow: visible;" y="52.5" x="10" height="37.5" width="30"><span class="ct-label ct-vertical ct-start" style="height: 38px; width: 30px" xmlns="http://www.w3.org/2000/xmlns/">7.5</span></foreignObject><foreignObject style="overflow: visible;" y="15" x="10" height="37.5" width="30"><span class="ct-label ct-vertical ct-start" style="height: 38px; width: 30px" xmlns="http://www.w3.org/2000/xmlns/">8.75</span></foreignObject><foreignObject style="overflow: visible;" y="-15" x="10" height="30" width="30"><span class="ct-label ct-vertical ct-start" style="height: 30px; width: 30px" xmlns="http://www.w3.org/2000/xmlns/">10</span></foreignObject></g></svg></div>
+                    </div>
+                </div>
+                <!-- /# card -->
+            </div>
+            <!-- /# column -->
+            <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-title">
+                        <h4>آمار فروشگاه</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover ">
+                                <thead>
+                                    <tr>
+                                        <th>نام فروشگاه</th>
+                                        <th>تعداد</th>
+                                        <th>مبلغ</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.SaleReport)
+                                    {
+                                        <tr>
+                                            <td>@item.Title</td>
+                                            <td>@item.Count</td>
+                                            <td>@item.SumPrice.ToString("N0")</td>
+                                        </tr>
+                                    }
+
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="text-center mt-4">
+            <p><a href="#"><img style="width:50%;" src="~/images/PNG.gif" alt="Alternate Text" /></a>.</p>
+
+        </div>
+        <!-- End PAge Content -->
+    </div>
+
+</div>
+
+
+

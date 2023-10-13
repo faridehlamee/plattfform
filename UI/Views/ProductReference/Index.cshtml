@@ -1,0 +1,124 @@
+﻿@model Data.DTO.Sales.OrderDTO
+@{
+    ViewData["Title"] = "آموزشگاه فورته | مرجوع کالا";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="page-content">
+    <div class="categories-page">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 mx-0">
+                    <form id="msform" asp-controller="ProductReference" asp-action="CreateProductReference" method="post">
+                        <!-- progressbar -->
+                        <input type="hidden" asp-for="Id"  />
+                        <input type="hidden" asp-for="AddressId" name="AddressId" />
+                        <ul id="progressbar">
+                            <li class="active" id="account">قوانین</li>
+                            <li id="personal">انتخاب محصول</li>
+                            <li id="payment">ثبت نهایی</li>
+
+                        </ul> <!-- fieldsets -->
+                        <fieldset>
+                            <div class="form-card">
+                                <h5 class="fs-title">شرایط و قوانین </h5>
+                                <hr />
+                                <p class="mt-4">
+                                    برای تعویض و یا مرجوع، محصول نباید استفاده شده باشد و فاقد هرگونه زدگی، پارگی، کثیف شدن، بوی عطر و بدن، شست و شو و... باشد.
+                                </p>
+
+                            </div> <input type="button" name="next" class="next action-button" value="ادامـــــــه" />
+                        </fieldset>
+                        <fieldset>
+                            <div class="form-card">
+                                <h5 class="fs-title">انتخاب محصول برای مرجوع</h5>
+                                <hr />
+                                <p> شماره سفارش :  @Model.RefId</p>
+                                <table class="table table-bordered">
+                                    <thead class="thead-light">
+                                        <tr>
+                                            <th>انتخاب</th>
+                                            <th>تصویر</th>
+                                            <th>نام محصول</th>
+                                            <th>دلیل مرجوع</th>
+                                            <th>تعداد</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @for (int i = 0; i < Model.listOrderDetail.Count; i++)
+                                        {
+                                        <tr>
+                                            @Html.HiddenFor(m => m.listOrderDetail[i].Id)
+                                            @Html.HiddenFor(m => m.listOrderDetail[i].OrderId)
+                                           
+                                            @Html.HiddenFor(m => m.listOrderDetail[i].ProductId)
+                                            <td width="40px;"> <input asp-for="listOrderDetail[i].IsSelected" type="checkbox" /> </td>
+                                            <td width="100px;"> <img src="https://dashboard.atkhalagh.ir/images/product/@Model.listOrderDetail[i].ProductCurrentImage" alt="" /></td>
+                                            <td> @Model.listOrderDetail[i].ProductName</td>
+                                            <td width="200px;">
+                                                <select asp-for="listOrderDetail[i].ReferenceReason" asp-items="Html.GetEnumSelectList<Common.AllEnum.Commons.ProductReferenceReason>()" class="form-control input-rounded SearchDropDown ">
+                                                    <option selected="selected" value="">لطفا انتخاب کنید</option>
+                                                </select>
+                                            </td>
+                                            <td width="150px;">
+                                                <input asp-for="listOrderDetail[i].Value" type="number" max="@Model.listOrderDetail[i].Value" required="">
+                                            </td>
+
+                                        </tr>
+                                        }
+
+
+                                    </tbody>
+                                </table>
+                            </div>
+                            <input type="button" name="previous" class="previous action-button-previous" value="بازگــشت" />
+                            <input type="button" name="next" class="next action-button" value="ادامـــــــه" />
+
+                        </fieldset>
+                        <fieldset>
+                            <div class="form-card">
+                                <h5 class="fs-title">اطلاعات ارسال کننده</h5>
+                                <hr />
+                                <div class="radio-group">
+                                    <p class="mt-4">
+                                        نام :  @Model.UserFirstName
+                                    </p>
+                                    <p class="mt-4">
+                                        نام خانوادگی :  @Model.UserLastName
+                                    </p>
+                                    <p class="mt-4">
+                                        موبایل :  @Model.UserPhoneNumber
+                                    </p>
+                                    <p class="mt-4">
+                                        آدرس :<span>  @Model.Address.ProvinceName</span>
+                                        <span>  @Model.Address.CityName</span>
+                                        <span>  @Model.Address.AddressDesc پلاک : @Model.Address.Plaque کدپستی:  @Model.Address.PostalCode</span>
+
+                                        <div></div>
+                                    </p>
+                                </div>
+                                <h5 class="fs-title">توضیحات</h5>
+                                <hr />
+                                <div class="row">
+                                    <div class="col-12">
+                                        <label class="pay">متن</label>
+                                        <textarea asp-for="Memo" placeholder="متن..."></textarea>
+
+                                    </div>
+                                    <p class="text-danger">* پس از ثبت نهایی همکاران ما طی 24 ساعت آینده با شما تماس خواهند گرفت</p>
+                                </div>
+
+                            </div>
+                            <input type="button" name="previous" class="previous action-button-previous" value="بازگــشت" />
+                            <input type="submit" name="make_payment" class="next action-button" value="ثبــــت" />
+
+                        </fieldset>
+
+                    </form>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,103 @@
+﻿@model Data.DTO.Sales.OrderDTO
+@{
+    ViewData["Title"] = "فاکتور";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<main class="cart-page default">
+    <div class="container">
+            <div class="factor">
+                <H3 class="text-center">فاکتور فروش</H3>
+                <div class="row mt-4">
+                    <div class="col-md-6">
+                        <p>
+                            نام خریدار: @Model.UserFirstName @Model.UserLastName
+                        </p>
+                        <p>
+                            آدرس : @($"{Model.Address.ProvinceName} - {Model.Address.CityName} - {Model.Address.AddressDesc} - پلاک : {Model.Address.Plaque}  ")
+                        </p>
+                        <p>
+                            کد پستی : @Model.Address.PostalCode
+                        </p>
+                    </div><!-- End .col-md-6 -->
+
+                    <div class="col-md-6">
+                        <p>
+                            شماره فاکتور : @Model.RefId
+                        </p>
+                        <p>
+                            تاریخ :@Model.PersianDate
+                        </p>
+                    </div><!-- End .col-md-6 -->
+
+
+                </div>
+                <hr />
+                <div class="row">
+                    <table class="table table-wishlist table-mobile text-center">
+                        <thead>
+                            <tr>
+                                <th>نام محصول</th>
+                                <th>تصویر محصول</th>
+                                <th>سایز</th>
+                                <th>تعداد</th>
+                                <th>قیمت</th>
+                                <th>مجموع</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            @foreach (var item in Model.listOrderDetail)
+                            {
+                                <tr>
+                                    <td class="price-col">
+                                        <div>
+                                            <h3 class="product-title text-center">
+                                                <a href="#">@item.ProductName</a>
+                                            </h3><!-- End .product-title -->
+                                        </div><!-- End .product -->
+                                    </td>
+                                    <td class="price-col">
+                                        <div>
+                                            <figure class="product-media">
+
+                                                <img width="100px" src="https://dashboard.forteacademy.ir/images/product/@item.ProductCurrentImage" alt="تصویر محصول">
+
+                                            </figure>
+                                        </div><!-- End .product -->
+                                    </td>
+                                    <td class="price-col">@item.ProductWareHouseTypeSizeItemName</td>
+                                    <td class="price-col">@item.Value</td>
+                                    <td class="price-col price">@item.MainPriceAmount.ToString("N0") تومان</td>
+                                    <td class="price-col price">@($"{(item.MainPriceAmount * item.Value).ToString("N0")}") تومان</td>
+
+                                </tr>
+                            }
+
+                            <tr>
+                                <td class="price-col">سبد کالا</td>
+                                <td class="price-col price">@Model.TotalPayment.ToString("N0")</td>
+                                <td class="price-col">هزینه ارسال</td>
+                                <td class="price-col price">@Model.TotalExtraAmount.ToString("N0")</td>
+                                <td class="price-col">تخفیف</td>
+                                <td class="price-col price">@Model.TotalDiscount.ToString("N0")</td>
+                            </tr>
+                            <tr>
+                                <td class="price-col">پرداخت</td>
+                                <td class="price-col price">@Model.FinalPayment.ToString("N0")</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+</main>
+
+
+

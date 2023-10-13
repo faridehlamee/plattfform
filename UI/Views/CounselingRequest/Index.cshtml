@@ -1,0 +1,63 @@
+﻿@model Data.DTO.Request.CounselingRequestDTO
+@{
+    ViewData["Title"] = "Consultation request form";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+ 
+
+
+
+<main class="main">
+
+    <div class="container">
+        <div class="page-header page-header-big text-center" style="background-image: url('../images/request-header-bg.jpg')">
+            <h1 class="page-title text-white">Counseling Request<span class="text-white">Request an Inspection</span></h1>
+        </div><!-- End .page-header -->
+    </div><!-- End .container -->
+
+    <div class="page-content pb-0">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-lg-12">
+                    <h2 class="title mb-1">Everything You need to Know About the Property</h2><!-- End .title mb-2 -->
+
+                    <form asp-action="Create" asp-controller="CounselingRequest" class="contact-form mb-3">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <label asp-for="FirstName" class="sr-only">Name</label>
+                                <input type="text" class="form-control" asp-for="FirstName" placeholder="Name *" required="">
+                            </div><!-- End .col-sm-6 -->
+
+                            <div class="col-sm-6">
+                                <label asp-for="LastName" class="sr-only">Last Name</label>
+                                <input type="text" class="form-control" asp-for="LastName" placeholder="Email *" required="">
+                            </div><!-- End .col-sm-6 -->
+                        </div><!-- End .row -->
+
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <label asp-for="Mobile" class="sr-only">Phone</label>
+                                <input type="tel" class="form-control" asp-for="Mobile" placeholder="Mobile">
+                            </div><!-- End .col-sm-6 -->
+
+
+                        </div><!-- End .row -->
+
+                        <label asp-for="Description" class="sr-only">Message</label>
+                        <textarea class="form-control" cols="30" rows="4" asp-for="Description" required="" placeholder="Message *"></textarea>
+
+                        <button type="submit" class="btn btn-outline-primary-2 btn-minwidth-sm">
+                            <span>Request an Inspection</span>
+                            <i class="icon-long-arrow-right"></i>
+                        </button>
+                    </form><!-- End .contact-form -->
+                </div><!-- End .col-lg-6 -->
+            </div><!-- End .row -->
+
+            <hr class="mt-4 mb-5">
+
+        </div><!-- End .container -->
+    </div><!-- End .page-content -->
+</main>

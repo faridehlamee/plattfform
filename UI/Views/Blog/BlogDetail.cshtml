@@ -1,0 +1,60 @@
+﻿@model Data.DTO.Blog.BlogDTO
+@{
+    ViewData["Title"] ="آموزشگاه فورته |"+ Model.Title;
+}
+
+<div class="content">
+    <div class="blog-content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12 order-1">
+                    <div class="blog-post shadow-box">
+                        
+                        <div class="blog-post-content">
+                            <figure class="image-center " style="text-align:center;">
+                                <img class="aligncenter"
+                                     src="https://dashboard.forteacademy.ir/images/blog/@Model.Image"
+                                     alt="@Model.Title">
+                            </figure>
+
+                            <div class="blog-post-title">
+                                <div class="blog-post-title-items">
+
+                                    <div class="blog-post-title-item">
+                                        <h4 class="title gold mt-2 mb-2">@Model.Title</h4>
+                                    </div>
+                                    <div class="blog-post-title-item">
+                                        <i class="bi bi-alarm"></i>
+                                        <p class="show-date text-muted">
+                                            @Model.DateInsert
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            @if (Model.AparatLink != null )
+                            {
+                                <div class="video">
+                                    <div id="@Model.AparatID">
+                                        <script type="text/JavaScript" src="@Model.AparatLink"></script>
+                                    </div>
+                                </div>
+                            }
+                            <p>
+                                @Html.Raw(Model.Description)
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end blog-content -->
+
+
+</div>
+
+@section scripts{
+
+
+
+}

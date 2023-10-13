@@ -1,0 +1,113 @@
+﻿@model Data.DTO.Request.CooperationRequestDTO
+@{
+    ViewData["Title"] = "فرم درخواست همکاری";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div class="content">
+
+
+    <div class="about-us py-3">
+        <div class="container-fluid">
+            <div class="content-box shadow-box px-3">
+                <div class="comment-form mt-5">
+                    <h6 class="tab-title mt-3">@ViewData["Title"]</h6>
+                    <form class="row g-3 needs-validation" novalidate asp-action="Create" asp-controller="CooperationRequest" enctype="multipart/form-data">
+                        <input type="hidden" asp-for="Courses" />
+                        <div class="col-md-6">
+                            <div class="form-inline w-100">
+                                <label asp-for="FirstName" class="form-label my-3">
+                                    نام
+                                    <span class="text-danger ms-1">*</span>
+                                </label>
+                                <input asp-for="FirstName" type="text" class="form-control"
+                                       placeholder="نام " required>
+                                <div class="invalid-feedback">
+                                    لطفا نام خود را وارد نمایید
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-inline w-100">
+                                <label asp-for="LastName" class="form-label my-3">
+                                    نام خانوادگی
+                                    <span class="text-danger ms-1">*</span>
+                                </label>
+                                <input asp-for="LastName" type="text" class="form-control"
+                                       placeholder="نام خانوادگی" required>
+                                <div class="invalid-feedback">
+                                    لطفا نام خانوادگی خود را وارد نمایید
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-inline w-100">
+                                <label asp-for="Mobile" class="form-label my-3">
+                                    موبایل
+                                    <span class="text-danger ms-1">*</span>
+                                </label>
+                                <input asp-for="Mobile" type="text" class="form-control"
+                                       placeholder="موبایل" required>
+                                <div class="invalid-feedback">
+                                    لطفا موبایل خود را وارد نمایید
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-inline w-100">
+                                <label asp-for="File" class="form-label my-3">
+                                    فایل رزومه
+                                    <span class="text-danger ms-1">*</span>
+                                </label>
+                                <input asp-for="File" type="file" class="form-control">
+                            </div>
+                        </div>
+                        @*          <div class="col-md-12">
+                            <label asp-for="Mobile" class="form-label my-3">
+                            دوره ها
+                            <span class="text-danger ms-1">*</span>
+                            </label>
+                            @foreach (var item in Model.ListCourse)
+                            {
+                            <div class="form-check mb-2">
+                            <input type="checkbox"  id="checkbox-@item.Value" value="@item.Text" class="form-check-input">
+                            <label for="checkbox-@item.Value" class="form-check-label text-muted">
+                            @item.Text
+                            </label>
+                            </div>
+                            }
+
+
+                            </div>*@
+                        <div class="form-group mb-2">
+                            <label asp-for="Description" class="form-label my-3">
+                                توضیحات  <span class="text-danger ms-1">*</span>
+                            </label>
+                            <textarea asp-for="Description" rows="7" class="form-control"
+                                      placeholder="توضیحات" required></textarea>
+                        </div>
+                        <div class="form-group mb-2">
+                            <div class="row">
+
+                                <div class="col-md-6">
+                                    <div class="form-inline w-100">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <input type="submit" value="ثبت"
+                               class="btn btn-success rounded-pill w-100 mt-3 shadow-sm">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- end about us -->
+
+
+</div>
+<!-- end content -->

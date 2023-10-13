@@ -1,0 +1,31 @@
+﻿
+@{
+    ViewData["Title"] = "آموزشگاه فورته | سبد خرید";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div class="content">
+    <div class="cart">
+        <div class="container-fluid">
+            <div class="cart-content shadow-box">
+                <div class="cart-empty">
+                    <div class="cart-empty-icon mb-0">
+                        <img src="img/default-icon/empty-cart.svg" alt="" width="300" class="img-fluid">
+                    </div>
+                    <div class="cart-empty-title">
+                        <h2 class="text-muted">سبد خرید شما خالیست!</h2>
+                        <div class="cart-empty-offer">
+                            <a href=""><span class="danger-span-border">لیست مورد علاقه من</span></a>
+                            <a href=""><span class="danger-span-border">محصولات شگفت انگیز</span></a>
+                            <a href=""><span class="danger-span-border">محصولات پر فروش روز</span></a>
+                        </div>
+                        <a asp-action="Index" asp-controller="Home" class="btn-main btn-main-primary waves-effect waves-light fs-6 waves-effect waves-light">صفحه اصلـــی</a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

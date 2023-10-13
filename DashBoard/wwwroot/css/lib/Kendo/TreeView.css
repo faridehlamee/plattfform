@@ -1,0 +1,289 @@
+/* </TreeView> */
+
+/*.treeview-section {
+	width: 80%;
+}*/
+
+.k-treeview {
+    /*z-index: 2;*/
+    /*padding-left: 45px;*/
+}
+
+    .k-treeview .k-treeview-lines {
+        display: block;
+        position: relative;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+
+        .k-treeview .k-treeview-lines .k-item {
+            display: block;
+            position: relative;
+            margin: 0;
+            min-height: 20px;
+            font-size: 13px;
+            line-height: normal;
+        }
+
+            .k-treeview .k-treeview-lines .k-item:hover {
+                color: white;
+            }
+
+        .k-treeview .k-treeview-lines .k-top,
+        .k-treeview .k-treeview-lines .k-bot,
+        .k-treeview .k-treeview-lines .k-mid {
+            display: block;
+            /*height: 30px;*/
+            margin: 5px 0;
+            padding: 0;
+            color: #333;
+            text-decoration: none;
+            font-weight: 400;
+            border: 1px solid #ccc;
+            background: #fafafa;
+            box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            overflow: hidden;
+        }
+
+.modal .k-treeview .k-treeview-lines .k-top,
+.modal .k-treeview .k-treeview-lines .k-bot,
+.modal .k-treeview .k-treeview-lines .k-mid {
+    /*height: 28px;*/
+}
+
+.k-treeview .k-treeview-lines .k-top:hover,
+.k-treeview .k-treeview-lines .k-bot:hover,
+.k-treeview .k-treeview-lines .k-mid:hover {
+    color: white;
+}
+
+.k-treeview .k-treeview-lines .k-icon.k-plus,
+.k-treeview .k-treeview-lines .k-icon.k-minus {
+    display: block;
+    position: relative;
+    cursor: pointer;
+    float: right;
+    width: 25px;
+    /*height: 20px;*/
+    margin-right: 0;
+    margin-top: 11px;
+    padding: 0;
+    text-indent: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    border: 0;
+    background: transparent;
+    font-size: 10px;
+    line-height: 1;
+    text-align: center;
+    font-weight: bold;
+}
+
+    .k-treeview .k-treeview-lines .k-icon.k-plus:before,
+    .k-treeview .k-treeview-lines .k-icon.k-minus:before {
+        content: '\f067';
+        display: block;
+        position: absolute;
+        width: 100%;
+        text-align: center;
+        text-indent: 0;
+        font-family: 'FontAwesome';
+        font-size: 13px !important;
+        cursor: pointer;
+    }
+
+    .k-treeview .k-treeview-lines .k-icon.k-minus:before {
+        content: '\f068';
+    }
+
+.k-treeview .k-treeview-lines .k-in {
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    line-height: 30px;
+    display: inline-block;
+    padding-top: 2px;
+    padding-left: 5px;
+    border-style: none;
+    -webkit-box-shadow: none;
+    width: 100%;
+    cursor: pointer;
+}
+
+    .k-treeview .k-treeview-lines .k-in.k-state-selected,
+    .k-treeview .k-treeview-lines .k-in.k-state-active,
+    .k-treeview .k-treeview-lines .k-in.k-state-focused,
+    .k-treeview .k-treeview-lines .k-in.k-state-hover {
+        background: inherit;
+        color: black;
+        padding-top: 2px;
+        margin-top: 0;
+        margin-bottom: 0;
+        margin-left: 0;
+        /*width: 100%;*/
+        padding-left: 5px;
+    }
+
+    .k-treeview .k-treeview-lines .k-in.k-state-selected {
+        background: cornflowerblue !important;
+    }
+
+    .k-treeview .k-treeview-lines .k-in.k-state-selected,
+    .k-treeview .k-treeview-lines .k-in.k-state-hover {
+        background: #2F96B4;
+        /*color: white;*/
+    }
+
+        .k-treeview .k-treeview-lines .k-in.k-state-selected:hover,
+        .k-treeview .k-treeview-lines .k-top:hover,
+        .k-treeview .k-treeview-lines .k-mid:hover,
+        .k-treeview .k-treeview-lines .k-bot:hover,
+        .k-treeview .k-treeview-lines .k-item:hover {
+            color: white !important;
+        }
+
+.k-treeview .k-treeview-lines .k-top:hover,
+.k-treeview .k-treeview-lines .k-top:focus,
+.k-treeview .k-treeview-lines .k-mid:hover,
+.k-treeview .k-treeview-lines .k-mid:focus,
+.k-treeview .k-treeview-lines .k-bot:hover,
+.k-treeview .k-treeview-lines .k-bot:focus {
+    background-color: #b3eeff;
+}
+
+.k-treeview .k-treeview-lines .k-top,
+.k-treeview .k-treeview-lines .k-bot,
+.k-treeview .k-treeview-lines .k-mid {
+    min-width: 400px;
+}
+
+
+/*.k-treeview .k-treeview-lines .k-icon.k-plus + .k-in,
+.k-treeview .k-treeview-lines .k-icon.k-minus + .k-in {
+    width: 97%;
+}*/
+
+.k-treeview .k-treeview-lines .k-in i.icon-link {
+    display: inline-block;
+    padding-right: 10px;
+}
+
+.k-treeview .k-treeview-lines .k-in:hover i.icon-link {
+    display: inline-block;
+    padding-right: 17px;
+}
+
+.k-treeview .k-treeview-lines .k-icon.k-plus + .k-in i.icon-link,
+.k-treeview .k-treeview-lines .k-icon.k-minus + .k-in i.icon-link {
+    display: inline-block;
+    padding-right: 20px;
+}
+
+.k-treeview .k-treeview-lines .k-in .icon-chevron-sign-down {
+    float: right;
+    padding-right: 5px;
+}
+
+/* </TreeView> */
+
+
+/*.treeview-section .k-in {
+    border-style: none;
+    -webkit-box-shadow: none;
+    padding: 2px 0px 2px 2px;
+    width: 99%;
+    vertical-align: middle;
+    line-height: 30px;
+    text-indent: 10px;
+}*/
+
+
+.treeview-item {
+    color: black !important;
+    overflow: hidden;
+}
+
+    .treeview-item a {
+        color: #606060 !important;
+    }
+
+    /*.k-treeview .k-treeview-lines .k-in.k-state-selected, .k-treeview .k-treeview-lines .k-in.k-state-hover {
+	background: none !important;
+}*/
+
+    .treeview-item .treeview-item-btn-group {
+        float: left !important;
+        margin-left: 10px;
+    }
+
+    .treeview-item .treeview-item-text {
+        float: right !important;
+        margin-right: 15px;
+    }
+
+
+.location-treeview-item {
+    background: none !important;
+    color: black !important;
+}
+
+.location-treeview-item a {
+    color: #606060 !important;
+}
+
+
+.location-treeview-item .location-btn-group {
+    float: left !important;
+    margin-left: 10px;
+}
+
+.modal-content .k-treeview .k-treeview-lines .k-top,
+.modal-content .k-treeview .k-treeview-lines .k-bot,
+.modal-content .k-treeview .k-treeview-lines .k-mid {
+    height: 28px !important;
+    font-size: 12px !important;
+}
+
+.modal-content .k-treeview .k-treeview-lines .k-in {
+    line-height: 23px !important;
+}
+
+.modal-content .k-treeview .k-treeview-lines .k-icon.k-plus,
+.modal-content .k-treeview .k-treeview-lines .k-icon.k-minus {
+    height: 25px !important;
+    margin-top: 8px !important;
+}
+/*Kendo Tree View*/
+.treeview-item-right {
+    float: right;
+}
+
+.treeview-item-left {
+    float: left;
+}
+
+.k-rtl {
+    overflow: hidden;
+}
+
+.k-treeview .k-treeview-lines .k-in.k-state-selected {
+    background: cornflowerblue !important;
+}
+
+.k-treeview .k-treeview-lines .k-top, .k-treeview .k-treeview-lines .k-bot, .k-treeview .k-treeview-lines .k-mid {
+    min-width: 100px !important;
+}
+/*Kendo Tree View*/
+.k-rtl .k-treeview .k-i-collapse, .k-rtl .k-treeview .k-i-expand {
+    margin-left: -16px; 
+    margin-right: 0px; 
+}
+.k-rtl .k-treeview .k-i-expand:before {
+    content: "\e005";
+}
+.k-rtl .k-treeview .k-i-collapse:before {
+    content: "\e006";
+    margin-top: 4px;
+}

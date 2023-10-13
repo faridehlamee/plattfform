@@ -1,0 +1,30 @@
+﻿@model Data.DTO.Movies.MovieCategoryDTO
+
+@Html.HiddenFor(c => c.Id)
+@Html.HiddenFor(c => c.IsActive)
+@Html.HiddenFor(c => c.DateInsert)
+@Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+
+    <hr />
+
+    <div class="form-group">
+        <div class="row">
+            <div class="col-md-6">
+                <label asp-for="Title">نام دسته</label>
+                <input asp-for="Title" type="text" class="form-control input-rounded" />
+            </div>
+            <div class="col-md-6">
+                <label asp-for="Image">تصویر</label>
+                <input asp-for="Image" type="file" class="form-control input-rounded" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <label asp-for="Description">نام دسته</label>
+                <textarea asp-for="Description" class="form-control input-rounded" >@Model.Description</textarea>
+            </div>
+        </div>
+    </div>
+</div>

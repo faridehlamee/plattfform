@@ -1,0 +1,122 @@
+﻿
+@{
+    ViewData["Title"] = "قوانین کد معرف";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var controllerName = this.ViewContext.RouteData.Values["controller"].ToString();
+}
+
+<div class="page-wrapper">
+    <!-- Bread crumb -->
+    @await Html.PartialAsync("_DashboardTitle")
+    <!-- End Bread crumb -->
+    <!-- Container fluid  -->
+    <div class="container-fluid">
+        <!-- Start Page Content -->
+        <div class="row">
+            <div class="col-12">
+
+                <div class="row page-item ml-4">
+                    <div class="dt-buttons">
+                        <a href="@Url.Action("Create",controllerName )" class="btn btn-success btn-rounded">
+                                 <i class="fa fa-plus mr-2" aria-hidden="true"></i>
+                            ثبت @ViewData["Title"]
+                        </a>
+                    </div>
+                </div>
+                <div class="k-rtl  shadow">
+                    <div id="List"></div>
+
+                </div>
+
+            </div>
+        </div>
+        <!-- End PAge Content -->
+    </div>
+
+</div>
+
+
+
+@section scripts{
+    <script>
+
+        $(document).ready(function () {
+
+            List();
+        });
+
+        function search() {
+            List();
+        }
+        function List() {
+            debugger
+            //var search = $('#searchForm').serialize();
+
+            $("#List").kendoGrid({
+                scrollable: true,
+                resizable: true,
+                autoBind: true,
+                sortable: true,
+                dataSource: {
+                    type: "Json",
+                    serverPaging: true,
+                    transport: {
+                        read: "@Url.Action("List", controllerName)",
+                        type: "POST",
+                        dataType: "json"
+                    },
+                    schema: {
+                        data: "data", // records are returned in the "data" field of the response
+                        total: "total" // total number of records is in the "total" field of the response
+                    },
+                    pageSize: 20,
+
+                },
+                pageable: {
+                    refresh: true,
+                    pageSizes: true,
+                    buttonCount: 5,
+                    pageSizes: [10, 20, 50]
+                },
+                dataBound: function () {
+                    this.expandRow(this.tbody.find("tr.k-master-row").first());
+                },
+                columns: [
+                   {
+                        field: "ForOwner",
+                        title: "برای صاحب کد",
+                        width: "110px"
+                    }, {
+                        field: "ForUser",
+                        title: "برای استفاده کننده",
+                        width: "110px"
+                    }, {
+                        template: '#= PertianDate(FromDate)#',
+                        field: "DateInsert",
+                        title: "از تاریخ",
+                        width: "110px"
+                    }, {
+                        template: '#= PertianDate(ToDate)#',
+                        field: "DateInsert",
+                        title: "تا تاریخ",
+                        width: "110px"
+                    }, {
+                        field: "Value",
+                        title: "مقدار",
+                        width: "110px"
+                    }
+
+
+                ]
+            });
+        }
+
+
+  
+    </script>
+
+
+
+
+
+}

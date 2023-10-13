@@ -1,0 +1,182 @@
+﻿@model Data.DTO.Product.ProductDTO
+@{
+    ViewData["Title"] = "محصولات";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var controllerName = this.ViewContext.RouteData.Values["controller"].ToString();
+}
+<input type="hidden" id="StoreTypeId" value="@Model.StoreTypeId" />
+<div class="page-wrapper">
+    <!-- Bread crumb -->
+    @await Html.PartialAsync("_DashboardTitle")
+    <!-- End Bread crumb -->
+    <!-- Container fluid  -->
+    <div class="container-fluid">
+        <!-- Start Page Content -->
+        <div class="row">
+            <div class="col-md-12">
+                <a class="btn btn-primary  btn-rounded ml-4" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                       <i class="fa fa-filter mr-2" aria-hidden="true"></i>
+                    جست و جو
+                </a>
+                <a href="@Url.Action("Create",controllerName ,new { StoreTypeId=Model.StoreTypeId})" class="btn btn-success btn-rounded">
+                         <i class="fa fa-plus mr-2" aria-hidden="true"></i>
+                    ثبت @ViewData["Title"]
+                </a>
+
+                <div class="collapse" id="collapseExample">
+                    <div class="card card-body">
+
+                        <form asp-controller="@controllerName" asp-action="#" method="post" id="searchForm" enctype="multipart/form-data">
+
+                            <div class="form-horizontal">
+                                <input asp-for="Id" type="hidden" />
+                                <input asp-for="StoreTypeId" type="hidden" />
+                                <hr />
+                                <div class="form-group">
+                                    <div class="row mb-4">
+                                        <div class="col-md-6">
+                                            <label asp-for="Name"></label>
+                                            <input asp-for="Name" type="text" class="form-control input-rounded" />
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label asp-for="ProductCode"></label>
+                                            <input asp-for="ProductCode" type="text" class="form-control input-rounded" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <hr />
+                            <div class="row">
+                                <button type="button" class="btn m-btn--pill m-btn--air btn-success mr-2 color-white cursor-pointer" onclick="search()">تایید</button>
+                            </div>
+                        </form>
+
+
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="k-rtl  shadow mt-4">
+                    <div id="List"></div>
+                </div>
+
+            </div>
+        </div>
+        <!-- End PAge Content -->
+    </div>
+
+</div>
+
+
+@section scripts{
+    <script>
+
+        $(document).ready(function () {
+
+            List();
+        });
+
+        function search() {
+            List();
+        }
+        function List() {
+            debugger
+            var search = $('#searchForm').serialize();
+
+            $("#List").kendoGrid({
+                scrollable: true,
+                resizable: true,
+                autoBind: true,
+                sortable: true,
+                dataSource: {
+                    type: "Json",
+                    serverPaging: true,
+                    transport: {
+                        read: "@Url.Action("List", controllerName)/?data=" + search,
+                        type: "POST",
+                        dataType: "json"
+                    },
+                    schema: {
+                        data: "data", // records are returned in the "data" field of the response
+                        total: "total" // total number of records is in the "total" field of the response
+                    },
+                    pageSize: 20,
+
+                },
+                pageable: {
+                    refresh: true,
+                    pageSizes: true,
+                    buttonCount: 5,
+                    pageSizes: [10, 20, 50]
+                },
+                dataBound: function () {
+                    this.expandRow(this.tbody.find("tr.k-master-row").first());
+                },
+                columns: [
+                    {
+                        template: " <img src='/images/Product/#=CurrentImage#'  width='50%' alt='#=CurrentImage#'/>",
+                        field: "CurrentImage",
+                        title: "تصویر",
+                        width: 100
+                    }, {
+                        field: "ProductCode",
+                        title: "کد ",
+                        width: "110px"
+                    }, {
+                        field: "Name",
+                        title: "نام ",
+                        width: "110px"
+                    }, {
+                        field: "Group",
+                        title: "گروه",
+                        width: "110px"
+                    }, {
+                        field: "Amount",
+                        title: "مبلغ",
+                        width: "110px"
+                    }, {
+                        field: "IsShow",
+                        title: "قابل نمایش",
+                        width: "110px"
+                    },
+                    {
+                        title: "عملیات",
+                        width: 100,
+                        template:
+
+                            "<a  onclick='Remove(#=Id#)' asp-route-id='#=Id#' class='btn'><i class='fa fa-trash' aria-hidden='true'></i></a>   |" +
+                            "<a href='@Url.Action("EditPage", controllerName)/?Id=#=Id#'  class='btn' ><i class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   |"+
+                            "<a href='@Url.Action("Index", "WareHouse")/?ProductId=#=Id#' class='btn'><i class='fa fa-database' aria-hidden='true'></i></a> " 
+
+                    }
+
+
+                ]
+            });
+        }
+
+
+          function Remove(Id) {
+              var r = confirm("آیا مطمئن هستید؟!");
+              if (r == true) {
+                  $.ajax({
+                      type: 'POST',
+                      url: '@Url.Action("Delete", controllerName)',
+                      data: { id: Id },
+                      success: function () {
+                          debugger;
+                          toastr.success(' حذف شد')
+                          $("#List").data("kendoGrid").dataSource.read();
+                      }
+                  });
+              }
+                   }
+    </script>
+
+
+
+
+
+}

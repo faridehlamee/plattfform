@@ -1,0 +1,19 @@
+﻿@model Data.DTO.BaseProduct.KeywordDTO
+
+@Html.HiddenFor(c => c.Id)
+@Html.HiddenFor(c => c.IsActive)
+@Html.HiddenFor(c => c.DateInsert)
+@Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+
+    <hr />
+    <div class="form-group">
+        <div class="row">
+            <div class="col-md-6">
+                <label asp-for="Key">عنوان</label>
+                <input asp-for="Key" type="text"class="form-control input-rounded" />
+            </div>
+        </div>
+    </div>
+</div>

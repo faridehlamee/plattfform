@@ -1,0 +1,211 @@
+﻿@model Data.DTO.Sales.OrderDTO
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var controllerName = this.ViewContext.RouteData.Values["controller"].ToString();
+}
+
+<div class="page-wrapper">
+    <!-- Bread crumb -->
+    @await Html.PartialAsync("_DashboardTitle")
+    <!-- End Bread crumb -->
+    <!-- Container fluid  -->
+    <div class="container-fluid">
+        <!-- Start Page Content -->
+        <div class="row">
+            <div class="col-md-12">
+                <a class="btn btn-primary  btn-rounded ml-4" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                    جست و جو
+                </a>
+                <div class="collapse" id="collapseExample">
+                    <div class="card card-body">
+
+                        <form asp-controller="@controllerName" asp-action="#" method="post" id="searchForm" enctype="multipart/form-data">
+
+                            <div class="form-horizontal">
+                                <input asp-for="Id" type="hidden" />
+                                <hr />
+                                <div class="form-group">
+                                    <div class="row mb-4">
+                                        <div class="col-md-6">
+                                            <label asp-for="UserFirstName"></label>
+                                            <input asp-for="UserFirstName" type="text" class="form-control input-rounded" />
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label asp-for="UserLastName"></label>
+                                            <input asp-for="UserLastName" type="text" class="form-control input-rounded" />
+                                        </div>
+                                    </div>
+                                    <div class="row mb-4">
+                                        <div class="col-md-6">
+                                            <label asp-for="RefId"></label>
+                                            <input asp-for="RefId" type="text" class="form-control input-rounded" />
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label asp-for="UserPhoneNumber"></label>
+                                            <input asp-for="UserPhoneNumber" type="text" class="form-control input-rounded" />
+                                        </div>
+                                    </div>
+                                    <input asp-for="State" type="hidden" />
+                                    <input asp-for="IsFinaly" type="hidden" />
+                                </div>
+                            </div>
+
+                            <hr />
+                            <div class="row">
+                                <button type="button" class="btn m-btn--pill m-btn--air btn-success mr-2 color-white cursor-pointer" onclick="search()">تایید</button>
+                            </div>
+                        </form>
+
+
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="k-rtl  shadow mt-4">
+                    <div id="List"></div>
+                </div>
+
+            </div>
+        </div>
+        <!-- End PAge Content -->
+    </div>
+
+</div>
+
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+
+            List();
+        });
+
+        function search()
+        {
+            List();
+        }
+
+
+        function List() {
+            debugger
+            var search = $('#searchForm').serialize();
+            $("#List").kendoGrid({
+                scrollable: true,
+                resizable: true,
+                autoBind: true,
+                sortable: true,
+                dataSource: {
+                    type: "Json",
+                    serverPaging: true,
+                    transport: {
+                        read: "@Url.Action("List", controllerName)?data=" + search,
+                        type: "POST",
+                        dataType: "json"
+
+                    }, schema: {
+                        data: "data", // records are returned in the "data" field of the response
+                        total: "total" // total number of records is in the "total" field of the response
+                    },
+                    pageSize: 20,
+
+                },
+                toolbar: ["search"],
+                pageable: {
+                    refresh: true,
+                    pageSizes: true,
+                    buttonCount: 5,
+                    pageSizes: [10, 20, 50]
+                },
+                dataBound: function () {
+                    this.expandRow(this.tbody.find("tr.k-master-row").first());
+                },
+                columns: [
+
+                    {
+                        title: "نام ",
+                        width: "110px",
+                        template:
+
+                        "<p>#=UserFirstName# #=UserLastName#</p>"
+
+                    }, {
+                        field: "UserPhoneNumber",
+                        title: "موبایل",
+                        width: "110px"
+                    },{
+                        field: "FinalPayment",
+                        title: "قیمت ",
+                        width: "110px"
+                    }, {
+                        field: "Address.ProvinceName",
+                        title: "استان ",
+                        width: "110px"
+                    }, {
+                        template: '#= PertianDate(DateInsert)#',
+                        title: "تاریخ ثبت ",
+                        width: "110px"
+                    }, {
+                        field: "DayName",
+                        title: "روز ",
+                        width: "110px"
+                    }, {
+                        field: "Hour",
+                        title: "ساعت ",
+                        width: "110px"
+                    }, {
+                        field: "RefId",
+                        title: "شماره مرجع ",
+                        width: "110px"
+                    },{
+                    title: "عملیات",
+                    width: 100,
+                    template:
+
+                            "<a href='@Url.Action("Factor", controllerName)/?Id=#=Id#' class='btn btn-primary btn-rounded' >نمایش</a> " +
+                            "<a href='javascript:Confirm(#=Id#)' class='btn btn-success'>ارسال برای پست </a> "
+
+                    }
+
+
+                ]
+            });
+        }
+
+
+        function Confirm(id) {
+            var r = confirm("آیا مطمئن هستید؟!");
+                         if (r == true) {
+                             $.ajax({
+                                 type: 'POST',
+                                 url: '@Url.Action("ConfirmFactor", controllerName)',
+                                 data: { Id: id },
+                                 success: function () {
+                                     toastr.success(' ثبت شد')
+                                     $("#List").data("kendoGrid").dataSource.read();
+                                 }
+                             });
+                         }
+                   }
+
+          function Remove(Id) {
+                       debugger;
+                       $.ajax({
+                           type: 'POST',
+                           url: '@Url.Action("Delete", controllerName)',
+                           data: { id: Id },
+                           success: function () {
+                               debugger;
+                               toastr.success(' حذف شد')
+                               $("#List").data("kendoGrid").dataSource.read();
+                           }
+                       });
+                   }
+    </script>
+
+
+
+
+
+}

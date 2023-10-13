@@ -1,0 +1,438 @@
+﻿@using Microsoft.EntityFrameworkCore;
+@using Services
+@inject Data.Contracts.IRepository<Entites.Entities.StoreType> _StoreTypeRepository; 
+@inject Data.Contracts.IRepository<Entites.Entities.Request.CooperationRequest> _cooperationRepository;
+@inject Data.Contracts.IRepository<Entites.Entities.Request.CounselingRequest> _CounselingRepository ;
+@{
+    var sortype = await _StoreTypeRepository.TableNoTracking.Where(c => c.IsActive).ToListAsync();
+    var cooperationCount = await _cooperationRepository.TableNoTracking.Where(c => c.IsActive && c.Index == 1).CountAsync(); 
+    var counselingCount = await _CounselingRepository.TableNoTracking.Where(c => c.IsActive && c.Index == 1).CountAsync();
+}
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon.png">
+    <title>@ViewData["Title"] - DashBoard</title>
+    <!-- Bootstrap Core CSS -->
+    <link href="~/css/lib/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+
+    <link href="~/css/lib/calendar2/semantic.ui.min.css" rel="stylesheet">
+    <link href="~/css/lib/calendar2/pignose.calendar.min.css" rel="stylesheet">
+    <link href="~/css/lib/owl.carousel.min.css" rel="stylesheet" />
+    <link href="~/css/lib/owl.theme.default.min.css" rel="stylesheet" />
+    <link href="~/css/lib/Kendo/kendo.common.min.css" rel="stylesheet" />
+    <link href="~/css/lib/Kendo/kendo.default.min.css" rel="stylesheet" />
+    <link href="~/css/lib/Kendo/kendo.default.mobile.min.css" rel="stylesheet" />
+    <link href="~/css/helper.css" rel="stylesheet">
+    <link href="~/css/style.css" rel="stylesheet">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:** -->
+    <!--[if lt IE 9]>
+        <script src="https:**oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https:**oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body class="fix-header fix-sidebar"> 
+        <div class="preloader">
+            <svg class="circular" viewBox="25 25 50 50">
+                <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" />
+            </svg>
+        </div>
+        <div id="main-wrapper">
+            <!-- header header  -->
+            <div class="header">
+                <nav class="navbar top-navbar navbar-expand-md navbar-light">
+                    <!-- Logo -->
+                    <div class="navbar-header">
+                        <a class="navbar-brand" href="@Url.Action("Index","Home")">
+                            <!-- Logo icon --> 
+                            <b>Ro</b>
+                        </a>
+                    </div>
+
+                    <!-- End Logo -->
+                    <div class="navbar-collapse">
+                        <!-- toggle and nav items -->
+                        <ul class="navbar-nav mr-auto mt-md-0">
+                            <!-- This is  -->
+                            <li class="nav-item"> <a class="nav-link nav-toggler hidden-md-up" href="javascript:void(0)"><i class="mdi mdi-menu"></i></a> </li>
+                            <li class="nav-item m-l-10"> <a class="nav-link sidebartoggler hidden-sm-down" href="javascript:void(0)"><i class="ti-menu"></i></a> </li>
+                            
+                        </ul>
+                        <!-- User profile and search -->
+                        <ul class="navbar-nav my-lg-0">
+
+                            <!-- Search -->
+                            <li class="nav-item hidden-sm-down search-box">
+                                <a class="nav-link hidden-sm-down" href="javascript:void(0)"><i class="ti-search"></i></a>
+                                <form class="app-search">
+                                    <input type="text" class="form-control" placeholder="Search here"> <a class="srh-btn"><i class="ti-close"></i></a>
+                                </form>
+                            </li>
+                            <!-- Comment -->
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fa fa-bell"></i>
+                                    <div class="notify"> <span class="heartbit"></span> <span class="point"></span> </div>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right mailbox animated zoomIn">
+                                    <ul>
+                                        <li>
+                                            <div class="drop-title">Notifications</div>
+                                        </li>
+                                        <li>
+                                            <div class="message-center">
+                                                <!-- Message -->
+                                                <a href="#">
+                                                    <div class="btn btn-danger btn-circle m-r-10"><i class="fa fa-link"></i></div>
+                                                    <div class="mail-contnet">
+                                                        <h5>This is title</h5> <span class="mail-desc">Just see the my new admin!</span> <span class="time">9:30 AM</span>
+                                                    </div>
+                                                </a>
+                                                <!-- Message -->
+                                                <a href="#">
+                                                    <div class="btn btn-success btn-circle m-r-10"><i class="ti-calendar"></i></div>
+                                                    <div class="mail-contnet">
+                                                        <h5>This is another title</h5> <span class="mail-desc">Just a reminder that you have event</span> <span class="time">9:10 AM</span>
+                                                    </div>
+                                                </a>
+                                                <!-- Message -->
+                                                <a href="#">
+                                                    <div class="btn btn-info btn-circle m-r-10"><i class="ti-settings"></i></div>
+                                                    <div class="mail-contnet">
+                                                        <h5>This is title</h5> <span class="mail-desc">You can customize this template as you want</span> <span class="time">9:08 AM</span>
+                                                    </div>
+                                                </a>
+                                                <!-- Message -->
+                                                <a href="#">
+                                                    <div class="btn btn-primary btn-circle m-r-10"><i class="ti-user"></i></div>
+                                                    <div class="mail-contnet">
+                                                        <h5>This is another title</h5> <span class="mail-desc">Just see the my admin!</span> <span class="time">9:02 AM</span>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <a class="nav-link text-center" href="javascript:void(0);"> <strong>Check all notifications</strong> <i class="fa fa-angle-right"></i> </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <!-- End Comment -->
+                            <!-- Messages -->
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fa fa-envelope"></i>
+                                    <div class="notify"> <span class="heartbit"></span> <span class="point"></span> </div>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right mailbox animated zoomIn" aria-labelledby="2">
+                                    <ul>
+                                        <li>
+                                            <div class="drop-title">You have 4 new messages</div>
+                                        </li>
+                                        <li>
+                                            <div class="message-center">
+                                                <!-- Message -->
+                                                <a href="#">
+                                                    <div class="user-img"> <img src="images/users/5.jpg" alt="user" class="img-circle"> <span class="profile-status online pull-right"></span> </div>
+                                                    <div class="mail-contnet">
+                                                        <h5>Michael Qin</h5> <span class="mail-desc">Just see the my admin!</span> <span class="time">9:30 AM</span>
+                                                    </div>
+                                                </a>
+                                                <!-- Message -->
+                                                <a href="#">
+                                                    <div class="user-img"> <img src="images/users/2.jpg" alt="user" class="img-circle"> <span class="profile-status busy pull-right"></span> </div>
+                                                    <div class="mail-contnet">
+                                                        <h5>John Doe</h5> <span class="mail-desc">I've sung a song! See you at</span> <span class="time">9:10 AM</span>
+                                                    </div>
+                                                </a>
+                                                <!-- Message -->
+                                                <a href="#">
+                                                    <div class="user-img"> <img src="images/users/3.jpg" alt="user" class="img-circle"> <span class="profile-status away pull-right"></span> </div>
+                                                    <div class="mail-contnet">
+                                                        <h5>Mr. John</h5> <span class="mail-desc">I am a singer!</span> <span class="time">9:08 AM</span>
+                                                    </div>
+                                                </a>
+                                                <!-- Message -->
+                                                <a href="#">
+                                                    <div class="user-img"> <img src="images/users/4.jpg" alt="user" class="img-circle"> <span class="profile-status offline pull-right"></span> </div>
+                                                    <div class="mail-contnet">
+                                                        <h5>Michael Qin</h5> <span class="mail-desc">Just see the my admin!</span> <span class="time">9:02 AM</span>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <a class="nav-link text-center" href="javascript:void(0);"> <strong>See all e-Mails</strong> <i class="fa fa-angle-right"></i> </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <!-- End Messages -->
+                            <!-- Profile -->
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="~/images/avatar-1.png" alt="user" class="profile-pic" /></a>
+                                <div class="dropdown-menu dropdown-menu-right animated zoomIn">
+                                    <ul class="dropdown-user">
+                                        <li><a href="#"><i class="ti-user"></i> Admin User</a></li> 
+                                        <li><a href="@Url.Action("logout","Account",new {area="Account" })"><i class="fa fa-power-off"></i> log out</a></li>
+                                    </ul>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+            <!-- Left Sidebar  -->
+            <div class="left-sidebar">
+                <!-- Sidebar scroll-->
+                <div class="scroll-sidebar">
+                    <!-- Sidebar navigation-->
+                    <nav class="sidebar-nav">
+                        <ul id="sidebarnav">
+                            <li class="nav-devider mb-4"></li>
+                            <li>
+                                <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-tachometer"></i><span class="hide-menu">System management </span></a>
+                                <ul aria-expanded="false" class="collapse">
+                                    <li><a asp-controller="Home" asp-action="Index">management </a></li>
+                                    <li><a href="http://royalcanyon.ca/"> Main Site</a></li>
+                                    <li><a asp-controller="User" asp-action="Index">Users</a></li>
+                                    <li>@*<a asp-controller="IdentificationCodeRule" asp-action="Index">قوانین کد معرف</a>*@</li>
+                                    @*@if (User.HasClaim(ClaimTypesStore.EmployeeDetails, true.ToString()))*@
+                                    @if (User.IsInRole("Admin"))
+                                    {
+
+                                        <li><a asp-controller="RoleManager" asp-action="Index">RoleManager</a></li>
+                                        <li><a asp-controller="Claim" asp-action="Index"> Claim</a></li>
+                                    }
+
+                                </ul>
+                            </li>
+                            @*<li class="nav-label">فــروشــگاه</li>
+        <li>
+            <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-cogs"></i><span class="hide-menu">ساختار فروشگاه</span></a>
+            <ul aria-expanded="false" class="collapse">
+                <li><a asp-controller="GenderProductType" asp-action="Index">نوع جنسیت</a></li>
+                <li><a asp-controller="StoreType" asp-action="Index">فروشگاه</a></li>
+                <li><a asp-controller="ProductType" asp-action="Index">نوع محصول</a></li>
+                <li><a asp-controller="Detail" asp-action="Index">تعریف پارامتر</a></li>
+                <li><a asp-controller="Guid" asp-action="Index">راهنما </a></li>
+            </ul>
+        </li>
+        <li>
+            <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-building"></i><span class="hide-menu">تنظیمات انبار</span></a>
+            <ul aria-expanded="false" class="collapse">
+                <li><a asp-controller="TypeSize" asp-action="Index"> اندازه</a></li>
+            </ul>
+        </li>
+        <li>
+            <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-product-hunt"></i><span class="hide-menu">محصولات</span></a>
+            <ul aria-expanded="false" class="collapse">
+
+                @foreach (var item in sortype)
+                {
+                    <li><a href="@Url.Action("Index","Product" , new { StoreTypeId=item.Id})">@item.StoreName</a></li>
+                }
+
+            </ul>
+        </li>
+        <li>
+            <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-th"></i><span class="hide-menu">دسته سازی محصول </span></a>
+            <ul aria-expanded="false" class="collapse">
+                <li><a asp-controller="OfferZone" asp-action="Index">مناطق صفحه</a></li>
+                <li><a asp-controller="OfferType" asp-action="Index">انواع آفر</a></li>
+                <li><a asp-controller="Offer" asp-action="Index"> آفر </a></li>
+            </ul>
+        </li>
+        <li>
+            <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-money"></i><span class="hide-menu">مالی</span></a>
+            <ul aria-expanded="false" class="collapse">
+                <li><a asp-controller="PriceCenter" asp-action="Index"> مرکز هزینه</a></li>
+                <li><a asp-controller="Discount" asp-action="Index" asp-route-discountType="2"> کد تخفیف  </a></li>
+                <li><a asp-controller="DiscountOnProduct" asp-action="Index" asp-route-discountType="1"> تخفیف روی محصول </a></li>
+            </ul>
+        </li>*@
+                            <li class="nav-label"> Requests</li>
+                            <li>
+                                <a asp-controller="CounselingRequest" asp-action="Index" aria-expanded="false"><i class="fa fa-pencil-square-o"></i><span class="hide-menu">Counseling Request</span><span class="badge badge-light ml-2">@counselingCount</span></a>
+
+                            </li>
+                            <li>
+                                <a asp-controller="CooperationRequest" asp-action="Index" aria-expanded="false"><i class="fa fa-pencil-square-o"></i><span class="hide-menu">Cooperation Request</span><span class="badge badge-light ml-2">@cooperationCount</span></a>
+
+                            </li>
+                            @*<li>
+            <a asp-controller="RequestCourseRegister" asp-action="Index" aria-expanded="false"><i class="fa fa-folder-open"></i><span class="hide-menu">درخواست ثبت نام</span><span class="badge badge-light ml-2">@registerCount</span></a>
+
+        </li>*@
+
+                            @*<li class="nav-label">آمــوزش</li>
+        <li>
+            <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-book"></i><span class="hide-menu">دوره ها</span></a>
+            <ul aria-expanded="false" class="collapse">
+                <li><a asp-controller="CourseCategory" asp-action="Index">دسته بندی دوره</a></li>
+                <li><a asp-controller="Course" asp-action="Index">دوره ها</a></li>
+            </ul>
+        </li>
+        <li>
+            <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-pencil"></i><span class="hide-menu">آزمون</span></a>
+            <ul aria-expanded="false" class="collapse">
+                <li><a asp-controller="Exam" asp-action="Index">آزمون ها</a></li>
+                <li><a asp-controller="Examer" asp-action="Index">تخصیص آزمون</a></li>
+                <li><a asp-controller="Examer" asp-action="Report">گزارش</a></li>
+            </ul>
+        </li>*@
+
+                            @*<li>
+            <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-video-camera"></i><span class="hide-menu">فیلم های آپارات</span></a>
+            <ul aria-expanded="false" class="collapse">
+                <li><a asp-controller="MovieCategory" asp-action="Index">دسته</a></li>
+                <li><a asp-controller="Movie" asp-action="Index">فیلم</a></li>
+            </ul>
+        </li>*@
+                            @*<li class="nav-label">اطلاعــات مربــیان</li>
+        <li>
+            <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-id-badge"></i><span class="hide-menu">مربی</span></a>
+            <ul aria-expanded="false" class="collapse">
+                <li><a asp-controller="Teacher" asp-action="Index"> مربیان</a></li>
+                <li><a asp-controller="TeacherCurriculum" asp-action="Index">برنامه آموزشی</a></li>
+            </ul>
+        </li>*@
+
+
+
+                            @*<li class="nav-label">فــروش</li>
+        <li>
+            <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-shopping-bag"></i><span class="hide-menu">فروش </span></a>
+            <ul aria-expanded="false" class="collapse">
+                <li><a asp-controller="Order" asp-action="Index" asp-route-state="1">سفارشات جدید </a></li>
+                <li><a asp-controller="Order" asp-action="Index" asp-route-state="2">آماده ارسال</a></li>
+                <li><a asp-controller="Order" asp-action="Index" asp-route-state="4">ارسال شده</a></li>
+            </ul>
+        </li>
+        <li>
+            <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-credit-card-alt"></i><span class="hide-menu">کیف پول </span></a>
+            <ul aria-expanded="false" class="collapse">
+                <li><a asp-controller="Wallet" asp-action="Index">کیف پول ها </a></li>
+                <li><a asp-controller="Wallet" asp-action="Transaction">تراکنش ها</a></li>
+            </ul>
+        </li>
+        <li><a asp-controller="Recharge" asp-action="Index"><i class="fa fa-bullhorn"></i><span class="hide-menu"> اعلام موجودی </span></a></li>
+        <li>
+            <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-reply"></i><span class="hide-menu">مرجوعی </span></a>
+            <ul aria-expanded="false" class="collapse">
+                <li><a asp-controller="Order" asp-action="Index" asp-route-state="5">درخواست جدید</a></li>
+                <li><a asp-controller="Order" asp-action="Index" asp-route-state="6">تایید شده</a></li>
+                <li><a asp-controller="Order" asp-action="Index" asp-route-state="7">  رد شده</a></li>
+            </ul>
+        </li>*@
+                            <li class="nav-label">Blog</li>
+                            <li>
+                                <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-suitcase"></i><span class="hide-menu">Blog </span></a>
+                                <ul aria-expanded="false" class="collapse">
+                                    <li><a asp-controller="BlogCategory" asp-action="Index">Category</a></li>
+                                    <li><a asp-controller="Blog" asp-action="Index">Blog</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-label">CRM</li>
+                            <li>
+                                <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-users"></i><span class="hide-menu">Customer </span></a>
+                                <ul aria-expanded="false" class="collapse">
+                                    <li><a asp-controller="Email" asp-action="Index">Email</a></li>
+                                    <li><a href="#">Comment</a></li>
+                                </ul>
+                            </li>
+                            @*<li class="nav-label">منـاطـق</li>
+        <li>
+            <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-map-o"></i><span class="hide-menu">مناطق </span></a>
+            <ul aria-expanded="false" class="collapse">
+                <li><a asp-controller="Province" asp-action="Index">استان</a></li>
+                <li><a asp-controller="City" asp-action="Index">شهر</a></li>
+            </ul>
+        </li>*@
+
+                            <li class="nav-label">Setting</li>
+                            <li>
+                                <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-columns"></i><span class="hide-menu">Web site Setting </span></a>
+                                <ul aria-expanded="false" class="collapse">
+                                    <li><a asp-controller="Slider" asp-action="Index">Slider</a></li>
+                                    <li><a asp-controller="Menu" asp-action="Index">Menu</a></li>
+                                    <li><a asp-controller="SubMenu" asp-action="Index">Sub Mnu </a></li>
+                                    <li><a asp-controller="FAQ" asp-action="Index">F&Q</a></li>
+                                    <li><a asp-controller="Keyword" asp-action="Index"> KeyWord</a></li>
+
+                                </ul>
+                            </li>
+                            <li>
+                                <a asp-controller="Team" asp-action="Index" aria-expanded="false"><i class="fa fa-pencil-square-o"></i><span class="hide-menu">Team </span></a>
+
+                            </li>
+                            <li>
+                                <a asp-controller="Service" asp-action="Index" aria-expanded="false"><i class="fa fa-pencil-square-o"></i><span class="hide-menu">Service</span></a>
+
+                            </li>
+                            <li>
+                                <a asp-controller="Pricing" asp-action="Index" aria-expanded="false"><i class="fa fa-pencil-square-o"></i><span class="hide-menu">Pricing </span></a>
+
+                            </li>
+                            <li>
+                                <a asp-controller="Portfolio" asp-action="Index" aria-expanded="false"><i class="fa fa-pencil-square-o"></i><span class="hide-menu">Protfolio</span></a>
+
+                            </li>
+
+                        </ul>
+                    </nav>
+                    <!-- End Sidebar navigation -->
+                </div>
+                <!-- End Sidebar scroll-->
+            </div>
+
+            <!-- End header header -->
+            <div>
+                @RenderBody()
+            </div>
+
+        </div>
+        <script src="~/js/lib/jquery/jquery.min.js"></script>
+        <script src="~/js/lib/bootstrap/js/bootstrap.min.js"></script>
+        <script src="~/js/lib/bootstrap/js/popper.min.js"></script>
+        <script src="~/js/lib/ckeditor/ckeditor.js"></script>
+        <script src="~/js/jquery.slimscroll.js"></script>
+        <script src="~/js/sidebarmenu.js"></script>
+        <script src="~/js/lib/sticky-kit-master/dist/sticky-kit.min.js"></script>
+        <script src="~/js/lib/morris-chart/raphael-min.js"></script>
+        <script src="~/js/lib/morris-chart/morris.js"></script>
+        <script src="~/js/lib/morris-chart/dashboard1-init.js"></script>
+
+        <script src="~/js/owl.carousel.js"></script>
+        <script src="~/js/lib/owl-carousel/owl.carousel-init.js"></script>
+        <script src="~/js/lib/toastr/toastr.min.js"></script>
+        <script src="~/js/lib/Kendo/jszip.min.js"></script>
+        <script src="~/js/lib/Kendo/kendo.all.min.js"></script>
+
+        <script src="~/js/lib/echart/echarts.js"></script>
+        <script src="~/js/lib/echart/echarts-init.js"></script>
+
+
+        <script src="~/js/jquery-ui.min.js"></script>
+        <script src="~/js/jquery.tagsinput-revisited.js"></script>
+        <script src="~/js/lib/select2/select2.full.min.js"></script>
+        <script src="~/js/jalali-moment.browser.js"></script>
+        <script src="~/js/jalalidatepicker.min.js"></script>
+        <script src="~/js/custom.min.js"></script>
+
+        @await RenderSectionAsync("Scripts", required: false)
+    </body>
+</html>

@@ -1,0 +1,47 @@
+﻿@model Data.DTO.Menu.SubMenuDTO
+
+@Html.HiddenFor(c => c.Id)
+@Html.HiddenFor(c => c.IsActive)
+@Html.HiddenFor(c => c.DateInsert)
+@Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+
+    <hr />
+
+    <div class="form-group">
+        <div class="row">
+            <div class="col-md-6">
+                <label asp-for="MenuId">سردسته</label>
+                <select asp-for="MenuId" asp-items="Model.MenuList" class="form-control input-rounded SearchDropDown">
+                    <option>انتخاب نمایید</option>
+                </select>
+            </div>
+            <div class="col-md-6">
+                <label asp-for="ParentId">پدر</label>
+                <select asp-for="ParentId" asp-items="Model.ListSubMenu" class="form-control input-rounded SearchDropDown">
+                    <option>انتخاب نمایید</option>
+                </select>
+            </div>
+            
+
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <label asp-for="SubTitle">زیر منو</label>
+                <input asp-for="SubTitle" type="text" class="form-control input-rounded" />
+            </div>
+            <div class="col-md-6">
+                <label asp-for="URL">آردسURL</label>
+                <input asp-for="URL" type="text" class="form-control input-rounded" />
+            </div>
+        </div>
+      
+        <div class="row">
+            <div class="col-md-6">
+                <label asp-for="Level">سطح</label>
+                <input asp-for="Level" type="text" class="form-control input-rounded" />
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,36 @@
+﻿@model Data.DTO.BaseProduct.GuideDTO
+
+@Html.HiddenFor(c => c.Id)
+@Html.HiddenFor(c => c.IsActive)
+@Html.HiddenFor(c => c.DateInsert)
+@Html.HiddenFor(c => c.ImageFile)
+@Html.HiddenFor(c => c.Description)
+@Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+
+    <hr />
+
+    <div class="form-group">
+        <div class="row">
+            <div class="col-md-6 mt-4">
+                <label asp-for="StoreTypeId">نوع فروشگاه</label>
+                <select asp-for="StoreTypeId" asp-items="Model.ListStoreType" class="form-control input-rounded SearchDropDown">
+                    <option>انتخاب نمایید</option>
+                </select>
+            </div>
+            <div class="col-md-6 mt-4">
+                <label asp-for="ImageFile">تصویر</label>
+                <input asp-for="ImageFile" type="file" class="form-control input-rounded" />
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-md-12 mt-4">
+                <label asp-for="Title">تیتر</label>
+                <input asp-for="Title" type="text" class="form-control input-rounded" />
+            </div>
+        </div>
+
+    </div>
+</div>

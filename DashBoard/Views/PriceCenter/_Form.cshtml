@@ -1,0 +1,23 @@
+﻿@model Data.DTO.Financial.PriceCenterDTO
+
+@Html.HiddenFor(c => c.Id)
+@Html.HiddenFor(c => c.IsActive)
+@Html.HiddenFor(c => c.DateInsert)
+@Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+
+    <hr />
+<div class="form-group">
+    <div class="row">
+        <div class="col-md-6">
+            <label asp-for="Title">عنوان</label>
+            <input asp-for="Title" type="text" class="form-control input-rounded" />
+        </div>
+        <div class="col-md-6">
+            <label asp-for="Code">کد</label>
+            <input asp-for="Code" type="text" class="form-control input-rounded" />
+        </div>
+    </div>
+</div>
+</div>

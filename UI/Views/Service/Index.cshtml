@@ -1,0 +1,36 @@
+﻿ @model IEnumerable<Data.DTO.Common.ServiceDTO>
+@{
+    ViewData["Title"] = "Service"; 
+}
+
+ 
+<main id="main">
+    @await Html.PartialAsync("_Breadcrumbs")
+
+  
+     <section id="services" class="services section-bg">
+        <div class="container" data-aos="fade-up">
+
+            <div class="section-title">
+                <h2>Services</h2>
+                @*<p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>*@
+            </div>
+
+            <div class="row">
+
+                @foreach (var item in Model)
+                {
+                    <div class="col-xl-3 col-md-6 d-flex align-items-stretch mt-4 mb-4 mt-xl-0" data-aos="zoom-in" data-aos-delay="400">
+                        <div class="icon-box">
+                            <div class="icon"><i class="@item.Icone"></i></div>
+                            <h4><a href="">@item.Name</a></h4>
+                            <p> @item.Decription</p>
+                        </div>
+                    </div>
+                }
+
+            </div>
+
+        </div>
+    </section><!-- End Services Section -->
+</main><!-- End #main -->

@@ -1,0 +1,85 @@
+﻿@model Data.DTO.BaseProduct.DetailsItemDTO
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="page-wrapper">
+    <!-- Bread crumb -->
+    @await Html.PartialAsync("_DashboardTitle")
+    <!-- End Bread crumb -->
+    <!-- Container fluid  -->
+    <div class="container-fluid">
+        <!-- Start Page Content -->
+        <div class="row">
+            <div class="col-12">
+
+                <input type="hidden" id="detailId" name="name" value="@Model.DetailsId" />
+                <div class="col-md-12" style="padding-left: 0px">
+                    <div class="card">
+                        <h5 class="card-header">@Model.Details.Title</h5>
+                        <div class="card-body mb-4">
+                            <ul class="ul-membership mt-4">
+                                @foreach (var item in Model.StoreTypeList)
+                                {
+                                    if (Model.StoreTypeDetailList.Where(c => c.Text == item.Value).Any())
+                                    {
+                                        <li class="parent-access">
+                                            <input type="checkbox" name="name" checked id="typeid-@item.Value" value="@item.Value" onclick="CheckRole(@item.Value)" />
+                                            <label>@item.Text</label>
+                                        </li>
+                                    }
+                                    else
+                                    {
+                                        <li class="parent-access">
+                                            <input type="checkbox" name="name" id="typeid-@item.Value" value="@item.Value" onclick="CheckRole(@item.Value)" />
+                                            <label>@item.Text</label>
+                                        </li>
+                                    }
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End PAge Content -->
+    </div>
+
+</div>
+
+
+@section scripts{
+    <script>
+        function CheckRole(Id) {
+            debugger;
+            var detailid = $("#detailId").val();
+            var id = Id;
+            var res;
+            if ($('#typeid-' + Id).is(":checked")) {
+                res = true;
+            } else {
+                res = false;
+            }
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("SaveRole", "AllocateToParameter")',
+                data: { ID: id, DetailID: detailid, resualt: res},
+                success: function (data) {
+
+                    if (data==1) {
+                        debugger;
+                        toastr.success(' ثبت شد')
+                        $("#DetailsList").data("kendoGrid").dataSource.read();
+                    } else {
+                        debugger;
+                        toastr.error(' حذف شد')
+                        $("#DetailsList").data("kendoGrid").dataSource.read();
+                    }
+
+                }
+            });
+        }
+
+    </script>
+}

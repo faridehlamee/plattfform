@@ -1,0 +1,267 @@
+﻿@model Data.DTO.Movies.MovieDTO
+@{
+    ViewData["Title"] = "آموزشگاه فورته | فیلم های آموزشی";
+}
+
+
+<div class="content">
+    <!-- start bradcrumb -->
+    <div class="category-bread">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="product-meta-breadcrumb shadow-sm">
+                        <nav>
+                            <ol class="breadcrumb mb-0">
+                                <li class="breadcrumb-item">
+                                    <a href="#">خانه</a>
+                                </li>
+                                <li class="breadcrumb-item">
+                                    <a href="#">@ViewData["Title"]</a>
+                                </li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end bradcrumb -->
+    <!-- start category -->
+    <div class="category">
+        <div class="container-fluid">
+            <div class="filter-items shadow-box">
+                <div class="items">
+                    <div class="count">
+                        @*<a href="#" class="sidebar-toggler"><i class="icon-bars"></i>فیلتر ها</a>*@
+                    </div>
+                    <div class="count">
+                        <p>مشاهده  <span class="fw-bold total-movie">3</span> نتیجه</p>
+                    </div>
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="category-item">
+                        <div class="row" id="lstmovie">
+
+
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="filter-items shadow-box">
+                <nav aria-label="Page navigation example" id="paged">
+                    <ul class="pagination justify-content-center">
+                        <li class="page-item disabled">
+                            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">قبلی</a>
+                        </li>
+                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item"><a class="page-link" href="#">بعدی</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+@*<div class="sidebar-filter-overlay"></div>
+<aside class="sidebar-shop sidebar-filter sidebar-filter-banner">
+    <div class="sidebar sidebar-shop mt-4">
+        <div class="category-filter">
+            <div class="category-filter-box">
+                <div class="category-filter-box-title">
+                    <h4 class="fw-bold">
+                        دسته ViewData["Title"]
+                    </h4>
+                </div>
+                <div class="category-filter-box-desc">
+
+                    foreach (var item2 in Model.ListMovieCategory)
+                    {
+                        <div class="form-group form-check">
+                            if (Model.MovieCategoryId.ToString() == item2.Value)
+                            {
+                                <input class="form-check-input moviecategory-control-input" type="checkbox"
+                                       checked="checked" name="available" value="item2.Value" id="cat-item2.Value">
+                            }
+                            else
+                            {
+                                <input class="form-check-input moviecategory-control-input" type="checkbox"
+                                       name="available" value="item2.Value" id="cat-item2.Value">
+                            }
+                            <label class="form-check-label" for="cat-item2.Value">
+                                item2.Text
+                            </label>
+                        </div>
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
+</aside>*@
+
+
+@section scripts{
+
+    <script>
+        $(document).ready(function() {
+
+            filter_data(1);
+        });
+        function filter_data(pageNum, pageSize) {
+
+            //$('#loading').css("display", "block");
+            var categoryCategoryIds = get_filter('moviecategory-control-input');
+           // var search = document.getElementById('search').value;
+            $("#lstmovie").html('');
+            $(".total-movie").html('');
+            //$("#lstFilter").html('');
+            $("#paged").html('');
+            $.ajax({
+                type: 'POST',
+                url: "@Url.Action("GetListMovie", "EducationalFilm")",
+                data: {
+                    page: pageNum, MovieCategoryIds: categoryCategoryIds
+                },
+                success: function(response) {
+                    $('#loading').css("display", "none");
+                    $("#NumShow").html(response.count);
+                    $(".total-movie").html(response.TotalProduct)
+                    $("#lstmovie").html('');
+                    // $("#lstFilter").html('');
+                    var prooductContent = '';
+                    var FilterContent = '';
+
+                    if (response.Resualt.length == 0) {
+                        prooductContent += ' <div class="col-md-12"> <img width="100%"  src="../../Content/assets/img/Product Not Found.png" /></div>';
+                    } else {
+                        for (var i = 0; i < response.Resualt.length; i++) {
+                            prooductContent += 
+                                 '<div class="col-md-3 col-sm-6" >'+
+                                    '<div class="card blog-content-item shadow-box">'+
+                                        '<div class="card-image">'+
+                                            '<img src="https://dashboard.atkhalagh.ir/images/movieCategory/' + response.Resualt[i].Image + '" class="card-img-top" alt="">'+
+                                                '<div class="card-hover">'+
+                                                   '<a onclick="goto(' + response.Resualt[i].Id +')">مشاهده</a>'+
+                                                '</div>'+
+                                        '</div>'+
+                                            '<a onclick="goto(' + response.Resualt[i].Id +')">'+
+                                                '<div class="card-body">'+
+                                                    '<h5 class="card-title fw-bold">' + response.Resualt[i].Title + '</h5>'+
+                                                '</div>'+
+                                            '</a>'+
+                                    '</div>'+
+                                   '</div>'
+
+
+
+                        }
+                        $("#lstmovie").append(prooductContent);
+                    }
+                    PaggingTemplate(response.TotalPages, response.CurrentPage);
+                }
+            });
+        }
+
+        function get_filter(class_name) {
+
+            var filter = [];
+            $('.' + class_name + ':checked').each(function() {
+                filter.push($(this).val());
+            });
+            return filter;
+        }
+
+        $('.moviecategory-control-input').click(function() {
+            filter_data();
+        });
+
+
+        //This is paging temlpate ,you should just copy paste
+        function PaggingTemplate(totalPage, currentPage) {
+
+
+            var template = "";
+            var TotalPages = totalPage;
+            var CurrentPage = currentPage;
+            var PageNumberArray = Array();
+
+
+            var countIncr = 1;
+            for (var i = currentPage; i <= totalPage; i++) {
+                PageNumberArray[0] = currentPage;
+                if (totalPage != currentPage && PageNumberArray[countIncr - 1] != totalPage) {
+                    PageNumberArray[countIncr] = i + 1;
+                }
+                countIncr++;
+            };
+            PageNumberArray = PageNumberArray.slice(0, 5);
+            var FirstPage = 1;
+            var LastPage = totalPage;
+            if (totalPage != currentPage) {
+                var ForwardOne = currentPage + 1;
+            }
+            var BackwardOne = 1;
+            if (currentPage > 1) {
+                BackwardOne = currentPage - 1;
+            }
+
+            //template = "<p>" + CurrentPage + " of " + TotalPages + " pages</p>"
+            template = template + '<nav aria-label="Page navigation example"><ul class="pagination justify-content-center">';
+            if (currentPage == 1) {
+
+                template = template + '<li class="page-item disabled"><a class="page-link" href="#" tabindex="-1" aria-disabled="true">قبلی</a></li>'
+
+            } else {
+                template = template + '<li class="page-item "><a class="page-link" onclick="filter_data(' + BackwardOne + ')" tabindex="-1" aria-disabled="true">قبلی</a></li>'
+            }
+
+            var numberingLoop = "";
+            for (var i = 0; i < PageNumberArray.length; i++) {
+                if (currentPage == PageNumberArray[i]) {
+                    numberingLoop = numberingLoop +'<li class="page-item active" > <a class="page-link" onclick="filter_data(' + PageNumberArray[i] + ')">' + PageNumberArray[i] + '</a></li >'
+
+                } else {
+                    numberingLoop = numberingLoop + '<li class="page-item" > <a class="page-link" onclick="filter_data(' + PageNumberArray[i] + ')">' + PageNumberArray[i] + '</a></li >'
+                }
+
+            }
+            if (currentPage != TotalPages) {
+
+
+                template = template + numberingLoop +'<li class="page-item" > <a class="page-link" onclick="filter_data(' + ForwardOne + ')">بعدی</a></li ></ul>'
+            } else {
+                template = template + numberingLoop + '<li class="page-item disabled"><a class="page-link" href="#">بعدی</a></li></ul>'
+
+            }
+
+            $("#paged").append(template);
+            $('#selectedId').change(function() {
+                filter_data(1, $(this).val());
+            });
+        }
+
+        function goto(Id) { window.open('@Url.Content("~/EducationalFilm/MovieDetail")?id=' + Id, '_blank'); }
+
+
+
+
+    </script>
+
+
+
+
+
+
+
+}

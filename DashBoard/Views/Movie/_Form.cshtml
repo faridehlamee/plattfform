@@ -1,0 +1,43 @@
+﻿@model Data.DTO.Movies.MovieDTO
+
+@Html.HiddenFor(c => c.Id)
+@Html.HiddenFor(c => c.IsActive)
+@Html.HiddenFor(c => c.DateInsert)
+@Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+
+    <hr />
+    <div class="form-group">
+        <div class="row">
+            <div class="col-md-6">
+                <label asp-for="MovieCategoryId">نام دسته</label>
+                <select asp-for="MovieCategoryId" asp-items="Model.ListMovieCategory" class="form-control input-rounded SearchDropDown">
+                    <option>انتخاب نمایید</option>
+                </select>
+            </div>
+            <div class="col-md-6">
+                <label asp-for="Name">نام </label>
+                <input asp-for="Name" type="text" class="form-control input-rounded" />
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <label asp-for="Description">خلاصه</label>
+                <textarea asp-for="Description" class="form-control input-rounded">@Model.Description</textarea>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <label asp-for="AparatID">شناسه آپارات</label>
+                <input asp-for="AparatID" type="text" class="form-control input-rounded" />
+            </div>
+            <div class="col-md-6">
+                <label asp-for="AparatLink">لینک آپارات</label>
+                <input asp-for="AparatLink" type="text" class="form-control input-rounded" />
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,23 @@
+﻿@model Data.DTO.Common.FAQDTO
+
+@Html.HiddenFor(c => c.Id)
+@Html.HiddenFor(c => c.IsActive)
+@Html.HiddenFor(c => c.DateInsert)
+@Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+
+    <hr />
+<div class="form-group">
+    <div class="row">
+        <div class="col-md-6">
+            <label asp-for="Question">سوال</label>
+            <input asp-for="Question" type="text" class="form-control input-rounded" />
+        </div>
+        <div class="col-md-6">
+            <label asp-for="Answer">پاسخ</label>
+            <input asp-for="Answer" type="text" class="form-control input-rounded" />
+        </div>
+    </div>
+</div>
+</div>

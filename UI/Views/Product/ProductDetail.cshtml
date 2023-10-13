@@ -1,0 +1,490 @@
+﻿@model Data.DTO.Product.ProductDTO
+@{
+    ViewData["Title"] = "جزئیات محصول";
+}
+
+
+
+
+
+<div class="content" style="padding: 10px 0;">
+    <!-- start product meta -->
+    <div class="product-meta">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="product-meta-breadcrumb shadow-sm">
+                        <nav>
+                            <ol class="breadcrumb mb-0">
+                                <li class="breadcrumb-item">
+                                    <a asp-action="Index" asp-controller="Home">خانه</a>
+                                </li>
+                                <li class="breadcrumb-item">
+                                    <a href="#">محصولات</a>
+                                </li>
+                                <li class="breadcrumb-item active" aria-current="page">
+                                    <span>
+                                        @Model.Name
+                                    </span>
+                                </li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <div class="summary shadow-sm">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div style="--swiper-navigation-color: #fff; --swiper-pagination-color: #fff" class="swiper product-gallery">
+                            @if (Model.DisCountAmount > 0)
+                            {
+                                <div class="summary-offer">
+                                    <span>9%</span>
+                                </div>
+                            }
+
+                            <div class="swiper-wrapper" title="برای بزرگنمایی تصویر دابل کلیک کنید">
+                                @foreach (var item in Model.ProductGallery)
+                                {
+                                    <div class="swiper-slide">
+                                        <div class="swiper-zoom-container">
+                                            <img class="img-fluid" src="https://dashboard.kiatechsoftware.com/images/product/@item" />
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                            <div class="swiper-button-next d-none d-lg-flex"></div>
+                            <div class="swiper-button-prev d-none d-lg-flex"></div>
+                            <div class="swiper-pagination d-none d-lg-block"></div>
+                        </div>
+                        <div thumbsSlider="" class="swiper product-gallery-thumb">
+                            <div class="swiper-wrapper">
+                                @foreach (var item in Model.ProductGallery)
+                                {
+                                    <div class="swiper-slide">
+                                        <img class="img-fluid" src="https://dashboard.forteacademy.ir/images/product/@item" />
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-8 border-right-product">
+                        <div class="summary-entry mt-lg-0 mt-4">
+                            <div class="se-title">
+                                <h5>
+                                    @Model.Name
+                                </h5>
+                                <h6 class="text-muted">
+                                </h6>
+                            </div>
+                            <div class="se-rating">
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-half"></i>
+                                <i class="bi bi-star"></i>
+                            </div>
+
+                        </div>
+                        <div class="se-body">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="se-label">
+                                        <ul class="nav">
+                                            <li class="nav-item send">
+                                                <span class="badge text-white">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                         fill="currentColor" class="bi bi-box-fill"
+                                                         viewBox="0 0 16 16">
+                                                        <path fill-rule="evenodd"
+                                                              d="M15.528 2.973a.75.75 0 0 1 .472.696v8.662a.75.75 0 0 1-.472.696l-7.25 2.9a.75.75 0 0 1-.557 0l-7.25-2.9A.75.75 0 0 1 0 12.331V3.669a.75.75 0 0 1 .471-.696L7.443.184l.004-.001.274-.11a.75.75 0 0 1 .558 0l.274.11.004.001 6.971 2.789Zm-1.374.527L8 5.962 1.846 3.5 1 3.839v.4l6.5 2.6v7.922l.5.2.5-.2V6.84l6.5-2.6v-.4l-.846-.339Z" />
+                                                    </svg>ارسال 2 روز آینده
+                                                </span>
+                                            </li>
+                                            <li class="nav-item original">
+                                                <span class="badge text-white ms-2">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                         fill="currentColor" class="bi bi-patch-check-fill"
+                                                         viewBox="0 0 16 16">
+                                                        <path d="M10.067.87a2.89 2.89 0 0 0-4.134 0l-.622.638-.89-.011a2.89 2.89 0 0 0-2.924 2.924l.01.89-.636.622a2.89 2.89 0 0 0 0 4.134l.637.622-.011.89a2.89 2.89 0 0 0 2.924 2.924l.89-.01.622.636a2.89 2.89 0 0 0 4.134 0l.622-.637.89.011a2.89 2.89 0 0 0 2.924-2.924l-.01-.89.636-.622a2.89 2.89 0 0 0 0-4.134l-.637-.622.011-.89a2.89 2.89 0 0 0-2.924-2.924l-.89.01-.622-.636zm.287 5.984-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7 8.793l2.646-2.647a.5.5 0 0 1 .708.708z" />
+                                                    </svg> اورجینال
+                                                </span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="se-desc">
+                                        <h6>ویژگی محصول:</h6>
+                                        <input type="checkbox" class="read-more-state" id="readMore1" />
+                                        <ul class="read-more-wrap">
+                                            @foreach (var item in Model.ListParameter)
+                                            {
+                                                <li>
+                                                    <span class="title">@item.DetailTitle :</span>
+                                                    <span class="desc"> @item.DetailsItemSubTopic</span>
+                                                </li>
+                                            }
+
+
+
+                                        </ul>
+
+                                        <div class="se-alert">
+                                            <div class="alert alert-warning d-flex align-items-center" role="alert">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                                     fill="currentColor" class="bi bi-box-fill me-2"
+                                                     viewBox="0 0 16 16">
+                                                    <path fill-rule="evenodd"
+                                                          d="M15.528 2.973a.75.75 0 0 1 .472.696v8.662a.75.75 0 0 1-.472.696l-7.25 2.9a.75.75 0 0 1-.557 0l-7.25-2.9A.75.75 0 0 1 0 12.331V3.669a.75.75 0 0 1 .471-.696L7.443.184l.004-.001.274-.11a.75.75 0 0 1 .558 0l.274.11.004.001 6.971 2.789Zm-1.374.527L8 5.962 1.846 3.5 1 3.839v.4l6.5 2.6v7.922l.5.2.5-.2V6.84l6.5-2.6v-.4l-.846-.339Z" />
+                                                </svg>
+                                                <p class="font-14">
+                                                    برای بزرگنمایی تصویر محصول روی تصویر محصول دوبار بزنید
+                                                </p>
+                                            </div>
+                                            <div class="alert alert-info d-flex align-items-center" role="alert">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32"
+                                                     fill="currentColor" class="bi bi-bell me-2" viewBox="0 0 16 16">
+                                                    <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zM8 1.918l-.797.161A4.002 4.002 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4.002 4.002 0 0 0-3.203-3.92L8 1.917zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5.002 5.002 0 0 1 13 6c0 .88.32 4.2 1.22 6z" />
+                                                </svg>
+                                                <p class="font-14">
+                                                    بازگشت کالا با دلیل "انصراف از خرید"، فقط در صورت بازنشدن پلمب
+                                                    کالا امکان‌پذیر است.
+                                                </p>
+                                            </div>
+                                            <div class="free-shipping">
+                                                <div class="title">
+                                                    <h6 class="fw-bold">ارسال رایگان</h6>
+                                                    <p>
+                                                        برای سفارش‌ بالای ۵۰۰ هزار تومان
+                                                    </p>
+                                                </div>
+                                                <img src="~/img/icon-1/free-shipping.svg" alt="" class="img-fluid">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 m-auto mt-lg-2 mt-3">
+                                    <form action="" method="post" id="addToCartFrom">
+                                        <input type="hidden" id="productId" value="@Model.Id" />
+                                        <div class="se-cart shadow-sm">
+                                            <div class="se-cart-detail">
+                                                <span class="scd-item text-muted">
+                                                    <i class="bi bi-tag"></i>
+                                                    مدل:  @Model.StoreTypeStoreName
+                                                </span>
+                                                <span class="scd-item text-muted">
+                                                    <i class="bi bi-shop"></i>
+                                                    دسته بندی: @Model.ProductTypeName
+                                                </span>
+
+                                            </div>
+                                            <div class="se-cart-price">
+                                                @if (Model.DisCountAmount > 0)
+                                                {
+                                                    <span class="se-cart-price-old">@Model.Amount.ToString("N0") تومان</span>
+                                                }
+                                                <span class="se-cart-price-new">@Model.FinalAmount.ToString("N0") تومان</span>
+                                                <input type="hidden" id="Amount" value="@Model.FinalAmount" />
+                                            </div>
+                                            <div class="se-cart-price">
+                                                <div class='countdown' data-date="2028-01-01" data-time="18:30">
+                                                </div>
+                                            </div>
+                                            @if (Model.ListWareHouse.Any(c => c.TypeWarehouse == Common.Enums.Product.TypeWarehouse.selective))
+                                            {
+                                                <label for="size">نوع محصول : </label>
+                                                <div class="boxed" style="text-align:right;">
+                                                    @for (int i = 0; i < Model.ListWareHouse.Count; i++)
+                                                    {
+                                                        if (Model.ListWareHouse[i].value <= 0)
+                                                        {
+
+                                                            <input type="radio" class="SizeId " id="ios-@i" name="Size" value="@Model.ListWareHouse[i].Id" disabled>
+                                                            <label class="disabledlabel" for="ios-@i">@Model.ListWareHouse[i].TypeSizeItemName</label>
+
+                                                        }
+                                                        else
+                                                        {
+                                                            <input type="radio" class="SizeId " id="ios-@i" name="Size" value="@Model.ListWareHouse[i].Id">
+                                                            <label for="ios-@i">@Model.ListWareHouse[i].TypeSizeItemName</label>
+                                                        }
+
+                                                    }
+                                                </div>
+                                            }
+                                            else
+                                            {
+                                                <input type="radio" checked class="SizeId d-none" id="ios" name="Size" value="@Model.ListWareHouse[0].Id">
+                                            }
+
+                                            <div class="se-cart-form">
+
+                                                <div class="row align-items-center">
+                                                    <div class="col-sm-6">
+                                                        <div class="cart-counter">
+                                                            <input type="text" name="count" class="counter" id="qty"
+                                                                   value="1">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <button class="shadow-sm fw-bold btn-add-to-cart mt-sm-0 mt-2 waves-effect waves-light">
+                                                            افزودن
+                                                            به سبد
+                                                            خرید
+                                                        </button>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="product-feature">
+                            <nav class="navbar">
+                                <ul class="navbar-nav justify-content-md-between justify-content-center">
+                                    <li class="nav-item">
+                                        <img src="~/img/product-feature/product_feauture_1.png" alt="">
+                                        <span>تحویل فوری</span>
+                                    </li>
+                                    <li class="nav-item">
+                                        <img src="~/img/product-feature/product_feauture_2 (1).png" alt="">
+                                        <span>پرداخت در محل</span>
+                                    </li>
+                                    <li class="nav-item">
+                                        <img src="~/img/product-feature/product_feauture_3.png" alt="">
+                                        <span>
+                                            ضمانت اصالت کالا
+                                        </span>
+                                    </li>
+                                    <li class="nav-item">
+                                        <img src="~/img/product-feature/product_feauture_4.png" alt="">
+                                        <span>
+                                            ضمانت بازگشت وجه
+                                        </span>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end product meta -->
+</div>
+<!-- start product desc -->
+<div class="product-descs" id="prodesc">
+    <div class="container-fluid">
+        <div class="product-desc shadow-md">
+            <div class="product-desc-tab">
+                <ul class="nav" id="productTab" role="tablist">
+
+                    <li class="nav-item">
+                        <button class="active waves-effect waves-light" id="productDesc" data-bs-toggle="tab"
+                                data-bs-target="#productDesc-pane" role="tab" type="button" aria-selected="true">
+                            <a href="#prodesc"><i class="bi bi-file-text"></i> توضیحات</a>
+                        </button>
+                    </li>
+                    <li class="nav-item">
+                        <button class=" waves-effect waves-light" id="productTable" data-bs-toggle="tab"
+                                data-bs-target="#productTable-pane" role="tab" type="button" aria-selected="false">
+                            <a href="#prodesc"><i class="bi bi-grid"></i> توضیحات تکمیلی</a>
+                        </button>
+                    </li>
+                </ul>
+            </div>
+            <div class="product-desc-tab-content">
+                <div class="tab-content" id="productTabContent">
+
+                    <div class="tab-pane fade show active product-desc-contents" id="productDesc-pane">
+                        <div class="product-desc-content">
+                            <input type="checkbox" class="read-more-state" id="readMore2" />
+                            <!-- والد بیشتر ، کمتر ، تمام متن توضیحات باید داخل این تگ قرار بگیرند -->
+                            <div class="read-more-wrap">
+                                @Html.Raw(Model.Description)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="productTable-pane">
+                        <h4 class="fw-bold mt-3 text-muted-2">مشخصات محصول</h4>
+                        <div class="box_list mt-4">
+                            <p class="title">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                     fill="currentColor" class="bi bi-caret-left-fill" viewBox="0 0 16 16">
+                                    <path d="m3.86 8.753 5.482 4.796c.646.566 1.658.106 1.658-.753V3.204a1 1 0 0 0-1.659-.753l-5.48 4.796a1 1 0 0 0 0 1.506z" />
+                                </svg>مشخصات کلی
+                            </p>
+                            <section>
+                                <ul class="param_list list-inline">
+                                    @foreach (var item in Model.ListParameter)
+                                    {
+
+                                        <li class="list-inline-item col-md-3 pe-md-1 pe-md-3 p-0 m-0">
+                                            <div class="box_params_list">
+                                                <p class="block border_right_custom1">
+                                                    @item.DetailTitle
+                                                </p>
+                                            </div>
+                                        </li>
+                                        <li class="list-inline-item col-md-8 p-0 m-0">
+                                            <div class="box_params_list">
+                                                <p class="block border_right_custom2">
+                                                    @item.DetailsItemSubTopic
+                                                </p>
+                                            </div>
+                                        </li>
+
+                                    }
+
+                                </ul>
+                            </section>
+                        </div>
+
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@section scripts{
+
+    <script>
+        $("#ReChargeForm").on("submit", function(event) {
+            debugger
+            event.preventDefault();
+
+            var url = $(this).attr("action");
+            var formData = $(this).serialize();
+
+            $.ajax({
+                url: url,
+                type: "POST",
+                data: formData,
+                dataType: "json",
+                success: function(resp) {
+                    debugger
+                    $('#letmeknow').modal('toggle');
+                    var message = resp.Message;
+                    if (resp.success) {
+
+                        swal("", message, "success");
+                        $(this).addClass('js-addedwish-b2');
+                        $(this).off('click');
+
+                    } else {
+
+                        swal("خطا", message, "error");
+                        $(this).addClass('js-addedwish-b2');
+                        $(this).off('click');
+
+                    }
+
+
+                }
+            })
+
+        });
+
+
+        $("#addToCartFrom").on("submit", function(event) {
+            debugger
+            event.preventDefault();
+            $(".btn-add-to-cart").attr('disabled', 'disabled');
+            debugger
+            var data = {
+                ProductWareHouseId: $('.SizeId:checked').val(),
+                Value: $('#qty').val(),
+                ProductId: $('#productId').val(),
+                FinalAmount: $("#Amount").val()
+            };
+            if (data.ProductWareHouseId == undefined) {
+                swal("خطا", "سایز انتخاب نشده است !!", "error");
+                $(this).addClass('js-addedwish-b2');
+                $(this).off('click');
+                $(".btn-add-to-cart").removeAttr('disabled');
+                return false;
+            }
+            if (data.Value == 0) {
+                swal("خطا", "مقدار انتخابی صحیح نیست !!", "error");
+                $(this).addClass('js-addedwish-b2');
+                $(this).off('click');
+                $(".btn-add-to-cart").removeAttr('disabled');
+                return false;
+            }
+            var formData = new FormData();
+            formData.append("data", JSON.stringify(data))
+            $.ajax({
+                url: '@Url.Action("AddToCart", "Cart")',
+                cache: false,
+                contentType: false,
+                processData: false,
+                data: formData,
+                type: 'post',
+                success: function(data) {
+                    if (data.resval == false) {
+                        swal("خطا", data.res, "error");
+                        $(this).addClass('js-addedwish-b2');
+                        $(this).off('click');
+                    } else {
+
+                        swal("", "محصول اضافه شد!", "success");
+                        $(this).addClass('js-addedwish-b2');
+                        $(this).off('click');
+                        //$('.shopping-cart-content').addClass('show').parent().addClass('show');
+                        ShoppingCart();
+
+                    }
+                    $(".btn-add-to-cart").removeAttr('disabled');
+                }
+            });
+
+        });
+
+        function InsertComment() {
+
+            var commenttext = $("#cmessage").val();
+            if (commenttext == null || commenttext == "") {
+
+                swal("خطا", "لطفا متن نظر را پر کنید", "error");
+                $(this).addClass('js-addedwish-b2');
+                $(this).off('click');
+                return false;
+
+            } else {
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("AddComment", "Comment")',
+                    data: { commentText: commenttext, productId: @Model.Id },
+                    success: function(data) {
+                        debugger;
+                        if (data == false) {
+                            swal("خطا", "ابتدا وارد سایت شوید", "error");
+                            $(this).addClass('js-addedwish-b2');
+                            $(this).off('click');
+                            return false;
+                        } else {
+
+                            document.getElementById("cmessage").value = null;
+                            swal("", "نظر ثبت شد !", "success");
+                            $(this).addClass('js-addedwish-b2');
+                            $(this).off('click');
+
+                        }
+                    }
+                });
+
+            }
+
+        }
+
+    </script>
+
+}

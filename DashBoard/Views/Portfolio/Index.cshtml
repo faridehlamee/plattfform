@@ -1,0 +1,113 @@
+﻿
+@{
+    ViewData["Title"] = "Portfolio";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var controllerName = this.ViewContext.RouteData.Values["controller"].ToString();
+}
+
+<div class="page-wrapper">
+    <!-- Bread crumb -->
+    @await Html.PartialAsync("_DashboardTitle")
+    <!-- End Bread crumb -->
+    <!-- Container fluid  -->
+    <div class="container-fluid">
+        <!-- Start Page Content -->
+        <div class="row">
+            <div class="col-12">
+
+                <div class="row page-item ml-4">
+                    <div class="dt-buttons">
+                        <a href="@Url.Action("Create",controllerName )" class="btn btn-success btn-rounded">
+                            ثبت @ViewData["Title"]
+                        </a>
+                    </div>
+                </div>
+                <div class="k-rtl  shadow">
+                    <div id="List"></div>
+
+                </div>
+
+            </div>
+        </div>
+        <!-- End PAge Content -->
+    </div>
+
+</div>
+
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $("#List").kendoGrid({
+                scrollable: true,
+                resizable: true,
+                autoBind: true,
+                sortable: true,
+                dataSource: {
+                    type: "Json",
+                    transport: {
+                        read: "@Url.Action("List", controllerName)",
+                        type: "POST",
+                        dataType: "json"
+
+                    },
+                    pageSize: 20,
+
+                },
+                toolbar: ["search"],
+                pageable: {
+                    refresh: true,
+                    pageSizes: true,
+                    buttonCount: 5,
+                    pageSizes: [10, 20, 50]
+                },
+                dataBound: function () {
+                    this.expandRow(this.tbody.find("tr.k-master-row").first());
+                },
+                columns: [
+
+                    {
+                        field: "Category",
+                        title: "Category ",
+                        width: "110px"
+                    },  {
+                        field: "Name",
+                        title: "Name ",
+                        width: "110px"
+                    },
+                    {
+                    title: "Operation",
+                    width: 100,
+                    template:
+
+                        "<a  onclick='Remove(#=Id#)' asp-route-id='#=Id#' class='btn btn-danger btn-rounded'>Delete</a> " +
+                        "<a href='@Url.Action("EditPage", controllerName)/?Id=#=Id#' class='btn btn-primary btn-rounded' >Edit</a> "
+
+                    }
+
+
+                ]
+            });
+        });
+
+
+          function Remove(Id) {
+                       debugger;
+                       $.ajax({
+                           type: 'POST',
+                           url: '@Url.Action("Delete", controllerName)',
+                           data: { id: Id },
+                           success: function () {
+                               debugger;
+                               toastr.success(' حذف شد')
+                               $("#List").data("kendoGrid").dataSource.read();
+                           }
+                       });
+                   }
+    </script>
+
+
+
+
+
+}

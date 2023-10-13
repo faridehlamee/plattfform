@@ -1,0 +1,416 @@
+﻿@model Data.DTO.User.UserDTO
+@{
+    ViewData["Title"] = "داشبورد";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="content">
+    <div class="dashboard">
+        <div class="container-fluid">
+            <div class="row">
+              
+                @await Html.PartialAsync("_UserMenu")
+                <div class="col-lg-9">
+                    <div class="content-box">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="ui-box">
+                                    <div class="ui-box-item ui-box-white">
+                                        <div class="ui-box-item-title">
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <h4 class="fw-bold">
+                                                    اطلاعیه ها
+                                                </h4>
+                                            </div>
+                                        </div>
+                                        <div class="ui-box-item-desc">
+                                            <div class="alert alert-warning" role="alert">
+                                                <div class="notifi-title">
+                                                    <p class="alert-link">توجه</p>
+                                                </div>
+                                                <div class="notifi-desc">
+                                                    <p>
+                                                       لطفا جهت ثبت نام، حتما اطلاعات شخصی خود را تکمیل نمایید تا در اسرع وقت با شما تماس حاصل نماییم
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="ui-boxs">
+                                    <div class="ui-box">
+                                        <div class="ui-box-item ui-box-white">
+                                            <div class="ui-box-item-title">
+                                                <div class="d-flex justify-content-between align-items-center">
+                                                    <h4 class="fw-bold">
+                                                        اطلاعات شخصی
+                                                    </h4>
+                                                    <a class="btn-main btn-main-primary waves-effect waves-light waves-effect waves-light" asp-action="AdditionalInfo" asp-controller="User">
+                                                        ویرایش <i class="bi bi-pencil-fill"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="ui-box-item-desc p-0">
+                                                <table class="table main-table shadow-none main-table-2">
+                                                    <tr>
+                                                        <td colspan="2">
+                                                            <h6 class="text-muted">نام و نام خانوادگی</h6>
+                                                            <p class="fw-bold mt-2">@Model.FirstName @Model.LastName</p>
+                                                        </td>
+                                                        <td colspan="2">
+                                                            <h6 class="text-muted">شماره موبایل</h6>
+                                                            <p class="fw-bold mt-2">@Model.PhoneNumber</p>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td colspan="2">
+                                                            <h6>پست الکترونیک</h6>
+                                                            <p class="fw-bold mt-2">@Model.Email</p>
+                                                        </td>
+                                                        <td colspan="2">
+                                                            <h6>جنسیت</h6>
+                                                            <p class="fw-bold mt-2">@Model.GenderDesc</p>
+                                                        </td>
+                                                    </tr>
+
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end dashboard -->
+</div>
+
+
+
+@section scripts{
+    <script src="~/assets/js/Kendo/jszip.min.js"></script>
+    <script src="~/assets/js/Kendo/kendo.all.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            CurrentOrder();
+            GetAddress();
+            GetProvince();
+            CurrentProductRefrence();
+        });
+
+
+        function CurrentOrder() {
+            debugger
+            $("#List").kendoGrid({
+                scrollable: true,
+                resizable: true,
+                autoBind: true,
+                sortable: true,
+                dataSource: {
+                    type: "Json",
+                    serverPaging: true,
+                    transport: {
+                        read: "@Url.Action("GetCurrentUserOrder", "Order")",
+                        type: "POST",
+                        dataType: "json"
+
+                    }, schema: {
+                        data: "data", // records are returned in the "data" field of the response
+                        total: "total" // total number of records is in the "total" field of the response
+                    },
+                    pageSize: 20,
+
+                },
+                pageable: {
+                    refresh: true,
+                    pageSizes: true,
+                    buttonCount: 5,
+                    pageSizes: [10, 20, 50]
+                },
+                dataBound: function () {
+                    this.expandRow(this.tbody.find("tr.k-master-row").first());
+                },
+                columns: [
+
+                    {
+                        title: "نام ",
+                        width: "110px",
+                        template:
+
+                        "<p>#=UserFirstName# #=UserLastName#</p>"
+
+                    }, {
+                        field: "UserPhoneNumber",
+                        title: "موبایل",
+                        width: "110px"
+                    },{
+                        field: "FinalPayment",
+                        title: "قیمت ",
+                        width: "110px"
+                    }, {
+                        field: "Address.ProvinceName",
+                        title: "استان ",
+                        width: "110px"
+                    }, {
+                        template: '#= PertianDate(DateInsert)#',
+                        title: "تاریخ ثبت ",
+                        width: "110px"
+                    }, {
+                        field: "DayName",
+                        title: "روز ",
+                        width: "110px"
+                    }, {
+                        field: "Hour",
+                        title: "ساعت ",
+                        width: "110px"
+                    }, {
+                        field: "RefId",
+                        title: "شماره مرجع ",
+                        width: "110px"
+                    }, {
+                        field: "StateDesc",
+                        title: "وضعیت",
+                        width: "110px"
+                    },{
+                    title: "عملیات",
+                    width: 100,
+                    template:
+
+                            "<a href='@Url.Action("Factor", "Order")/?OrderId=#=Id#' ><i class='fa fa-file ml-2' aria-hidden='true'></i>نمایش</a>"
+                    }
+
+
+                ]
+            });
+        }
+        function CurrentProductRefrence() {
+            debugger
+            $("#ReferenceList").kendoGrid({
+                scrollable: true,
+                resizable: true,
+                autoBind: true,
+                sortable: true,
+                dataSource: {
+                    type: "Json",
+                    transport: {
+                        read: "@Url.Action("GetCurrentUserProductRefrence", "Order")",
+                        type: "POST",
+                        dataType: "json"
+
+                    },
+                    pageSize: 20,
+
+                },
+                pageable: {
+                    refresh: true,
+                    pageSizes: true,
+                    buttonCount: 5,
+                    pageSizes: [10, 20, 50]
+                },
+                dataBound: function () { 
+                    this.expandRow(this.tbody.find("tr.k-master-row").first());
+                },
+                columns: [
+
+                    {
+                        title: "نام ",
+                        width: "110px",
+                        template:
+
+                        "<p>#=UserFirstName# #=UserLastName#</p>"
+
+                    }, {
+                        field: "UserPhoneNumber",
+                        title: "موبایل",
+                        width: "110px"
+                    },{
+                        field: "FinalPayment",
+                        title: "قیمت ",
+                        width: "110px"
+                    }, {
+                        field: "Address.ProvinceName",
+                        title: "استان ",
+                        width: "110px"
+                    }, {
+                        field: "DayName",
+                        title: "روز ",
+                        width: "110px"
+                    }, {
+                        field: "Hour",
+                        title: "ساعت ",
+                        width: "110px"
+                    }, {
+                        field: "RefId",
+                        title: "شماره مرجع ",
+                        width: "110px"
+                    },{
+                    title: "عملیات",
+                    width: 100,
+                    template:
+
+
+                           "<a href='@Url.Action("Index", "ProductReference")/?Id=#=Id#' ><i class='fa fa-repeat' aria-hidden='true'></i>مرجوع</a>"
+                    }
+
+
+                ]
+            });
+        }
+
+
+         function GetAddress() {
+                 $.ajax({
+                        type: 'POST',
+                        url: "@Url.Action("GetAddress", "User")",
+                        success: function (response) {
+                            debugger
+
+                            $('.lstaddress').html('');
+                            var Address = '';
+                            for (var i = 0; i < response.length; i++) {
+
+                                Address += ' <div class="col-sm-3">'+
+                                    '<div class="card" >'+
+                                        '<div class="card-body">'+
+                                    '<h5 class="card-title"><i class="fa fa-map-marker" aria-hidden="true"></i></h5>'+
+                                      '<p class="card-text">' + response[i].ProvinceName + ' - ' + response[i].CityName + '</p>' +
+                                    '<p class="card-text">' + response[i].AddressDesc + ' پلاک  '+  response[i].Plaque  +'</p>' +
+                                    '<p class="card-text">' + response[i].PostalCode + '</p>' +
+                                    '<a onclick="Remove(' + response[i].Id + ')" class="card-link">حذف</a>' +
+                                        '</div>'+
+                                    '</div>'+
+                                '</div>'
+
+
+                                }
+                            $(".lstaddress").append(Address);
+
+
+
+                        }
+                    });
+
+            }
+
+           function GetProvince() {
+
+                  $.ajax({
+                        type: 'POST',
+                        url: "@Url.Action("GetProvince", "Address")",
+                        success: function (response) {
+                            debugger
+
+                            var Province = '';
+                            for (var i = 0; i < response.length; i++) {
+
+                                Province += ' <option value="' + response[i].Value + '" >' + response[i].Text+'</option>'
+
+                                }
+                            $(".province").append(Province);
+
+
+
+                        }
+                    });
+
+            }
+
+            $(".province").change(function () {
+                debugger
+                var provinceId = $(".province").val();
+
+                   $.ajax({
+                        type: 'POST',
+                       url: "@Url.Action("GetCity", "Address")",
+                       data: { ProvinceId: provinceId},
+                        success: function (response) {
+                            debugger
+                            $(".city").html('');
+                            var city = '';
+                            for (var i = 0; i < response.length; i++) {
+
+                                city += ' <option value="' + response[i].Value + '" >' + response[i].Text+'</option>'
+
+                                }
+                            $(".city").append(city);
+
+
+
+                        }
+                    });
+            });
+
+             function SaveAddress() {
+
+                 var strAddress = {
+                ProvinceId: $('.province').val(),
+                CityId: $('.city').val(),
+                Receiver: $('#receiver').val(),
+                AddressDesc: $("#addressdesc").val(),
+                Plaque: $("#plaque").val(),
+                PostalCode: $("#postalcode").val()
+            };
+            // if (data.ProductWareHouseId == undefined) {
+            //    swal( "خطا", "سایز انتخاب نشده است !!", "error");
+            //    $(this).addClass('js-addedwish-b2');
+            //    $(this).off('click');
+            //    return false;
+            //}
+            // if (data.Value == 0) {
+            //    swal( "خطا", "مقدار انتخابی صحیح نیست !!", "error");
+            //    $(this).addClass('js-addedwish-b2');
+            //    $(this).off('click');
+            //    return false;
+            //}
+             var formData = new FormData();
+                 formData.append("strAddress", JSON.stringify(strAddress))
+             $.ajax({
+                 url: '@Url.Action("AddAddress", "Address")',
+                 cache: false,
+                 contentType: false,
+                 processData: false,
+                 data: formData,
+                type: 'post',
+                success: function (data) {
+                    debugger
+                    if (data== false) {
+                        swal("خطا", "خطا در ثبت", "error");
+                        $(this).addClass('js-addedwish-b2');
+                        $(this).off('click');
+                    } else {
+                        $(".lstaddress").html('');
+                        GetAddress();
+
+                    }
+                }
+            });
+
+        }
+
+
+
+        function Remove(id) {
+            debugger;
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("Delete", "Address")',
+                data: { Id: id },
+                success: function () {
+                    debugger;
+                    toastr.success(' حذف شد')
+                    GetAddress();
+                }
+            });
+        }
+
+
+
+    </script>
+}

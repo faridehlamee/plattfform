@@ -1,0 +1,27 @@
+﻿@model Data.DTO.WareHouse.ProductWareHouseDTO
+
+@Html.HiddenFor(c => c.Id)
+@Html.HiddenFor(c => c.IsActive)
+@Html.HiddenFor(c => c.DateInsert)
+@Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+
+    <hr />
+    <input type="hidden" asp-for="ProductId"  />
+<div class="form-group">
+    <div class="row">
+        <div class="col-md-6">
+            <label asp-for="TypeSizeItemId"></label>
+            <select asp-for="TypeSizeItemId" asp-items="Model.ListTypeItem" class="form-control input-rounded SearchDropDown">
+                <option>انتخاب نمایید</option>
+            </select>
+        </div>
+        <div class="col-md-6">
+            <label asp-for="value"></label>
+            <input asp-for="value" type="text" class="form-control input-rounded" />
+        </div>
+    </div>
+   
+</div>
+</div>

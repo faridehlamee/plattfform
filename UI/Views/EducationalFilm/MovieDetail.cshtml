@@ -1,0 +1,115 @@
+﻿@model Data.DTO.Movies.MovieCategoryDTO
+@{
+    ViewData["Title"] = "آموزشگاه فورته | " + Model.Title;
+}
+
+
+<div class="content">
+    <div class="blog-content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12 order-1">
+                    <div class="blog-post shadow-box">
+
+                        <div class="blog-post-content">
+                            <figure class="image-center " style="text-align:center;">
+                                @if (Model.Movie != null)
+                                {
+                                    <div class="video">
+                                        <div id="@Model.Movie.AparatID">
+                                            <script type="text/JavaScript" src="@Model.Movie.AparatLink"></script>
+                                        </div>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <img class="aligncenter"
+                                         src="https://dashboard.atkhalagh.ir/images/movieCategory/@Model.Image"
+                                         alt="@Model.Title">
+                                }
+
+                            </figure>
+
+                            <div class="blog-post-title">
+                                <div class="blog-post-title-items">
+
+                                    <div class="blog-post-title-item">
+                                        <h4 class="title gold mt-2 mb-2">@Model.Title</h4>
+                                    </div>
+                                    <div class="blog-post-title-item">
+                                        <i class="bi bi-alarm"></i>
+                                        <p class="show-date text-muted">
+                                            @Model.DateInsert
+                                        </p>
+                                    </div>
+                                </div>
+   
+                                <div class="blog-post-title-items">
+
+                                    <div class="blog-post-title-item">
+                                        <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
+                                            مشاهده لیست فیلم ها
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <p>
+                                @Html.Raw(Model.Description)
+                            </p>
+                            <p>
+                                @if (Model.Movie != null)
+                                {
+
+                                    @Html.Raw(Model.Movie.Description)
+                                }
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end blog-content -->
+
+
+</div>
+<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+    <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasExampleLabel">لیست فیلم های دوره @Model.Title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+
+        <ul class="nav flex-column sidebar-menu">
+            @foreach (var item in Model.ListMovie)
+            {
+                if (Model.Movie!= null && item.Id == Model.Movie.Id)
+                {
+                    <li class="nav-item active">
+                        <a asp-action="MovieDetail" asp-route-id="@item.MovieCategoryId" asp-route-movieId="@item.Id" class="nav-link text-muted ">
+                            <i class="bi bi-house"></i>
+                            <span>@item.Name</span>
+                        </a>
+                    </li>
+                }
+                else
+                {
+                    <li class="nav-item ">
+                        <a asp-action="MovieDetail" asp-route-id="@item.MovieCategoryId" asp-route-movieId="@item.Id" class="nav-link text-muted ">
+                            <i class="bi bi-house"></i>
+                            <span>@item.Name</span>
+                        </a>
+                    </li>
+                }
+
+            }
+
+        </ul>
+    </div>
+</div>
+@section scripts{
+
+
+
+}

@@ -1,0 +1,325 @@
+﻿@model Data.DTO.Product.SearchDTO
+@{
+    ViewData["Title"] = "Product";
+}
+@await Html.PartialAsync("_Breadcrumbs")
+
+<div class="content">
+    <!-- start bradcrumb -->
+
+    <section id="why-us" class="why-us section-bg">
+        <div class="container-fluid" data-aos="fade-up">
+
+            <div class="row">
+
+                <div class="col-lg-7 d-flex flex-column justify-content-center align-items-stretch  order-2 order-lg-1">
+
+                    <div class="content">
+                        <h3>Equipment Information Management System(EIMS)</h3>
+                        <p>
+                            EIMS is a comprehensive software solution designed to streamline equipment management for companies of all sizes. If your organization deals with equipment and wants a reliable system to track and manage various aspects such as change requests, unplanned maintenance, calibration, and more, EIMS is the perfect solution for you. At its core, EIMS serves as a centralized hub for all equipment-related information, providing a user-friendly
+                            interface and powerful features to enhance your equipment management processes. Let's take a closer look at some key features and benefits of EIMS:
+                        </p>
+
+                        <div class="row">
+                            <div class="col-md-6 icon-box" data-aos="fade-up">
+                                <i class="bx bx-equalizer"></i>
+                                <h4>Equipment Tracking: </h4>
+                                <p>
+                                    EIMS allows you to efficiently track and monitor all your equipment throughout its lifecycle.
+                                    From acquisition to disposal, you can easily record essential details such as serial numbers, specifications, maintenance history,
+                                    and location. This comprehensive tracking capability
+                                    ensures that you have full visibility and control over your equipment inventory.
+                                </p>
+                            </div>
+                            <div class="col-md-6 icon-box" data-aos="fade-up" data-aos-delay="100">
+                                <i class="bx bx-cube-alt"></i>
+                                <h4>Change Request Management:</h4>
+                                <p>
+                                    With EIMS, you can effortlessly manage change requests related to your equipment.
+                                    Whether it's a modification, upgrade, or replacement, the system enables you to log
+                                    and track change requests, assign tasks to the relevant team members, and monitor the progress.
+                                    This ensures that all equipment changes are properly documented and executed.
+
+                                </p>
+                            </div>
+                            <div class="col-md-6 icon-box" data-aos="fade-up" data-aos-delay="200">
+                                <i class="bx bx-alarm"></i>
+                                <h4>Unplanned Maintenance: </h4>
+                                <p>
+                                    EIMS helps you effectively handle unplanned maintenance events that may arise for your equipment.
+                                    The system allows you to quickly create maintenance tickets, assign them to technicians, and track the
+                                    resolution process in real-time.
+                                    By proactively managing unplanned maintenance, you can minimize downtime and maximize productivity.
+                                </p>
+                            </div>
+                            <div class="col-md-6 icon-box" data-aos="fade-up" data-aos-delay="300">
+                                <i class="bx bx-shield"></i>
+                                <h4>Calibration Management:</h4>
+                                <p>
+
+                                    For equipment that requires regular calibration, EIMS offers robust calibration management capabilities.
+                                    The system maintains a detailed calibration schedule, sends automated reminders,
+                                    and tracks calibration history for each piece of equipment. This ensures compliance
+                                    with industry standards and helps you maintain accurate and reliable equipment performance.
+                                </p>
+                            </div>
+                            <div class="col-md-6 icon-box" data-aos="fade-up" data-aos-delay="300">
+                                <i class="bx bxs-report"></i>
+                                <h4>Reporting and Analytics:</h4>
+                                <p>
+
+                                    EIMS provides a wide range of reporting and analytical tools to gain
+                                    insights into your equipment performance, maintenance trends, and resource
+                                    utilization. Generate custom reports, visualize data through interactive
+                                    dashboards, and make data-driven decisions to optimize your equipment management processes.
+                                </p>
+                            </div>
+                            <div class="col-md-6 icon-box" data-aos="fade-up" data-aos-delay="300">
+                                <i class="bx bx-customize"></i>
+                                <h4>Integration and Customization:</h4>
+                                <p>
+
+                                    EIMS is designed to seamlessly integrate with your existing systems and
+                                    workflows. Whether it's connecting with your enterprise resource
+                                    planning (ERP) software or utilizing APIs to integrate with other
+                                    applications, EIMS ensures smooth data flow and minimizes manual efforts.
+                                    Additionally, the system can be customized to align with your unique
+                                    equipment management requirements.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 cta-btn-container text-center">
+                            <a asp-controller="CounselingRequest" asp-action="Index" class="btn-get-started scrollto">Request a quote</a>
+                        </div>
+                      
+                    </div>
+
+
+                </div>
+
+                <div class="col-lg-5 align-items-stretch order-1 order-lg-2 img" style='background-image: url("..//img/skills.png");' data-aos="zoom-in" data-aos-delay="150">&nbsp;</div>
+            </div>
+
+        </div>
+    </section>
+
+</div>
+
+
+<div class="sidebar-filter-overlay"></div><!-- End .sidebar-filter-overlay -->
+<aside class="sidebar-shop sidebar-filter sidebar-filter-banner">
+    <div class="sidebar sidebar-shop mt-4">
+        @for (int i = 0; i < Model.Filter.Count; i++)
+        {
+            <div class="category-filter">
+                <div class="category-filter-box">
+                    <div class="category-filter-box-title">
+                        <h4 class="fw-bold">
+                            @Model.Filter[i].Title
+                        </h4>
+                    </div>
+                    <div class="category-filter-box-desc">
+
+                        @foreach (var item2 in Model.Filter[i].Item)
+                        {
+                            <div class="form-group form-check">
+                                <input class="form-check-input custom-control-input" type="checkbox"
+                                       name="available" value="@item2.Value" id="cat-@item2.Value">
+                                <label class="form-check-label" for="cat-@item2.Value">
+                                    @item2.Text
+                                </label>
+                            </div>
+                        }
+
+                    </div>
+                </div>
+            </div>
+        }
+
+
+
+        <input type="hidden" name="OfferId" id="offerid" value="@Model.OfferId" />
+        <input type="hidden" name="storeTypeId" id="storeTypeId" value="@Model.StoreTypeId" />
+        <input type="hidden" name="productTypeId" id="productTypeId" value="@Model.ProductTypeId" />
+        <input type="hidden" name="search" id="search" value="@Model.Search" />
+    </div>
+</aside><!-- End .sidebar-filter -->
+
+
+@section scripts{
+
+    <script>
+        $(document).ready(function() {
+
+            filter_data(1);
+        });
+        function filter_data(pageNum, pageSize) {
+
+            //$('#loading').css("display", "block");
+            var FilterIds = get_filter('custom-control-input');
+            var OfferId = document.getElementById('offerid').value;
+            var storeTypeId = document.getElementById('storeTypeId').value;
+            var productTypeId = document.getElementById('productTypeId').value;
+            var search = document.getElementById('search').value;
+            $("#lstProducts").html('');
+            $(".total-product").html('');
+            //$("#lstFilter").html('');
+            $("#paged").html('');
+            $.ajax({
+                type: 'POST',
+                url: "@Url.Action("GetProduct", "Product")",
+                data: {
+                    page: pageNum, D: FilterIds, OfferId: OfferId, StoreTypeId: storeTypeId, ProductTypeId: productTypeId, Search: search
+                },
+                success: function(response) {
+                    $('#loading').css("display", "none");
+                    $("#NumShow").html(response.count);
+                    $(".total-product").html(response.TotalProduct )
+                    $("#lstProducts").html('');
+                    // $("#lstFilter").html('');
+                    var prooductContent = '';
+                    var FilterContent = '';
+
+                    if (response.Resualt.length == 0) {
+                        prooductContent += ' <div class="col-md-12"> <img width="100%"  src="../../Content/assets/img/Product Not Found.png" /></div>';
+                    } else {
+                        for (var i = 0; i < response.Resualt.length; i++) {
+                            prooductContent += '<div class="col-md-3" >'+
+                                    '<div class="product-box-item">'+
+                                        '<div class="product-box-item-img">'+
+                                           '<a onclick="goto(' + response.Resualt[i].Id +')">'+
+                                                '<img src="https://dashboard.forteacademy.ir/images/thumbnailproduct/' + response.Resualt[i].CurrentImage + '" alt="">'+
+                                           '</a>'+
+                                    '</div>'+
+                                                '<a onclick="goto(' + response.Resualt[i].Id +')">'+
+                                                '<div class="product-box-item-desc">'+
+                                                    '<div class="product-box-item-title">'+
+                                                          '<h6>' + response.Resualt[i].Name + '</h6>'+
+                                                    '</div>'+
+                                                    '<div class="product-box-price">'+
+                                                    '<div class="d-flex justify-content-between align-items-center">' +
+                                                    (response.Resualt[i].DisCountAmount > 0 ?
+                                                              '<div class="d-flex flex-column">' +
+                                                              '<span class="text-danger fw-bold fs-5">' + response.Resualt[i].DisCountAmount + '%</span>' +
+                                                              '<span class="fw-bold">تخفیف</span>' +
+                                                              '</div>' +
+                                                              '<div class="d-flex flex-column">' +
+                                                              '<span class="new-price">' + response.Resualt[i].FinalAmount.toLocaleString() + ' تومان</span>' +
+                                                              '<span class="old-price">' + response.Resualt[i].Amount.toLocaleString() + ' تومان</span>' +
+                                                              '</div>'  :
+                                                               '<div class="d-flex flex-column">' +
+                                                               '<span class="new-price">' + response.Resualt[i].FinalAmount.toLocaleString() + ' تومان</span>' +
+                                                               '</div>') +
+                                                        '</div>'+
+                                                    '</div>'+
+                                                '</div>'+
+                                            '</a>'+
+                                        '</div>'+
+                                   '</div>'
+
+
+                        }
+                        $("#lstProducts").append(prooductContent);
+
+
+                    }
+
+
+                    PaggingTemplate(response.TotalPages, response.CurrentPage);
+                }
+            });
+        }
+
+        function get_filter(class_name) {
+
+            var filter = [];
+            $('.' + class_name + ':checked').each(function() {
+                filter.push($(this).val());
+            });
+            return filter;
+        }
+
+        $('.custom-control-input').click(function() {
+            filter_data();
+        });
+
+
+        //This is paging temlpate ,you should just copy paste
+        function PaggingTemplate(totalPage, currentPage) {
+
+
+            var template = "";
+            var TotalPages = totalPage;
+            var CurrentPage = currentPage;
+            var PageNumberArray = Array();
+
+
+            var countIncr = 1;
+            for (var i = currentPage; i <= totalPage; i++) {
+                PageNumberArray[0] = currentPage;
+                if (totalPage != currentPage && PageNumberArray[countIncr - 1] != totalPage) {
+                    PageNumberArray[countIncr] = i + 1;
+                }
+                countIncr++;
+            };
+            PageNumberArray = PageNumberArray.slice(0, 5);
+            var FirstPage = 1;
+            var LastPage = totalPage;
+            if (totalPage != currentPage) {
+                var ForwardOne = currentPage + 1;
+            }
+            var BackwardOne = 1;
+            if (currentPage > 1) {
+                BackwardOne = currentPage - 1;
+            }
+
+            //template = "<p>" + CurrentPage + " of " + TotalPages + " pages</p>"
+            template = template + '<nav aria-label="Page navigation example"><ul class="pagination justify-content-center">';
+            if (currentPage == 1) {
+
+                template = template + '<li class="page-item disabled"><a class="page-link" href="#" tabindex="-1" aria-disabled="true">قبلی</a></li>'
+
+            } else {
+                template = template + '<li class="page-item "><a class="page-link" onclick="filter_data(' + BackwardOne + ')" tabindex="-1" aria-disabled="true">قبلی</a></li>'
+            }
+
+            var numberingLoop = "";
+            for (var i = 0; i < PageNumberArray.length; i++) {
+                if (currentPage == PageNumberArray[i]) {
+                    numberingLoop = numberingLoop +'<li class="page-item active" > <a class="page-link" onclick="filter_data(' + PageNumberArray[i] + ')">' + PageNumberArray[i] + '</a></li >'
+
+                } else {
+                    numberingLoop = numberingLoop + '<li class="page-item" > <a class="page-link" onclick="filter_data(' + PageNumberArray[i] + ')">' + PageNumberArray[i] + '</a></li >'
+                }
+
+            }
+            if (currentPage != TotalPages) {
+
+
+                template = template + numberingLoop +'<li class="page-item" > <a class="page-link" onclick="filter_data(' + ForwardOne + ')">بعدی</a></li ></ul>'
+            } else {
+                template = template + numberingLoop + '<li class="page-item disabled"><a class="page-link" href="#">بعدی</a></li></ul>'
+
+            }
+
+            $("#paged").append(template);
+            $('#selectedId').change(function() {
+                filter_data(1, $(this).val());
+            });
+        }
+
+        function goto(Id) { window.open('@Url.Content("~/Product/ProductDetail")?Id=' + Id, '_blank'); }
+
+
+
+
+    </script>
+
+
+
+
+
+
+
+}

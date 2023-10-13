@@ -1,0 +1,97 @@
+﻿
+@{
+    ViewData["Title"] = "همه آزمون ها";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="content">
+    <div class="dashboard">
+        <div class="container-fluid">
+            <div class="row">
+                @await Html.PartialAsync("_UserMenu")
+                <div class="col-lg-9">
+                    <div class="content-box" >
+
+                        <div class="row">
+
+                            <div class="col-12">
+                                <div class="ui-boxs">
+                                    <div class="ui-box">
+                                        <div class="ui-box-item ui-box-white">
+                                            <div class="ui-box-item-title" style="padding: 15px;">
+                                                <h4 class="fw-bold">
+                                                    دوره ها
+                                                </h4>
+                                            </div>
+                                            <div class="ui-box-item-desc p-0" style="overflow-x: auto;">
+                                                <table class="table table-striped table-hover">
+                                                    <thead>
+                                                        <tr>
+                                                            <th scope="col">نام آزمون</th>
+                                                            <th scope="col">وضعیت</th>
+                                                            <th scope="col">تاریخ ثبت</th>
+                                                            <th scope="col">عملیات</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody class="examer">
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end dashboard -->
+</div>
+
+
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+
+            GetCurrentOrder();
+        });
+
+        function GetCurrentOrder() {
+              $.ajax({
+                    type: 'POST',
+                    url: "@Url.Action("GetAllExam", "Exam")",
+                    success: function (response) {
+                        debugger
+
+                        $(".examer").html('');
+                        var examerdata1 = '';
+                            for (var i = 0; i < response.data.length; i++) {
+                                var persiandate = PertianDate(response.data[i].DateInsert)
+                                examerdata1 +=
+
+                                             '<tr>'+
+
+                                                '<td>' + response.data[i].ExamName+'</td>'+
+                                                '<td>' + response.data[i].StatusDesc + '</td>'+
+                                                '<td>' + persiandate+ '</td>'+
+                                (response.data[i].Status <= 2 ? '<td><a  href="@Url.Action("QuizApp","Exam")?examerId=' + response.data[i].Id + '" class="btn btn-warning">شروع آزمون</a></td>' :
+                                    '<td><a  href="@Url.Action("ExamResult", "Exam")?examerId=' + response.data[i].Id + '" class="btn btn-main">نتیجه آزمون</a></td>') +
+                                            '</tr>'
+
+                            }
+                        $(".examer").append(examerdata1);
+
+
+
+                    }
+                });
+        }
+
+
+
+
+    </script>
+}

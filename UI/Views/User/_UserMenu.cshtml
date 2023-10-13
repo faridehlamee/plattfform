@@ -1,0 +1,97 @@
+﻿@using Entites.Entities.User;
+@inject Microsoft.AspNetCore.Identity.UserManager<User> _userManager;
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor _IHttpContextAccessor;
+@{
+
+    var UserFullname = _userManager.GetUserAsync(_IHttpContextAccessor.HttpContext.User).Result;
+}
+
+<div class="col-lg-3">
+    <div class="ui-boxs">
+        <div class="ui-box">
+            <div class="ui-box-item">
+                <div class="ui-box-item-desc" style="border-radius: 10px;background-color: #fff;">
+                    <div class="dashboard-user-img-profile">
+                        <img src="~/img/default-icon/user-profile.png" width="80" height="80"
+                             class="img-fluid rounded-circle" alt="">
+                    </div>
+                    <div class="dashboard-user-info">
+                        <p> @UserFullname.FirstName @UserFullname.LastName</p>
+                    </div>
+                    <div class="dashboard-user-btn">
+                        <div>
+                            <i class="bi bi-key"></i>
+                            <a asp-action="ChangePassword" asp-controller="User" class="text-muted">تغییر رمز عبور</a>
+                        </div>
+                        <div>
+                            <i class="bi bi-arrow-left-circle"></i>
+                            <a asp-action="Logout" asp-controller="Account" class="text-muted">خروج از حساب</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="ui-box">
+            <div class="ui-box-item">
+                <div class="ui-box-item-title" style="padding: 15px;">
+                    <h4 class="fw-bold">
+                        حساب کاربری شما
+                    </h4>
+                </div>
+                <div class="ui-box-item-desc p-0">
+                    <ul class="nav flex-column sidebar-menu">
+                        <li class="nav-item">
+                            <a asp-controller="User" asp-action="Index" class="nav-link text-muted">
+                                <i class="bi bi-person-circle"></i>
+                                <span>
+                                    پروفایل
+
+                                </span>
+                            </a>
+                        </li>
+                  @*      <li class="nav-item ">
+                            <a asp-controller="User" asp-action="Address" class="nav-link text-muted">
+                                <i class="bi bi-pin-map"></i>
+                                <span>
+                                    آدرس ها
+                                </span>
+                            </a>
+                        </li>*@
+                        <li class="nav-item">
+                            <a asp-action="Course" asp-controller="User" class="nav-link text-muted">
+                                <i class="bi bi-journal-bookmark"></i>
+                                <span>
+                                   دوره ها
+                                </span>
+                            </a>
+                        </li>
+                    @*    <li class="nav-item">
+                            <a asp-action="Exam" asp-controller="User" class="nav-link text-muted">
+                                <i class="bi bi-pen"></i>
+                                <span>
+                                   آزمون ها
+                                </span>
+                            </a>
+                        </li>*@
+                        @*<li class="nav-item">
+                            <a asp-action="orders" asp-controller="User" class="nav-link text-muted">
+                                <i class="bi bi-basket-fill"></i>
+                                <span>
+                                    همه سفارش ها
+                                </span>
+                            </a>
+                        </li>*@
+                        <li class="nav-item">
+                            <a asp-action="AdditionalInfo" asp-controller="User" class="nav-link text-muted">
+                                <i class="bi bi-pencil"></i>
+                                <span>
+                                    اطلاعات شخصی
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

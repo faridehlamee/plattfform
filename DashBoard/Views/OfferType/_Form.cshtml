@@ -1,0 +1,20 @@
+﻿@model Data.DTO.Offer.OfferTypeDTO
+
+@Html.HiddenFor(c => c.Id)
+@Html.HiddenFor(c => c.IsActive)
+@Html.HiddenFor(c => c.DateInsert)
+@Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+
+    <hr />
+
+    <div class="form-group">
+        <div class="row">
+            <div class="col-md-6">
+                <label asp-for="Type">عنوان</label>
+                <input asp-for="Type" type="text"class="form-control input-rounded" />
+            </div>
+        </div>
+    </div>
+</div>

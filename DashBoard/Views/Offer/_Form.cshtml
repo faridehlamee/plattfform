@@ -1,0 +1,51 @@
+﻿@model Data.DTO.Offer.OfferDTO
+
+@Html.HiddenFor(c => c.Id)
+@Html.HiddenFor(c => c.IsActive)
+@Html.HiddenFor(c => c.DateInsert)
+@Html.HiddenFor(c => c.Image)
+@Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+
+    <hr />
+
+    <div class="form-group">
+        <div class="row">
+            <div class="col-md-6 mt-4">
+                <label asp-for="OfferTypeId"></label>
+                <select asp-for="OfferTypeId" asp-items="Model.ListOfferType" class="form-control input-rounded SearchDropDown">
+                    <option>انتخاب نمایید</option>
+                </select>
+            </div>
+            <div class="col-md-6 mt-4">
+                <label asp-for="OfferZoneId"></label>
+                <select asp-for="OfferZoneId" asp-items="Model.ListOfferZone" class="form-control input-rounded SearchDropDown">
+                    <option>انتخاب نمایید</option>
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 mt-4">
+                <label asp-for="Name">نام</label>
+                <input asp-for="Name" type="text" class="form-control input-rounded" />
+            </div>
+            <div class="col-md-6 mt-4">
+                <label asp-for="PersianExpirDate">تاریخ اانقضا</label>
+                <input asp-for="PersianExpirDate" data-jdp-min-date="today" data-jdp placeholder="yyyy/mm/dd" class="form-control input-rounded" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 mt-4">
+                <label asp-for="description">توضیح</label>
+                <input asp-for="description" type="text" class="form-control input-rounded" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 mt-4">
+                <label asp-for="Image">تصویر</label>
+                <input asp-for="Image" type="file" class="form-control input-rounded" />
+            </div>
+        </div>
+    </div>
+</div>

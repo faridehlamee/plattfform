@@ -1,0 +1,51 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <UserSecretsId>ae8b3217-03fc-4454-9bd1-0b6176dc34f8</UserSecretsId>
+    <DockerComposeProjectPath>..\docker-compose.dcproj</DockerComposeProjectPath>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\WebFrameWork\WebFrameWork.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+   <PackageReference Include="Microsoft.AspNetCore.Http.Extensions" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="5.0.9" />
+    <PackageReference Include="Microsoft.AspNetCore.Session" Version="2.2.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.7">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.ApiDescription.Client" Version="3.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="5.0.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.13" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
+  
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="wwwroot\images\blog\" />
+    <Folder Include="wwwroot\images\teacher\" />
+    <Folder Include="wwwroot\images\menu\" />
+    <Folder Include="wwwroot\images\exercises\" />
+    <Folder Include="wwwroot\images\categoryExercises\" />
+    <Folder Include="wwwroot\images\course\" />
+    <Folder Include="wwwroot\images\courseCategory\" />
+    <Folder Include="wwwroot\images\thumbnailproduct\" />
+    <Folder Include="wwwroot\images\offer\" />
+    <Folder Include="wwwroot\images\offprice\" />
+    <Folder Include="wwwroot\images\productType\" />
+    <Folder Include="wwwroot\images\Product\" />
+    <Folder Include="wwwroot\images\selectitem\" />
+    <Folder Include="wwwroot\images\sizeguide\" />
+    <Folder Include="wwwroot\images\slider\" />
+  </ItemGroup>
+
+</Project>

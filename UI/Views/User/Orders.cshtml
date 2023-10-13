@@ -1,0 +1,111 @@
+﻿
+@{
+    ViewData["Title"] = "همه سفارش ها";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="content">
+    <div class="dashboard">
+        <div class="container-fluid">
+            <div class="row">
+                @await Html.PartialAsync("_UserMenu")
+                <div class="col-lg-9">
+                    <div class="content-box">
+
+                        <div class="row">
+
+                            <div class="col-12">
+                                <div class="ui-boxs">
+                                    <div class="ui-box">
+                                        <div class="ui-box-item ui-box-white">
+                                            <div class="ui-box-item-title" style="padding: 15px;">
+                                                <h4 class="fw-bold">
+                                                    سفارش ها
+                                                </h4>
+                                            </div>
+                                            <div class="ui-box-item-desc p-0" style="overflow-x: auto;">
+                                                <table class="table table-striped table-hover">
+                                                    <thead>
+                                                        <tr>
+                                                            <th scope="col">نام</th>
+                                                            <th scope="col">موبایل</th>
+                                                            <th scope="col">قیمت</th>
+                                                            <th scope="col">استان</th>
+                                                            <th scope="col">تاریخ ثبت</th>
+                                                            <th scope="col">روز</th>
+                                                            <th scope="col">ساعت</th>
+                                                            <th scope="col">شماره مرجع</th>
+                                                            <th scope="col">وضعیت</th>
+                                                            <th scope="col">عملیات</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody class="order">
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end dashboard -->
+</div>
+
+
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+
+            GetCurrentOrder();
+        });
+
+
+
+
+        function GetCurrentOrder() {
+              $.ajax({
+                    type: 'POST',
+                    url: "@Url.Action("GetCurrentUserOrder", "Order")",
+                    success: function (response) {
+                        debugger
+
+                        $(".order").html('');
+                            var orderdata1 = '';
+                            for (var i = 0; i < response.data.length; i++) {
+                                var persiandate = PertianDate(response.data[i].DateInsert)
+                                orderdata1 +=
+
+                                             '<tr>'+
+
+                                                '<td>' + response.data[i].UserFirstName + ' ' + response.data[i].UserLastName +'</td>'+
+                                                '<td>' + response.data[i].UserPhoneNumber + '</td>'+
+                                '<td>' + response.data[i].FinalPayment + '</td>'+
+                                '<td>' + response.data[i].Address.ProvinceName + '</td>'+
+                                '<td >' + persiandate+ '</td>'+
+                                '<td>' + response.data[i].DayName + '</td>'+
+                                '<td>' + response.data[i].Hour + '</td>'+
+                                '<td>' + response.data[i].RefId + '</td>' +
+                                '<td>' + response.data[i].StateDesc + '</td>' +
+                                '<td><a href="@Url.Action("Factor", "Order")/?OrderId=' + response.data[i].Id +'"><i class="fa fa-file ml-2" aria-hidden="true"></i>نمایش</a></td>'+
+                                            '</tr>'
+
+                            }
+                        $(".order").append(orderdata1);
+
+
+
+                    }
+                });
+        }
+
+
+
+
+    </script>
+}

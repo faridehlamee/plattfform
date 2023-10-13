@@ -1,0 +1,41 @@
+﻿@model Data.DTO.Menu.MenuDTO
+
+@Html.HiddenFor(c => c.Id)
+@Html.HiddenFor(c => c.IsActive)
+@Html.HiddenFor(c => c.DateInsert)
+@Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+
+    <hr />
+    <div class="form-group">
+        <div class="row mb-4">
+            <div class="col-md-6">
+                <label asp-for="Title"></label>
+                <input asp-for="Title" type="text" class="form-control input-rounded" />
+            </div>
+            <div class="col-md-6">
+                <label asp-for="Icon"></label>
+                <input asp-for="Icon" type="text" class="form-control input-rounded" />
+            </div>
+        </div>
+        <div class="row mb-6">
+            <div class="col-md-4">
+                <label asp-for="Level"></label>
+                <input asp-for="Level" type="text" class="form-control input-rounded" />
+            </div>
+            <div class="col-md-6">
+                <label asp-for="Image"></label>
+                <input asp-for="Image" type="file" class="form-control input-rounded" />
+            </div>
+        </div>
+        <div class="row mb-4">
+            <div class="col-md-12">
+                <label asp-for="URL"></label>
+                <input asp-for="URL" type="text" class="form-control input-rounded" />
+            </div>
+        </div>
+           
+       
+    </div>
+</div>

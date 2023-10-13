@@ -1,0 +1,100 @@
+﻿@model Data.DTO.Request.CounselingRequestDTO
+@{
+    ViewData["Title"] = "درخواست مشاوره";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var controllerName = this.ViewContext.RouteData.Values["controller"].ToString();
+}
+
+
+<!-- Page wrapper  -->
+<div class="page-wrapper">
+    <!-- Bread crumb -->
+    @await Html.PartialAsync("_DashboardTitle")
+    <!-- End Bread crumb -->
+    <!-- Container fluid  -->
+    <div class="container-fluid">
+        <!-- Start Page Content -->
+        <div class="row">
+            <div class="col-lg-12">
+                <div id="invoice" class="effect2">
+                    <!--End Invoice Mid-->
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="invoice-info">
+                                <h2>آکادمی فورته</h2>
+                                <p>
+                                    تاریخ درخواست :   <span class="show-date"> @Model.DateInsert</span>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="title">
+                            </div>
+                            <!--End Title-->
+                        </div>
+                        <!--End Info-->
+
+                    </div>
+                    <!--End InvoiceTop-->
+                    <hr />
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="invoice-info">
+                                <h3>اطلاعات</h3>
+                                <p><strong class="mr-2">نام درخواست دهنده : </strong>  @Model.FirstName @Model.LastName </p>
+                                <p><strong class="mr-2"> شماره تماس : </strong>  @Model.Mobile</p>
+                                <p><strong class="mr-2">موضوع درخواست : </strong> @Model.Title</p>
+                                <p><strong class="mr-2">توضیحات درخواست : </strong> @Model.Description</p>
+                                <p>
+                                    @if (Model.File != "faild" && Model.File != null)
+                                    {
+
+                                        <a href="@Url.Action("Downlod", "Request",new {fileName=Model.File})" class="btn btn-success btn-rounded"><i class="fa fa-download" aria-hidden="true"></i></a>
+                                    }
+
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                          
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="row">
+                        <div class="col-md-12">
+                            @if (Model.Index != -1)
+                            {
+                                <form asp-controller="CounselingRequest" asp-action="Operation" method="post">
+                                    <input type="hidden" asp-for="Id" />
+                                    <div class="form-group row">
+                                        <label class="col-sm-2 col-form-label" for="inputState">وضعیت</label>
+                                        <div class="col-sm-10">
+                                            <select id="inputState" name="status" class="form-control">
+                                                <option value="1" selected>Confirm</option>
+                                                <option value="-1">reject</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="Message" class="col-sm-2 col-form-label">کامنت</label>
+                                        <div class="col-sm-10">
+                                            <textarea class="form-control" name="message"></textarea>
+                                        </div>
+                                    </div>
+                                    <input type="submit" class="btn btn-success" />
+
+                                </form>
+                            }
+
+
+                        </div>
+                    </div>
+                    <!--End InvoiceBot-->
+                </div>
+                <!--End Invoice-->
+            </div>
+        </div>
+        <!-- End PAge Content -->
+    </div>
+</div>
+<!-- End Page wrapper  -->

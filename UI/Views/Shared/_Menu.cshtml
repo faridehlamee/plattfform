@@ -1,0 +1,37 @@
+﻿
+
+@inject Data.Contracts.Common.IMenuRepository _menuRepository;
+@{
+
+    var menudata = await _menuRepository.GetAllActive();
+
+}
+
+@foreach (var item in menudata)
+{
+    @if (item.CltSubMenu.Count != 0)
+    {
+        <li>
+            <a href="@item.URL" class="sf-with-ul">  @item.Title</a>
+
+            <ul>
+                @foreach (var item2 in item.CltSubMenu)
+                {
+
+                    <li><a href="@item2.URL">@item2.SubTitle</a></li>
+                }
+
+
+
+            </ul>
+        </li>
+    }
+    else
+    {
+        <li>
+            <a href="@item.URL" >  @item.Title</a>
+        </li>
+    }
+
+
+}

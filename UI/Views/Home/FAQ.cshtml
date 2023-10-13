@@ -1,0 +1,38 @@
+﻿@model List<Data.DTO.Common.FAQDTO>
+@{
+    ViewData["Title"] = "سوالات متداول";
+}
+<main class="cart default">
+    <div class="container text-center">
+        <div class="cart-empty">
+            <div class="row">
+                <h4 class="title text-center mb-3">سوالات متدوال مشتریان</h4><!-- End .title -->
+                <div class="accordion accordion-rounded" id="accordion-2">
+
+                    @foreach (var item in Model)
+                    {
+                        <div class="card card-box card-sm bg-light mt-4">
+                            <div class="card-header" id="heading2-@item.Id">
+                                <h5 class="card-title">
+                                    <a class="collapsed" role="button" data-toggle="collapse" href="#collapse2-@item.Id"
+                                       aria-expanded="false" aria-controls="collapse2-@item.Id">
+                                        @item.Question
+                                    </a>
+                                </h5>
+                            </div><!-- End .card-header -->
+                            <div id="collapse2-@item.Id" class="collapse" aria-labelledby="heading2-@item.Id"
+                                 data-parent="#accordion-2">
+                                <div class="card-body">
+                                    @item.Answer
+                                </div><!-- End .card-body -->
+                            </div><!-- End .collapse -->
+                        </div><!-- End .card -->
+                    }
+
+
+                </div><!-- End .accordion -->
+            </div>
+        </div>
+    </div>
+</main>
+

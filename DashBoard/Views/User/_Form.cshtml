@@ -1,0 +1,39 @@
+﻿@model Data.DTO.User.UserDTO
+
+@Html.HiddenFor(c => c.Id)
+@Html.HiddenFor(c => c.IsActive)
+@Html.HiddenFor(c => c.DateInsert)
+@Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+
+    <hr />
+    <div class="form-group">
+        <div class="row mb-4">
+            <div class="col-md-6">
+                <label asp-for="FirstName">نام</label>
+                <input asp-for="FirstName" type="text" class="form-control input-rounded" />
+            </div>
+            <div class="col-md-6">
+                <label asp-for="LastName">نام خانوادگی</label>
+                <input asp-for="LastName" type="text" class="form-control input-rounded" />
+            </div>
+        </div>
+        <div class="row mb-4">
+            <div class="col-md-6">
+                <label asp-for="Email">ایمیل</label>
+                <input asp-for="Email" type="text" class="form-control input-rounded" />
+            </div>
+            <div class="col-md-6">
+                <label asp-for="PhoneNumber">شماره تلفن</label>
+                <input asp-for="PhoneNumber" type="text" class="form-control input-rounded" />
+            </div>
+        </div>
+        <div class="row mb-4">
+            <div class="col-md-6">
+                <label asp-for="PassWord">رمز عبور</label>
+                <input asp-for="PassWord" type="text" class="form-control input-rounded" />
+            </div>
+        </div>
+    </div>
+</div>

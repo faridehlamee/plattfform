@@ -1,0 +1,147 @@
+﻿
+@{
+    ViewData["Title"] = "آموزشگاه فورته | سبد خرید";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="content">
+    <div class="line-steps">
+        <div class="container-fluid">
+            <div class="line-step-container">
+                <div class="line-step">
+                    <div class="line-step-boxs">
+                        <div class="line-step-box complete">
+                            <a asp-action="Index" asp-controller="Cart">
+                                <div class="icon">
+                                    <i class="bi bi-bag"></i>
+                                </div>
+                                <p>سبد خرید</p>
+                            </a>
+                        </div>
+                        <div class="line-step-box">
+                            <a asp-action="Index" asp-controller="Order">
+                                <div class="icon">
+                                    <i class="bi bi-file-earmark-text"></i>
+                                </div>
+                                <p> پرداخت</p>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="cart">
+        <div class="container-fluid">
+            <div class="cart-content shadow-box">
+                <div class="row">
+                    <div class="col-lg-8">
+                        <div class="cart-detail">
+                            <div class="table-responsive-lg">
+                                <table class="table table-hover main-table">
+                                    <thead style="background: #f8f8f8;">
+                                        <tr class="py-3">
+                                            <th scope="col"></th>
+                                            <th scope="col"></th>
+                                            <th scope="col">محصول</th>
+                                            <th scope="col">قیمت</th>
+                                            <th scope="col">تعداد</th>
+                                            <th scope="col">قیمت کل</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="cart-products">
+                                        
+                                      
+                                    </tbody>
+                                </table>
+                            </div>
+                           
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="cart-payment">
+                            <div class="title text-center">
+                                <h4 class="fw-bold">مجموع کل سبد خرید</h4>
+                            </div>
+                            <table class="table main-table">
+                                
+                                <tr>
+                                    <td class="fw-bold">جمع کل سبد خرید : </td>
+                                    <td class="txt">
+                                        <span class="fw-bold cart-cart-total-price">0</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="fw-bold">مبلغ قابل پرداخت :</td>
+                                    <td class="txt">
+                                        <span class="fw-bold cart-total-price">0</span> <span class="text-muted"></span>
+                                    </td>
+                                </tr>
+
+                            </table>
+                           
+                                <a class="btn-bank waves-effect waves-light" asp-action="Index" asp-controller="Order" >
+                                    اقدام به پرداخت
+
+                                </a>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+
+            cartPage();
+        });
+
+
+
+
+        function cartPage() {
+              $.ajax({
+                    type: 'POST',
+                    url: "@Url.Action("GetCart", "Cart")",
+                    success: function (response) {
+                        debugger
+
+                        $(".cart-products").html('');
+                            var orderdata1 = '';
+                            for (var i = 0; i < response.data.length; i++) {
+
+                                orderdata1 +=
+                                            '<td class="icon"><a onclick="removeorder(' + response.data[i].Id +')"><i class="bi bi-x-circle-fill"></i></a></td>'+
+                                            '<td class="position-relative">'+
+                                             '<img src="https://dashboard.forteacademy.ir/images/product/' + response.data[i].ProductCurrentImage + '" class=""alt="">'+
+                                            '</td>'+
+                                            '<td class="title">' + response.data[i].ProductName +'</td>'+
+                                            '<td class="price">'+
+                                                     '<span class="num">' + response.data[i].FinalAmount +'</span><span class="text-muted">تومان</span>'+
+                                            '</td>'+
+                                            '<td class="td-count">' + response.data[i].Value +' عدد</td>'+
+                                            '<td class="price">'+
+                                                     '<span class="num">' + response.data[i].FinalAmount +'</span><span class="text-muted">تومان</span>'+
+                                            '</td>'+
+                                        '</tr>'
+                            }
+                            $(".cart-products").append(orderdata1);
+
+
+
+                    }
+                });
+        }
+
+
+
+
+    </script>
+}

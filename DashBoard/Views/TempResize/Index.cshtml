@@ -1,0 +1,47 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="page-wrapper">
+    @await Html.PartialAsync("_DashboardTitle")
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card card-outline-primary">
+                    <div class="card-header">
+                        <h4 class="m-b-0 text-white">فرم @ViewData["Title"]</h4>
+                    </div>
+                    <div class="card-body">
+                        <form asp-controller="TempResize" asp-action="Create" method="post" id="proForm" enctype="multipart/form-data">
+
+                            <div class="form-horizontal">
+
+                                <hr />
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <label>fromId</label>
+                                            <input name="fromId" type="text" class="form-control input-rounded" />
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label>ToId</label>
+                                            <input name="ToId" type="text" class="form-control input-rounded" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <hr />
+                            <div class="row">
+                                <button type="submit" class="btn m-btn--pill m-btn--air btn-success mr-2 color-white cursor-pointer">ثبت</button>
+                                
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

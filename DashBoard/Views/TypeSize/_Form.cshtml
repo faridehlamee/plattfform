@@ -1,0 +1,47 @@
+﻿@model Data.DTO.WareHouse.TypeSizeDTO
+
+@Html.HiddenFor(c => c.Id)
+@Html.HiddenFor(c => c.IsActive)
+@Html.HiddenFor(c => c.DateInsert)
+@Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+
+    <hr />
+    @*<div class="form-group">
+        <div class="row">
+            <div class="col-md-4">
+                @Html.LabelFor(c => c.CategoryList)
+                <select asp-for="ProductCategoryId" asp-items="Model.CategoryList" class="form-control input-rounded SearchDropDown">
+                    <option>انتخاب نمایید</option>
+                </select>
+            </div>
+            <div class="col-md-4">
+                @Html.LabelFor(c => c.BrandList)
+                <select asp-for="ProductBrandId" asp-items="Model.BrandList" class="form-control input-rounded SearchDropDown">
+                    <option>انتخاب نمایید</option>
+                </select>
+            </div>
+            <div class="col-md-4">
+                @Html.LabelFor(c => c.Unit)
+                <select asp-for="Unit" asp-items="Html.GetEnumSelectList<Common.AllEnum.Products.ProductUntit>()" class="form-control input-rounded SearchDropDown ">
+                    <option selected="selected" value="">لطفا انتخاب کنید</option>
+                </select>
+            </div>
+        </div>
+    </div>*@
+    <div class="form-group">
+        <div class="row">
+            <div class="col-md-6">
+                <label asp-for="Name">نام</label>
+                <input asp-for="Name" type="text" class="form-control input-rounded" />
+            </div>
+            <div class="col-md-6">
+                <label asp-for="TypeWarehouse">نوع انبار</label>
+                <select asp-for="TypeWarehouse" asp-items="Html.GetEnumSelectList<Common.Enums.Product.TypeWarehouse>()" class="form-control input-rounded SearchDropDown ">
+                    <option selected="selected" value="">لطفا انتخاب کنید</option>
+                </select>
+            </div>
+        </div>
+    </div>
+</div>

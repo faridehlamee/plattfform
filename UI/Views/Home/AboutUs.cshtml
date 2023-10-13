@@ -1,0 +1,125 @@
+﻿ @model IEnumerable<Data.DTO.Common.TeamDTO>
+@{
+    ViewData["Title"] = "About Us";
+}
+
+  
+<main class="main">
+ 
+    <div class="container">
+        <div class="page-header page-header-big text-center" style="background-image: url('../images/about-header-bg.jpg')">
+            <h1 class="page-title text-white">About us<span class="text-white">Who we are</span></h1>
+        </div><!-- End .page-header -->
+    </div><!-- End .container -->
+
+    <div class="page-content pb-0">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 mb-3 mb-lg-0">
+                    <h2 class="title">Our Vision</h2><!-- End .title -->
+                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Phasellus hendrerit. Pellentesque aliquet nibh nec urna. In nisi neque, aliquet vel, dapibus id, mattis vel, nisi. Sed pretium, ligula sollicitudin laoreet viverra, tortor libero sodales leo, eget blandit nunc tortor eu nibh. </p>
+                </div><!-- End .col-lg-6 -->
+
+                <div class="col-lg-6">
+                    <h2 class="title">Our Mission</h2><!-- End .title -->
+                    <p>Sed egestas, ante et vulputate volutpat, eros pede semper est, vitae luctus metus libero eu augue. Morbi purus libero, faucibus adipiscing, commodo quis, gravida id, est. Sed lectus. <br>Praesent elementum hendrerit tortor. Sed semper lorem at felis. </p>
+                </div><!-- End .col-lg-6 -->
+            </div><!-- End .row -->
+
+            <div class="mb-5"></div><!-- End .mb-4 -->
+        </div><!-- End .container -->
+
+        <div class="bg-light-2 pt-6 pb-5 mb-6 mb-lg-8">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-5 mb-3 mb-lg-0">
+                        <h2 class="title">
+                            ABOUT
+                        </h2><!-- End .title -->
+                        <p class="lead text-primary mb-3">Amir Behkish, PhD, CHI, AScT</p><!-- End .lead text-primary -->
+                        <p class="mb-2">
+
+                            Certified Home Inspector
+
+                            Project Manager
+
+                            License# 69680
+
+                            Based on his +23 years of experience in construction industry as: Home Inspector in British Columbia, Civil & Structural Engineer in Iran, Project Manager, Investor, and General Contractor, He is the BEST CHOICE for any Home Inspection project.
+
+                            Amir owns and operates a construction-consulting firm and run Home Inspection under the umbrella of that company. He is certified, trained, and insured by General Liability and E&O insurances.
+
+                            Carrying many detective tools and inspection gadgets, helps him to find problems & defects. His reports are narrative, clear, and precise combined with full detailed color photos, pointing out the problems to clients for their investments. He doesn’t believe in check-box type reports, as the clients hire him to take advantage of his knowledge, education, and experience. It’s the clients’ right to have more accurate information about their most important investment.
+
+                            ASTTBC PI, Certified Home Inspector in British Columbia
+                            Registered Civil & Structural Engineer in Iran
+                            PhD in Civil Engineering-Construction
+                            ASTTBC, Registered Applied Science Technologist in Civil
+                            EPA, Certified AHERA, Asbestos, Building Inspector
+                            MICRO, Certified Mold Inspector
+                            ACI, Concrete Field Testing Technician- Grade 1
+                            ACI, Aggregate Field Testing and Mix Design Technician
+                            YES! He is the Inspector who knows the spirit of the construction.
+
+                        </p>
+
+ 
+                    </div><!-- End .col-lg-5 -->
+
+                    <div class="col-lg-6 offset-lg-1">
+                        <div class="about-images">
+                            <img src="~/images/about/img-1.jpg" alt="" class="about-img-front"> 
+                        </div><!-- End .about-images -->
+                    </div><!-- End .col-lg-6 -->
+                </div><!-- End .row -->
+            </div><!-- End .container -->
+        </div><!-- End .bg-light-2 pt-6 pb-6 -->
+
+        <div class="container">
+           
+
+            <hr class="mt-4 mb-6">
+
+            @if (Model.Count() > 0)
+            {
+                <h2 class="title text-center mb-4">Meet Our Team</h2><!-- End .title text-center mb-2 -->
+
+                <div class="row">
+                    @foreach (var item in Model)
+                    {
+
+                        <div class="col-md-4">
+                            <div class="member member-anim text-center">
+                                <figure class="member-media">
+                                    <img src="~/images/team/member-1.jpg" alt="member photo">
+                                    <figcaption class="member-overlay">
+                                        <div class="member-overlay-content">
+                                            <h3 class="member-title">@item.FullName <span> @item.JobDescription</span></h3><!-- End .member-title -->
+                                            <p>@item.Bio</p>
+                                            <div class="social-icons social-icons-simple">
+                                            
+                                                <a href="@item.LinkedIdUrl" class="social-icon" title="linkedin" target="_blank"><i class="icon-linkedin"></i></a>
+                                            </div><!-- End .soial-icons -->
+                                        </div><!-- End .member-overlay-content -->
+                                    </figcaption><!-- End .member-overlay -->
+                                </figure><!-- End .member-media -->
+                                <div class="member-content">
+                                    <h3 class="member-title">@item.FullName<span>@item.JobDescription</span></h3><!-- End .member-title -->
+                                </div><!-- End .member-content -->
+                            </div><!-- End .member -->
+                        </div><!-- End .col-md-4 -->
+
+
+                    }
+
+
+                </div><!-- End .row -->
+
+            }
+
+        </div><!-- End .container -->
+
+        <div class="mb-2"></div><!-- End .mb-2 -->
+
+    </div><!-- End .page-content -->
+</main>

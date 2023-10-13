@@ -1,0 +1,124 @@
+﻿@model Data.DTO.Product.ProductDTO
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var controllerName = this.ViewContext.RouteData.Values["controller"].ToString();
+}
+
+<div class="page-wrapper">
+    @await Html.PartialAsync("_DashboardTitle")
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card card-outline-primary">
+                    <div class="card-header">
+                        <h4 class="m-b-0 text-white">فرم @ViewData["Title"]</h4>
+                    </div>
+                    <div class="card-body">
+                        <form asp-controller="@controllerName" asp-action="Edit" id="proForm" method="post" enctype="multipart/form-data">
+
+                            <div id="ProductDiv">
+                                @await Html.PartialAsync("_ProductForm")
+                            </div>
+
+                            <hr />
+                            <div class="row">
+                                <button type="submit" class="btn m-btn--pill m-btn--air btn-success mr-2 color-white cursor-pointer">ثبت</button>
+                                <a asp-controller="@controllerName" asp-action="Index" asp-route-Id="@Model.StoreTypeId" class="btn m-btn--pill m-btn--air btn-danger color-white cursor-pointer">بازگشت</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+
+    <script>
+
+        function addimg() {
+            debugger
+                var data = $("#proForm").serialize();
+                      $.ajax({
+                          type: 'POST',
+                          dataType: 'html',
+                          url: '@Url.Action("AddImageForm", "Product")?' + data,
+
+                          success: function (data) {
+                              debugger
+                              $("#ProductDiv").html('')
+                              $("#ProductDiv").html(data)
+                         }
+            });
+        }
+
+    </script>
+    <script>
+        $(function () {
+            debugger
+            $('#form-tags-1').tagsInput();
+
+            $('#form-tags-2').tagsInput({
+                'onAddTag': function (input, value) {
+                    console.log('tag added', input, value);
+                },
+                'onRemoveTag': function (input, value) {
+                    console.log('tag removed', input, value);
+                },
+                'onChange': function (input, value) {
+                    console.log('change triggered', input, value);
+                }
+            });
+
+            $('#form-tags-3').tagsInput({
+                'unique': true,
+                'minChars': 2,
+                'maxChars': 10,
+                'limit': 5,
+                'validationPattern': new RegExp('^[a-zA-Z]+$')
+            });
+
+
+
+            $('#form-tags-5').tagsInput({
+                'delimiter': ';'
+            });
+
+            $('#form-tags-6').tagsInput({
+                'delimiter': [',', ';']
+            });
+
+            $('#form-tags-4').tagsInput({
+                'autocomplete': {
+                    source: [
+                      
+                    ]
+                }
+            });
+
+
+
+               @*$.ajax({
+               type: 'POST',
+               dataType: 'html',
+               url: '@Url.Action("KeywordList", "Keyword")',
+
+                   success: function (data) {
+                       debugger
+                      var converted = JSON.parse(data);
+
+                   $('.form-tags-4').tagsInput({
+                       'autocomplete': {
+
+                           source: { converted }
+                       }
+                   });
+
+              }
+            });*@
+        });
+    </script>
+
+}

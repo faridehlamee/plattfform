@@ -1,0 +1,20 @@
+﻿@model Data.DTO.WareHouse.TypeSizeItemDTO
+
+@Html.HiddenFor(c => c.Id)
+@Html.HiddenFor(c => c.IsActive)
+@Html.HiddenFor(c => c.DateInsert)
+@Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+
+    <hr />
+    <div class="form-group">
+        <div class="row">
+            <div class="col-md-6">
+                <label asp-for="Name">آیتم</label>
+                <input asp-for="Name" type="text" class="form-control input-rounded" />
+                <input asp-for="TypeSizeId" type="hidden"  />
+            </div>
+        </div>
+    </div>
+</div>

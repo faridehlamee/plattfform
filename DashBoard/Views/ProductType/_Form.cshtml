@@ -1,0 +1,26 @@
+﻿@model Data.DTO.BaseProduct.ProductTypeDTO
+
+@Html.HiddenFor(c => c.Id)
+@Html.HiddenFor(c => c.IsActive)
+@Html.HiddenFor(c => c.DateInsert)
+@Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+
+    <hr />
+    <div class="form-group">
+        <div class="row">
+            <div class="col-md-6">
+                <label asp-for="Name">نام فروشگاه</label>
+                <input asp-for="Name" type="text"class="form-control input-rounded" />
+            </div>
+
+            <div class="col-md-6">
+                <label asp-for="StoreTypeId">نوع فروشگاه</label>
+                <select asp-for="StoreTypeId" asp-items="Model.StoreTypeList" class="form-control input-rounded SearchDropDown">
+                    <option>انتخاب نمایید</option>
+                </select>
+            </div>
+        </div>
+    </div>
+</div>

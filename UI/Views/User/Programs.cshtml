@@ -1,0 +1,46 @@
+﻿
+@{
+    ViewData["Title"] = "Programs";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<main class="profile-user-page default">
+    <div class="container">
+        <div class="row">
+            <div class="profile-page col-xl-9 col-lg-8 col-md-12 order-2">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="col-12">
+                            <h1 class="title-tab-content">پیگیری برنامه</h1>
+                        </div>
+                        <div class="content-section default">
+                            <form method="get" class="profile-return-request-form">
+                                <p> شماره پیگیری برنامه خودرا وارد کنید.</p>
+                                <div class="profile-return-request-form-row">
+                                    <div class="row">
+                                        <div class="col-md-9 col-12">
+                                            <div class="profile-return-request-form-field">
+                                                <label class="ui-input">
+                                                    <input class="input-field" type="text" placeholder="مثلا 765301">
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3 col-12">
+                                            <div class="profile-return-request-form-button profile-return-request-form-button-top-btn">
+                                                <button type="submit" class="btn-primary">بررسی برنامه</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+               @await Html.PartialAsync("_UserMenu")
+
+        </div>
+    </div>
+</main>
+<!-- main -->

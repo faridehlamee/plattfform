@@ -1,0 +1,267 @@
+﻿@model Data.DTO.User.UserDTO
+@{
+    ViewData["Title"] = "AdditionalInfo";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="content">
+    <div class="dashboard">
+        <div class="container-fluid">
+            <div class="row">
+
+                @await Html.PartialAsync("_UserMenu")
+                <div class="col-lg-9">
+                    <div class="content-box">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="ui-boxs">
+                                    <div class="ui-box">
+                                        <div class="ui-box-item ui-box-white">
+                                            <div class="ui-box-item-title">
+                                                <div class="d-flex justify-content-between align-items-center">
+                                                    <h4 class="fw-bold">
+                                                        اطلاعات شخصی
+                                                    </h4>
+
+                                                </div>
+                                            </div>
+                                            <div class="ui-box-item-desc p-2">
+                                                <form class="form-account needs-validation" asp-action="UpdateAccount" asp-controller="User" novalidate> 
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-inline w-100">
+                                                                <label for="commentName" class="form-label my-3">
+                                                                    نام
+                                                                    <span class="text-danger ms-1">*</span>
+                                                                </label>
+                                                                <input type="text" class="form-control" asp-for="FirstName" required placeholder="نام خود را وارد نمایید">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-inline w-100 mb-2">
+                                                                <label asp-for="LastName" class="form-label my-3">
+                                                                    نام خانوادگی
+                                                                    <span class="text-danger ms-1">*</span>
+                                                                </label>
+                                                                <input type="text" class="form-control " asp-for="LastName" placeholder="نام خانوادگی خود را وارد نمایید" required="">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-inline w-100">
+                                                                <label asp-for="FatherName" class="form-label my-3">
+                                                                    نام پدر
+                                                                    <span class="text-danger ms-1">*</span>
+                                                                </label>
+                                                                <input type="text" class="form-control" asp-for="FatherName" required placeholder="نام پدر را وارد نمایید">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-inline w-100 mb-2">
+                                                                <label asp-for="PersianBirthDate" class="form-label my-3">
+                                                                    تاریخ تولد
+                                                                    <span class="text-danger ms-1">*</span>
+                                                                </label>
+                                                                <input asp-for="PersianBirthDate" class="form-control " data-jdp placeholder="yyyy/mm/dd" required="">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-inline w-100">
+                                                                <label asp-for="NationalCode" class="form-label my-3">
+                                                                    کد ملی
+                                                                    <span class="text-danger ms-1">*</span>
+                                                                </label>
+                                                                <input type="text" class="form-control" asp-for="NationalCode" required placeholder="کد ملی را وارد نمایید">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-inline w-100 mb-2">
+                                                                <label asp-for="Gender" class="form-label my-3">
+                                                                    جنسیت
+                                                                    <span class="text-danger ms-1">*</span>
+                                                                </label>
+                                                                <select asp-for="Gender" asp-items="Html.GetEnumSelectList<Common.AllEnum.Commons.Gender>()" class="form-control ">
+                                                                    <option selected="selected" value="">لطفا انتخاب کنید</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-inline w-100">
+                                                                <label asp-for="Email" class="form-label my-3">
+                                                                    آدرس ایمیل
+                                                                    <span class="text-danger ms-1"></span>
+                                                                </label>
+                                                                <input type="text" class="form-control" asp-for="Email" placeholder=" آدرس ایمیل خود را وارد نمایید">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-inline w-100 mb-2">
+                                                                <label asp-for="DegreeOfEducation" class="form-label my-3">
+                                                                    مدرک تحصیلی
+
+                                                                </label>
+                                                                <select asp-for="DegreeOfEducation" asp-items="Html.GetEnumSelectList<Common.AllEnum.Commons.DegreeOfEducation>()" class="form-control ">
+                                                                    <option selected="selected" value="">لطفا انتخاب کنید</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div class="row">
+                                                        <input asp-for="address.Id" type="hidden" />
+                                                        <div class="col-sm-6">
+                                                            <div class="form-inline w-100">
+                                                                <input type="hidden" value="@Model.address.ProvinceId" id="province_id" />
+                                                                <label asp-for="address.ProvinceId" class="form-label my-3">استان  <span class="text-danger ms-1">*</span></label>
+                                                                <select asp-for="address.ProvinceId" class="form-control province" required>
+                                                                    <option value="0">انتخاب نمایید</option>
+                                                                </select>
+                                                            </div><!-- End .col-sm-6 -->
+                                                        </div><!-- End .col-sm-6 -->
+
+                                                        <div class="col-sm-6">
+                                                            <div class="form-inline w-100 mb-2">
+                                                              <input type="hidden" value="@Model.address.CityId" id="city_id" />
+                                                                <label asp-for="address.CityId" for="city" class="form-label my-3">شهر  <span class="text-danger ms-1">*</span></label>
+                                                                <select asp-for="address.CityId" class="form-control city" required>
+                                                                    <option value="0">انتخاب نمایید</option>
+                                                                </select>
+                                                            </div><!-- End .col-sm-6 -->
+                                                        </div><!-- End .col-sm-6 -->
+                                                    </div><!-- End .row -->
+                                                    <div class="row">
+                                                        <div class="col-sm-12">
+                                                            <div class="form-inline w-100">
+                                                                <label asp-for="address.AddressDesc" class="form-label my-3">آدرس  <span class="text-danger ms-1">*</span></label>
+                                                                <input asp-for="address.AddressDesc" id="addressdesc" type="text" class="form-control" required>
+                                                            </div><!-- End .col-sm-6 -->
+                                                        </div><!-- End .row -->
+                                                    </div><!-- End .row -->
+                                                    <div class="row">
+                                                        <div class="col-sm-6">
+                                                            <div class="form-inline w-100 mb-2">
+                                                                <label asp-for="address.Plaque" class="form-label my-3"> پلاک</label>
+                                                                <input for="Plaque" asp-for="address.Plaque" type="text" class="form-control" >
+                                                            </div><!-- End .col-sm-6 -->
+                                                        </div><!-- End .col-sm-6 -->
+
+                                                        <div class="col-sm-6">
+                                                            <div class="form-inline w-100">
+                                                                <label asp-for="address.PostalCode" class="form-label my-3">کدپستی </label>
+                                                                <input for="PostalCode" asp-for="address.PostalCode" type="text" class="form-control" >
+                                                            </div><!-- End .col-sm-6 -->
+                                                        </div><!-- End .row -->
+                                                    </div><!-- End .row -->
+                                                @*    <div class="row">
+                                                        <div class="col-sm-6">
+                                                            <div class="form-inline w-100 mb-2">
+                                                                <label asp-for="address.Receiver" class="form-label my-3"> نام گیرنده*</label>
+                                                                <input asp-for="address.Receiver" id="receiver" type="text" class="form-control" required>
+                                                            </div><!-- End .col-sm-6 -->
+                                                        </div>
+                                                    </div>*@
+                                                    <div class="row mt-4">
+                                                        <div class="col-12 text-center">
+                                                            <button class="btn btn-primary">ذخیره</button>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end dashboard -->
+</div>
+
+@section scripts{
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            GetProvince();
+        var provinceId = $("#province_id").val();
+            if(provinceId != 0){
+             GetCity(provinceId)
+            }
+        });
+
+
+
+        function GetProvince() {
+
+                  $.ajax({
+                        type: 'POST',
+                        url: "@Url.Action("GetProvince", "Address")",
+                        success: function (response) {
+                            debugger 
+                            var provinceId = $("#province_id").val();
+                            var Province = '';
+                            for (var i = 0; i < response.length; i++) {
+                                if(provinceId==response[i].Value){
+                                     Province += ' <option value="' + response[i].Value + '" selected="selected">' + response[i].Text+'</option>'
+                                }else{
+
+                                       Province += ' <option value="' + response[i].Value + '" >' + response[i].Text+'</option>'
+                                }
+
+                                }
+                            $(".province").append(Province);
+
+
+
+                        }
+                    });
+
+            }
+
+        $(".province").change(function () {
+                debugger
+                var provinceId = $(".province").val();
+
+                   GetCity(provinceId)
+            });
+            function GetCity(provinceId){
+                 $.ajax({
+                        type: 'POST',
+                       url: "@Url.Action("GetCity", "Address")",
+                       data: { ProvinceId: provinceId},
+                        success: function (response) {
+                            debugger
+                            $(".city").html('');
+                            var city = '';
+                            var cityId = $("#city_id").val();
+                            for (var i = 0; i < response.length; i++) {
+                                if(cityId ==  response[i].Value){
+                                       city += ' <option value="' + response[i].Value + '" selected="selected" >' + response[i].Text+'</option>'
+                                }else{
+
+                                       city += ' <option value="' + response[i].Value + '" >' + response[i].Text+'</option>'
+
+                                }
+
+                                }
+                            $(".city").append(city);
+
+
+
+                        }
+                    });
+            }
+
+
+
+    </script>
+}

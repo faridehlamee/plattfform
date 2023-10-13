@@ -1,0 +1,48 @@
+﻿@model Data.DTO.Common.EmailDTO
+
+@Html.HiddenFor(c => c.Id)
+@Html.HiddenFor(c => c.IsActive)
+@Html.HiddenFor(c => c.DateInsert)
+@Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+
+    <hr />
+    <div class="form-group">
+        <div class="row">
+            <div class="col-md-6">
+                <label asp-for="Subject"> </label>
+                <input asp-for="Subject" type="text" class="form-control input-rounded" />
+            </div>
+            <div class="col-md-6">
+                <label asp-for="EmailAddress">Email</label>
+                <input asp-for="EmailAddress" type="text" class="form-control input-rounded" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <label asp-for="Mobile"> </label>
+                <input asp-for="Mobile" type="text" class="form-control input-rounded" />
+            </div>
+        </div>
+        @if (Model.message != null)
+        {
+            <div class="row">
+                <div class="col-md-12">
+                    <label asp-for="message"></label>
+                    <textarea asp-for="message" class="form-control " rows="10">@Model.message</textarea>
+                </div>
+            </div>
+
+        }
+
+        <div class="row">
+            <div class="col-md-12">
+                <label asp-for="Replay"></label>
+                <textarea asp-for="Replay" class="form-control " rows="10">@Model.Replay</textarea>
+            </div>
+        </div>
+
+
+    </div>
+</div>

@@ -1,0 +1,225 @@
+﻿@model Data.DTO.Offer.OfferItemDTO
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var controllerName = this.ViewContext.RouteData.Values["controller"].ToString();
+}
+
+<div class="page-wrapper">
+    <!-- Bread crumb -->
+    @await Html.PartialAsync("_DashboardTitle")
+    <!-- End Bread crumb -->
+    <!-- Container fluid  -->
+    <div class="container-fluid">
+        <!-- Start Page Content -->
+        <div class="row">
+            <div class="col-md-12">
+                <a class="btn btn-primary  btn-rounded ml-4" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                    جست و جو
+                </a>
+                <div class="collapse" id="collapseExample">
+                    <div class="card card-body">
+
+                        <form asp-controller="@controllerName" asp-action="#" method="post" id="searchForm" enctype="multipart/form-data">
+
+                            <div class="form-horizontal">
+                                <input name="Id" type="hidden" />
+                                <input name="OfferId" value="@Model.OfferId" type="hidden" />
+
+                                <hr />
+                                <div class="form-group">
+                                    <div class="row mb-4">
+                                        <div class="col-md-6">
+                                            <label for="Name">نام محصول</label>
+                                            <input name="Name" type="text" class="form-control input-rounded" />
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="ProductCode">کد محصول</label>
+                                            <input name="ProductCode" type="text" class="form-control input-rounded" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <hr />
+                            <div class="row">
+                                <button type="button" class="btn m-btn--pill m-btn--air btn-success mr-2 color-white cursor-pointer" onclick="search()">تایید</button>
+                            </div>
+                        </form>
+
+
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="col-lg-12">
+                    <div class="card card-outline-primary">
+                        <div class="card-body">
+                            <form asp-controller="@controllerName" asp-action="AddItem" id="ItemId" method="post" enctype="multipart/form-data">
+                                <input type="hidden" asp-for="OfferId" />
+                                <div class="form-horizontal">
+                                    <hr />
+                                    <div class="form-group">
+                                        @*<div class="row">
+                                            <div class="col-md-2">
+                                                <label asp-for="Value"></label>
+                                                <input type="text" asp-for="Value" name="name" class="form-control" />
+                                            </div>
+                                            <div class="col-md-2">
+                                                <label asp-for="PersianExpireDate"></label>
+                                                <input asp-for="PersianExpireDate" data-jdp-min-date="today" data-jdp placeholder="تاریخ مشاوره" class="form-control" />
+                                            </div>
+                                            <div class="col-md-2">
+                                                <label asp-for="TypeOffPrice"></label>
+                                                <select asp-for="TypeOffPrice" asp-items="Html.GetEnumSelectList<Common.AllEnum.Commons.TypeOffPrice>()" class="form-control input-rounded SearchDropDown ">
+                                                    <option selected="selected" value="">لطفا انتخاب کنید</option>
+                                                </select>
+                                            </div>
+                                        </div>*@
+                                    </div>
+                                </div>
+                                <hr />
+                                <button type="submit" class="btn m-btn--pill m-btn--air btn-success color-white cursor-pointer">ثبت</button>
+                                <a asp-controller="Offer" asp-action="Index" class="btn m-btn--pill m-btn--air btn-danger color-white cursor-pointer">بازگشت</a>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="k-rtl  shadow">
+                    <div id="List"></div>
+
+                </div>
+
+            </div>
+        </div>
+        <!-- End PAge Content -->
+    </div>
+
+</div>
+
+
+@section scripts{
+    <script>
+       $(document).ready(function () {
+
+            List();
+        });
+
+        function search() {
+            List();
+        }
+        function List() {
+            debugger
+            var search = $('#searchForm').serialize();
+
+            $("#List").kendoGrid({
+                scrollable: true,
+                resizable: true,
+                autoBind: true,
+                sortable: true,
+                dataSource: {
+                    type: "Json",
+                    serverPaging: true,
+                    transport: {
+                        read: "@Url.Action("ListForAdd", controllerName)/?data=" + search,
+                        type: "POST",
+                        dataType: "json"
+                    },
+                    schema: {
+                        data: "data", // records are returned in the "data" field of the response
+                        total: "total" // total number of records is in the "total" field of the response
+                    },
+                    pageSize: 20,
+
+                },
+                pageable: {
+                    refresh: true,
+                    pageSizes: true,
+                    buttonCount: 5,
+                    pageSizes: [10, 20, 50]
+                },
+                dataBound: function () {
+                    this.expandRow(this.tbody.find("tr.k-master-row").first());
+                },
+                columns: [
+                    {
+                        title: "#",
+                        width: 25,
+                        template: "#if(selecteditemArr.indexOf(Id) > -1){#<input onclick='itemSelect(#=Id#)'  type='checkbox' id='item-#=Id#'  checked='checked' />#}else{#<input onclick='itemSelect(#=Id#)' type='checkbox' id='item-#=Id#'  /> #}#"
+                    },{
+                        template: " <img src='/images/Product/#=CurrentImage#'  width='50%' alt='#=CurrentImage#'/>",
+                        field: "CurrentImage",
+                        title: "تصویر",
+                        width: 100
+                    }, {
+                        field: "ProductCode",
+                        title: "کد ",
+                        width: "110px"
+                    }, {
+                        field: "Name",
+                        title: "نام ",
+                        width: "110px"
+                    }, {
+                        field: "Amount",
+                        title: "مبلغ",
+                        width: "110px"
+                    }
+
+
+                ]
+            });
+        }
+
+
+        var selecteditemArr = [];
+        function itemSelect(id) {
+            debugger;
+            var chk = $("#item-" + id);
+            if (chk.is(':checked')) {
+                selecteditemArr.push(id);
+            } else {
+                var index = selecteditemArr.indexOf(id);
+                selecteditemArr.splice(index, 1);
+            }
+        }
+
+
+
+        $("#ItemId").on("submit", function (event) {
+            event.preventDefault();
+            var formdata = {
+                //Value: $('#Value').val(),
+                //TypeOffPrice: $('#TypeOffPrice').val(),
+                //PersianExpireDate: $('#PersianExpireDate').val(),
+                OfferId: $('#OfferId').val(),
+                ProductIds: selecteditemArr.join(",")
+            };
+            var url = $(this).attr("action");
+            $.ajax({
+                url: '@Url.Action("AddItem", controllerName)',
+                type: "POST",
+                data: formdata,
+                dataType: "json",
+                success: function (respons) {
+                    debugger
+                    if (respons == true) {
+                        toastr.success(' ثبت شد')
+                        selecteditemArr = [];
+                        List();
+                    } else if (respons == false) {
+                        toastr.error('خطا - مقادیر خالی می باشد')
+                    }
+
+                }
+            })
+        });
+    </script>
+
+
+
+
+
+}

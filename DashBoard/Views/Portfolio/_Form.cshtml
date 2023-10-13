@@ -1,0 +1,49 @@
+﻿@model Data.DTO.Common.PortfolioDTO
+
+@Html.HiddenFor(c => c.Id)
+@Html.HiddenFor(c => c.IsActive)
+@Html.HiddenFor(c => c.DateInsert)
+@Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+
+    <hr />
+    <div class="form-group">
+        <div class="row">
+            <div class="col-md-6">
+                <label asp-for="Category"></label>
+                <input asp-for="Category" type="text" class="form-control input-rounded" />
+            </div>
+            <div class="col-md-6">
+                <label asp-for="Name"></label>
+                <input asp-for="Name" type="text" class="form-control input-rounded" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <label asp-for="CompletionTime"></label>
+                <input asp-for="CompletionTime" type="text" class="form-control input-rounded" />
+            </div>
+            <div class="col-md-6">
+                <label asp-for="ProjectDate "></label>
+                <input asp-for="ProjectDate" type="datetime" class="form-control input-rounded" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <label asp-for="Url"></label>
+                <input asp-for="Url" type="text" class="form-control input-rounded" />
+            </div>
+            <div class="col-md-12">
+                <label asp-for="Detail "></label>
+                <input asp-for="Detail" type="text" class="form-control input-rounded" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <label asp-for="Image"></label>
+                <input asp-for="Image" type="file" class="form-control input-rounded" />
+            </div>
+        </div>
+    </div>
+</div>

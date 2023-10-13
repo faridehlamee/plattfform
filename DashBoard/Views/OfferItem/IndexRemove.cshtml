@@ -1,0 +1,136 @@
+﻿@model Data.DTO.Offer.OfferItemDTO
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var controllerName = this.ViewContext.RouteData.Values["controller"].ToString();
+}
+
+<div class="page-wrapper">
+    <!-- Bread crumb -->
+    @await Html.PartialAsync("_DashboardTitle")
+    <!-- End Bread crumb -->
+    <!-- Container fluid  -->
+    <div class="container-fluid">
+        <!-- Start Page Content -->
+        <div class="row">
+            <div class="col-12">
+                <div class="col-lg-12">
+                    <div class="card card-outline-primary">
+                        <div class="card-body">
+                            <input type="hidden" asp-for="OfferId" />
+                            <a onclick="Remove()" class="btn btn-primary btn-rounded">حذف</a>
+                            <a asp-controller="Offer" asp-action="Index" class="btn m-btn--pill m-btn--air btn-danger color-white cursor-pointer btn-rounded">بازگشت</a>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="k-rtl  shadow">
+                    <div id="List"></div>
+
+                </div>
+
+            </div>
+        </div>
+        <!-- End PAge Content -->
+    </div>
+
+</div>
+
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            debugger
+            var dlId = document.getElementById("OfferId").value;
+            $("#List").kendoGrid({
+                scrollable: true,
+                resizable: true,
+                autoBind: true,
+                sortable: true,
+                dataSource: {
+                    type: "Json",
+                    transport: {
+                        read: "@Url.Action("List", controllerName)/?Id=" + dlId,
+                        type: "POST",
+                        dataType: "json"
+
+                    },
+                    pageSize: 20,
+
+                },
+                toolbar: ["search"],
+                pageable: {
+                    refresh: true,
+                    pageSizes: true,
+                    buttonCount: 5,
+                    pageSizes: [10, 20, 50]
+                },
+                dataBound: function () {
+                    this.expandRow(this.tbody.find("tr.k-master-row").first());
+                },
+                columns: [
+                    {
+                        title: "#",
+                        width: 25,
+                        template: "#if(selecteditemArr.indexOf(Product.Id) > -1){#<input onclick='itemSelect(#=Product.Id#)'  type='checkbox' id='item-#=Product.Id#'  checked='checked' />#}else{#<input onclick='itemSelect(#=Product.Id#)' type='checkbox' id='item-#=Product.Id#'  /> #}#"
+                    },{
+                        template: " <img src='/images/Product/#=Product.CurrentImage#'  width='50%' alt='#=Product.CurrentImage#'/>",
+                        field: "Product.CurrentImage",
+                        title: "تصویر",
+                        width: 100
+                    },{
+                        field: "Product.ProductCode",
+                        title: "کد ",
+                        width: "110px"
+                    },{
+                        field: "Product.Name",
+                        title: "نام ",
+                        width: "110px"
+                    }
+
+
+                ]
+            });
+        });
+
+        var selecteditemArr = [];
+          function Remove() {
+              debugger;
+              var formdata = {
+                  OfferId: document.getElementById("OfferId").value,
+                  ProductIds: selecteditemArr.join(",")
+              };
+           
+                       $.ajax({
+                           type: 'POST',
+                           url: '@Url.Action("Delete", controllerName)',
+                           data: formdata,
+                           success: function () {
+                               debugger;
+                               toastr.success(' حذف شد')
+                               selecteditemArr = [];
+                               $("#List").data("kendoGrid").dataSource.read();
+                           }
+                       });
+        }
+
+       
+        function itemSelect(id) {
+            debugger;
+            var chk = $("#item-" + id);
+            if (chk.is(':checked')) {
+                selecteditemArr.push(id);
+            } else {
+                var index = selecteditemArr.indexOf(id);
+                selecteditemArr.splice(index, 1);
+            }
+        }
+
+    </script>
+
+
+
+
+
+}

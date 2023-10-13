@@ -1,0 +1,117 @@
+﻿@model Data.DTO.Request.CounselingRequestDTO
+@{
+    ViewData["Title"] = "درخواست مشاوره";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var controllerName = this.ViewContext.RouteData.Values["controller"].ToString();
+ 
+}
+
+<div class="page-wrapper">
+    <!-- Bread crumb -->
+    @await Html.PartialAsync("_DashboardTitle")
+    <!-- End Bread crumb -->
+    <!-- Container fluid  -->
+    <form asp-controller="@controllerName" asp-action="#" method="post" id="searchForm" enctype="multipart/form-data">
+
+        <div class="form-horizontal">
+            <input asp-for="Id" type="hidden" />
+            <input asp-for="Index" type="hidden" />
+        </div>
+
+    </form>
+    <div class="container-fluid">
+        <!-- Start Page Content -->
+        <div class="row">
+
+            <div class="col-12">
+                <div class="k-rtl  shadow mt-4">
+                    <div id="List"></div>
+                </div>
+
+            </div>
+        </div>
+        <!-- End PAge Content -->
+    </div>
+
+</div>
+
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+
+            List();
+        });
+
+
+        function List() {
+            debugger
+            var search = $('#searchForm').serialize();
+            $("#List").kendoGrid({
+                scrollable: true,
+                resizable: true,
+                autoBind: true,
+                sortable: true,
+                dataSource: {
+                    type: "Json",
+                    serverPaging: true,
+                    transport: {
+                        read: "@Url.Action("List", controllerName)?data=" + search,
+                        type: "POST",
+                        dataType: "json"
+
+                    }, schema: {
+                        data: "data", // records are returned in the "data" field of the response
+                        total: "total" // total number of records is in the "total" field of the response
+                    },
+                    pageSize: 20,
+
+                },
+                toolbar: ["search"],
+                pageable: {
+                    refresh: true,
+                    pageSizes: true,
+                    buttonCount: 5,
+                    pageSizes: [10, 20, 50]
+                },
+                dataBound: function () {
+                    this.expandRow(this.tbody.find("tr.k-master-row").first());
+                },
+                columns: [
+
+                    {
+                        title: "Full Name ",
+                        width: "110px",
+                        template:
+
+                        "<p>#=FirstName# #=LastName#</p>"
+
+                    }, {
+                        field: "Title",
+                        title: "Title",
+                        width: "110px"
+                    }, {
+                        field: "Statuse",
+                        title: "Statuse",
+                        width: "110px"
+                    },{
+                    title: "Operation",
+                    width: 100,
+                    template:
+
+                            "<a href='@Url.Action("RequestInfo", controllerName)/?Id=#=Id#' class='btn btn-primary btn-rounded' >نمایش</a>" 
+
+                    }
+
+                ]
+            });
+        }
+
+
+    </script>
+
+
+
+
+
+}

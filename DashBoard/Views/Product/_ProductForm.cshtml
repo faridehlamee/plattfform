@@ -1,0 +1,141 @@
+﻿@model Data.DTO.Product.ProductDTO
+
+@Html.HiddenFor(c => c.Id)
+@Html.HiddenFor(c => c.IsActive)
+@Html.HiddenFor(c => c.DateInsert)
+@Html.HiddenFor(c => c.StoreTypeId)
+@Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <input type="hidden" name="url" value="@Url.ActionContext.HttpContext.Request.Path" />
+    <hr />
+    <div class="form-group">
+        <div class="row mb-4">
+            <div class="col-md-4">
+                <label asp-for="ProductTypeId">نوع محصول</label>
+                <select asp-for="ProductTypeId" asp-items="Model.ProductTypeList" class="form-control input-rounded SearchDropDown">
+                    <option>انتخاب نمایید</option>
+                </select>
+            </div>
+
+            <div class="col-md-4">
+                <label asp-for="GuideId">راهنما</label>
+                <select asp-for="GuideId" asp-items="Model.GuideList" class="form-control input-rounded SearchDropDown">
+                    <option>انتخاب نمایید</option>
+                </select>
+            </div>
+            <div class="col-md-4">
+                <label asp-for="TypeSizeId">انبار</label>
+                <select asp-for="TypeSizeId" asp-items="Model.TypeSizeList" class="form-control input-rounded SearchDropDown">
+                    <option>انتخاب نمایید</option>
+                </select>
+            </div>
+        </div>
+        <div class="row mb-4">
+            @for (int i = 0; i < Model.ListParameter.Count; i++)
+            {
+                <input type="hidden" asp-for="ListParameter[i].Id"  />
+                <div class="col-md-4">
+                    <label asp-for="ListParameter[i].DetailsItemId">@Model.ListParameter[i].DetailTitle</label>
+                    <select asp-for="ListParameter[i].DetailsItemId" asp-items="Model.ListParameter[i].ListDetailItem" class="form-control input-rounded SearchDropDown">
+                        <option>انتخاب نمایید</option>
+                    </select>
+                </div>
+            }
+
+
+        </div>
+        <div class="row mb-4">
+            <div class="col-md-6">
+                <label asp-for="ProductCode">کد </label>
+                <input asp-for="ProductCode" type="text" class="form-control input-rounded" />
+            </div>
+            <div class="col-md-6">
+                <label asp-for="Name">نام </label>
+                <input asp-for="Name" type="text" class="form-control input-rounded" />
+            </div>
+        </div>
+        <div class="row mb-4">
+            <div class="col-md-6">
+                <label asp-for="Amount">قیمت</label>
+                <input asp-for="Amount" type="text" class="form-control input-rounded" />
+            </div>
+            <div class="col-md-6">
+                <label asp-for="Group">کد گروه</label>
+                <input asp-for="Group" type="text" class="form-control input-rounded" />
+            </div>
+        </div>
+        <div class="row mb-4">
+            <div class="col-md-12">
+                <label asp-for="Description">توضیحات</label>
+                <input asp-for="Description" type="text" class="form-control input-rounded" />
+                @*<textarea asp-for="Description"  class="form-control input-rounded"></textarea>*@
+            </div>
+        </div>
+        <div class="row mb-4">
+            <div class="col-md-12">
+                <label asp-for="Tags">کلید واژه</label>
+                <input asp-for="Tags" type="text" class="form-control input-rounded "  id="form-tags-4"/>
+            </div>
+        </div>
+        <div class="row mb-4">
+            <div class="form-group">
+                <div class="row">
+                    @if (Model.Gallery != null)
+                    {
+                        for (int i = 0; i < Model.Gallery.Count; i++)
+                        {
+                            @Html.HiddenFor(c => c.Gallery[i].Id)
+                            @Html.HiddenFor(c => c.Gallery[i].EntityId)
+                            @Html.HiddenFor(c => c.Gallery[i].EntityType)
+                            @Html.HiddenFor(c => c.Gallery[i].ImageFile)
+                            <div class="col-md-2">
+                                <img src="~/images/product/@Model.Gallery[i].ImageFile" alt="@Model.Gallery[i].ImageFile" class="img-thumbnail">
+                                <div class="card-body">
+                                    <h3>@Model.Gallery[i].Priority</h3>
+                                    <a href="@Url.Action("DeleteImage","Product",new { Id =Model.Gallery[i].Id , url =Context.Request.Path+Context.Request.QueryString})" class="card-link">حذف</a>
+                                </div>
+                            </div>
+                        }
+
+                    }
+
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="form-group">
+                <a onclick="addimg()" class="btn btn-warning btn-rounded">     اضافه کردن گالری +  </a>
+            </div>
+        </div>
+        <div class="row mb-4">
+
+            @for (int i = 0; i < Model.ListImage.Count; i++)
+            {
+                <div class="col-md-6">
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.ListImage[i].ImageFile)
+                        @Html.EditorFor(m => m.ListImage[i].ImageFile, new { htmlAttributes = new { @class = "form-control input-rounded", Type = "file" } })
+
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.ListImage[i].Priority)
+                        @Html.EditorFor(m => m.ListImage[i].Priority, new { htmlAttributes = new { @class = "form-control input-rounded" } })
+
+                    </div>
+                </div>
+
+            }
+        </div>
+        <div class="row mb-4">
+            <div class="col-md-6">
+                <label>
+                    @Html.CheckBoxFor(m => m.IsShow) قابل نمایش
+                </label>
+            </div>
+        </div>
+    </div>
+</div>

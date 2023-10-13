@@ -1,0 +1,21 @@
+﻿@model Data.DTO.Address.ProvinceDTO
+
+@Html.HiddenFor(c => c.Id)
+@Html.HiddenFor(c => c.IsActive)
+@Html.HiddenFor(c => c.DateInsert)
+@Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+
+    <hr />
+
+    <div class="form-group">
+    
+        <div class="row">
+            <div class="col-md-6">
+                <label asp-for="Name">استان</label>
+                <input asp-for="Name" type="text" class="form-control input-rounded" />
+            </div>
+        </div>
+    </div>
+</div>

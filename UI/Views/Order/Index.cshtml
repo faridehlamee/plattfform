@@ -1,0 +1,516 @@
+﻿@{
+    ViewData["Title"] = "پرداخت";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="content">
+    <div class="line-steps">
+        <div class="container-fluid">
+            <div class="line-step-container">
+                <div class="line-step">
+                    <div class="line-step-boxs">
+                        <div class="line-step-box complete">
+                            <a asp-action="Index" asp-controller="Cart">
+                                <div class="icon">
+                                    <i class="bi bi-bag"></i>
+                                </div>
+                                <p>سبد خرید</p>
+                            </a>
+                        </div>
+                        <div class="line-step-box complete">
+                            <a asp-action="Index" asp-controller="Order">
+                                <div class="icon">
+                                    <i class="bi bi-file-earmark-text"></i>
+                                </div>
+                                <p> پرداخت</p>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="cart">
+        <div class="container-fluid">
+            <div class="cart-content shadow-box">
+                <div class="alert alert-warning" role="alert">
+                    کوپن تخفیف دارید <span class="alert-link pointer" id="showFormDiscount">
+                        برای نوشتن کد اینجا کلیک
+                        کنید
+                    </span>
+                </div>
+                <div class="category-filter" id="discountForm" style="display:none;">
+                    <div class="category-filter-box">
+                        <div class="category-filter-box-title">
+                            <h4 class="fw-bold">
+                                اگر شما کد تخفیف دارید ، برای ثبت آن از طریق زیر اقدام کنید.
+                            </h4>
+                        </div>
+                        <div class="category-filter-box-desc">
+
+                            <div class="row align-items-center">
+                                <div class="col-sm-8">
+                                    <div class="form-group">
+                                        <label for="discount" class="form-label">کد تخفیف:</label>
+                                        <input type="text" class="form-control rounded-pill" name="DisCountCode" id="coponVal" placeholder="کد تخفیف شما">
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <button class="btn btn-primary btn-sm rounded-pill mt-sm-3 mt-3" onclick="ApplyCode()">
+                                        ثبت کد
+                                        تخفیف
+                                    </button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <form asp-controller="Order" asp-action="Bill">
+                    <div class="row">
+                        <div class="col-lg-7">
+                            <div class="checkout-forms">
+                                <div class="checkout-form-title">
+                                    <h5>جزییات پرداخت</h5>
+                                </div>
+                                <div class="checkout-form">
+
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="UserFirstName" class="form-label">
+                                                        نام <span class="text-danger ms-1">*</span>
+                                                    </label>
+                                                    <input for="UserFirstName" id="UserFirstName" readonly type="text" class="form-control rounded-pill" required>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="UserLastName" class="form-label">
+                                                        نام خانوادگی <span class="text-danger ms-1">*</span>
+                                                    </label>
+                                                    <input for="UserLastName" id="UserLastName" readonly type="text" class="form-control rounded-pill" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="name" class="form-label">
+                                                        شماره تماس <span class="text-danger ms-1">*</span>
+                                                    </label>
+                                                    <input for="UserPhoneNumber" id="UserPhoneNumber" readonly type="text" class="form-control rounded-pill" required>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="lname" class="form-label">
+                                                        کد معرف <span class="text-danger ms-1">*</span>
+                                                    </label>
+                                                    <input for="UserRepresentative" id="UserRepresentative" type="text" class="form-control rounded-pill" name="UserRepresentative">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="name" class="form-label">
+                                                        آدرس <span class="text-danger ms-1">*</span>
+                                                    </label>
+                                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                                        ایجاد آدرس جدید
+                                                    </button>
+                                                    <div class="row mb-4" id="lstaddress">
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                   
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-5">
+                            <div class="cart-payment">
+                                <div class="title text-center">
+                                    <h4 class="fw-bold">مجموع کل سبد خرید</h4>
+                                </div>
+                                <table class="table main-table">
+                                    <thead>
+                                        <tr>
+                                            <td class="pb-3">محصول</td>
+                                            <td class="pb-3">جمع</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="cart-orders">
+                                    </tbody>
+                                    <tfoot>
+                                        <tr class="fw-bold">
+                                            <td class="fw-bold">جمع سبد خرید</td>
+                                            <td class="txt totalcartamount price">0 تومان</td>
+                                        </tr>
+
+                                        <tr>
+                                            <td class="fw-bold"> ارسال : </td>
+                                            <td class="txt extraamount price">
+                                                0 تومان
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="fw-bold">تخفیف</td>
+                                            <td class="txt discountamount price">0 تومان</td>
+                                        </tr>
+
+                                        <tr>
+                                            <td class="fw-bold">مبلغ قابل پرداخت :</td>
+                                            <td class="txt finalamount price">0  تومان</td>
+                                        </tr>
+
+                                    </tfoot>
+                                </table>
+
+                                <div class="category-filter">
+                                    <div class="category-filter-box">
+                                        <div class="category-filter-box-title">
+                                            <h4 class="fw-bold">
+                                                انتخاب بانک
+                                            </h4>
+                                        </div>
+                                        <div class="category-filter-box-desc">
+
+                                            <div class="form-group form-check">
+                                                <input class="form-check-input" type="radio" id="bankOne" checked value="1" required name="PaymentType">
+                                                <label class="form-check-label" for="bankOne">پرداخت آنلاین</label>
+                                            </div>
+                                            <div class="form-group">
+                                                <input class="form-check-input" type="radio" id="bankTwo" value="3" required name="PaymentType">
+                                                <label class="form-check-label" for="bankTwo">پرداخت کیف پول <span class="balance price">0</span></label>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <button class="btn-bank waves-effect waves-light">اقدام به پرداخت</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title fs-5" id="exampleModalLabel">آدرس جدید</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <label for="province">استان *</label>
+                        <select class="form-control province" id="province">
+                            <option value="0" selected>انتخاب نمایید</option>
+                        </select>
+                    </div><!-- End .col-sm-6 -->
+
+                    <div class="col-sm-6">
+                        <label for="city">شهر *</label>
+                        <select class="form-control city" id="city">
+                            <option value="0" selected>انتخاب نمایید</option>
+                        </select>
+                    </div><!-- End .col-sm-6 -->
+                </div><!-- End .row -->
+                <div class="row">
+                    <div class="col-sm-12">
+                        <label for="AddressDesc">آدرس *</label>
+                        <input for="AddressDesc" id="addressdesc" type="text" class="form-control" required>
+                    </div><!-- End .col-sm-6 -->
+                </div><!-- End .row -->
+                <div class="row">
+                    <div class="col-sm-6">
+                        <label for="Plaque"> پلاک*</label>
+                        <input for="Plaque" id="plaque" type="text" class="form-control" required>
+                    </div><!-- End .col-sm-6 -->
+
+                    <div class="col-sm-6">
+                        <label for="PostalCode">کدپستی *</label>
+                        <input for="PostalCode" id="postalcode" type="text" class="form-control" required>
+                    </div><!-- End .col-sm-6 -->
+                </div><!-- End .row -->
+                <div class="row">
+                    <div class="col-sm-6">
+                        <label for="Receiver"> نام گیرنده*</label>
+                        <input for="Receiver" id="receiver" type="text" class="form-control" required>
+                    </div><!-- End .col-sm-6 -->
+
+
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">لغو</button>
+                <button type="button" onclick="SaveAddress()" class="btn btn-primary"> ذخیره</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script>
+            $(document).ready(function () {
+
+                CreateOrder();
+                GetAddress();
+                GetProvince();
+                GetBalance();
+            });
+
+
+
+            function CreateOrder() {
+                  $.ajax({
+                        type: 'POST',
+                        url: "@Url.Action("CreateOrder", "Order")",
+                        success: function (response) {
+
+                            $(".totalcartamount").html('');
+                            $(".extraamount").html('');
+                            $(".discountamount").html('');
+                            $(".finalamount").html('');
+                            $(".cart-orders").html('');
+
+                            $(".totalcartamount").html(response.totalCartAmount + 'تومان');
+                            $(".extraamount").html(response.extraAmount + 'تومان');
+                            $(".discountamount").html(response.DisCount + 'تومان');
+                            $(".finalamount").html(response.FinalAmount + 'تومان');
+                            $("#UserFirstName").val(response.User.FirstName);
+                            $("#UserLastName").val(response.User.LastName);
+                            $("#UserPhoneNumber").val(response.User.PhoneNumber);
+                            if (response.User.Representative != null) {
+                                $("#UserRepresentative").attr("readonly", true);
+                                $("#UserRepresentative").val(response.User.Representative);
+                            }
+
+
+                                var Cart = '';
+                            for (var i = 0; i < response.cart.length; i++) {
+
+                                Cart += '<tr><td><a href="#">' + response.cart[i].ProductName+'</a></td>'+
+                                    '<td class="text-left price">' + response.cart[i].TotalAmount +' تومان</td></tr>'
+
+
+
+                                }
+                            $(".cart-orders").append(Cart);
+
+
+
+                        }
+                    });
+            }
+
+            function GetAddress() {
+                 $.ajax({
+                        type: 'POST',
+                        url: "@Url.Action("GetAddress", "User")",
+                        success: function (response) {
+                            debugger
+
+                            var Address = '';
+                            for (var i = 0; i < response.length; i++) {
+
+                                Address +='<div class="col-12 selectaddress ">'+
+                                    '<input id="payment_method_' + response[i].Id + '" class="input-radio" type="radio" value="' + response[i].Id+'" required  name="AddressId">'+
+                                    '<label for="payment_method_' + response[i].Id + '">' + response[i].ProvinceName + ' - '+ response[i].CityName + ' - '+ response[i].AddressDesc +' - ' +response[i].Plaque +' </label>'+
+                                        '</div>'
+
+
+                                }
+                            $("#lstaddress").append(Address);
+
+
+
+                        }
+                    });
+
+            }
+
+
+            function ApplyCode() {
+
+                var code =$("#coponVal").val()
+
+                if (code == null || code=="") {
+                    swal("خطا","کد نامعتبر می باشد", "error");
+                    $(this).addClass('js-addedwish-b2');
+                    $(this).off('click');
+                    return false;
+                }
+
+                $.ajax({
+                    type: 'POST',
+                    url: "@Url.Action("CheckCopon", "Order")",
+                    data: { Copon :code },
+                        success: function (response) {
+
+                            $(".discountamount").html('');
+                            $(".finalamount").html('');
+                            $(".discountamount").html(response.discount + 'تومان');
+                            $(".finalamount").html(response.FinalAmount + 'تومان');
+
+                            if (response.Val == false) {
+                                swal("خطا", response.message, "error");
+                                $(this).addClass('js-addedwish-b2');
+                                $(this).off('click');
+                            } else {
+
+                                swal("", response.message, "success");
+                                $(this).addClass('js-addedwish-b2');
+                                $(this).off('click');
+
+                            }
+
+
+                        }
+                    });
+
+
+            }
+
+            function GetProvince() {
+
+                  $.ajax({
+                        type: 'POST',
+                        url: "@Url.Action("GetProvince", "Address")",
+                        success: function (response) {
+                            debugger
+
+                            var Province = '';
+                            for (var i = 0; i < response.length; i++) {
+
+                                Province += ' <option value="' + response[i].Value + '" >' + response[i].Text+'</option>'
+
+                                }
+                            $(".province").append(Province);
+
+
+
+                        }
+                    });
+
+            }
+
+            $(".province").change(function () {
+                debugger
+                var provinceId = $(".province").val();
+
+                   $.ajax({
+                        type: 'POST',
+                       url: "@Url.Action("GetCity", "Address")",
+                       data: { ProvinceId: provinceId},
+                        success: function (response) {
+                            debugger
+                            $(".city").html('');
+                            var city = '';
+                            for (var i = 0; i < response.length; i++) {
+
+                                city += ' <option value="' + response[i].Value + '" >' + response[i].Text+'</option>'
+
+                                }
+                            $(".city").append(city);
+
+
+
+                        }
+                    });
+            });
+
+             function SaveAddress() {
+
+                 var strAddress = {
+                ProvinceId: $('.province').val(),
+                CityId: $('.city').val(),
+                Receiver: $('#receiver').val(),
+                AddressDesc: $("#addressdesc").val(),
+                Plaque: $("#plaque").val(),
+                PostalCode: $("#postalcode").val()
+            };
+            // if (data.ProductWareHouseId == undefined) {
+            //    swal( "خطا", "سایز انتخاب نشده است !!", "error");
+            //    $(this).addClass('js-addedwish-b2');
+            //    $(this).off('click');
+            //    return false;
+            //}
+            // if (data.Value == 0) {
+            //    swal( "خطا", "مقدار انتخابی صحیح نیست !!", "error");
+            //    $(this).addClass('js-addedwish-b2');
+            //    $(this).off('click');
+            //    return false;
+            //}
+             var formData = new FormData();
+                 formData.append("strAddress", JSON.stringify(strAddress))
+             $.ajax({
+                 url: '@Url.Action("AddAddress", "Address")',
+                 cache: false,
+                 contentType: false,
+                 processData: false,
+                 data: formData,
+                type: 'post',
+                success: function (data) {
+                    debugger
+                    if (data== false) {
+                        swal("خطا", "خطا در ثبت", "error");
+                        $(this).addClass('js-addedwish-b2');
+                        $(this).off('click');
+                    } else {
+                        $("#lstaddress").html('');
+                        GetAddress();
+                        $('#exampleModal').modal('hide');
+                        RemoveValueAddress();
+
+                    }
+                }
+            });
+
+        }
+
+        function RemoveValueAddress() {
+            document.getElementById("province").value = 0;
+            document.getElementById("city").value = 0;
+            document.getElementById("receiver").value = null;
+            document.getElementById("addressdesc").value = null;
+            document.getElementById("plaque").value = null;
+            document.getElementById("postalcode").value = null;
+
+        }
+
+
+
+               function GetBalance() {
+
+                  $.ajax({
+                        type: 'POST',
+                        url: "@Url.Action("GetCurrentUserBalance", "Wallet")",
+                        success: function (response) {
+                            debugger
+                            $(".balance").html('(موجودی = '+response + 'تومان)');
+
+                        }
+                    });
+
+            }
+
+    </script>
+}

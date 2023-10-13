@@ -1,0 +1,52 @@
+﻿@model Data.DTO.Discount.DiscountDTO
+
+@Html.HiddenFor(c => c.Id)
+@Html.HiddenFor(c => c.IsActive)
+@Html.HiddenFor(c => c.DateInsert)
+@Html.HiddenFor(c => c.DiscountType)
+@Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+
+    <hr />
+
+    <div class="form-group">
+        <div class="row">
+            <div class="col-md-4 mt-4">
+                <label asp-for="KeyDiscountPercent"></label>
+                <input asp-for="KeyDiscountPercent" type="text" class="form-control input-rounded" />
+            </div>
+            <div class="col-md-4 mt-4">
+                <label asp-for="TypeOffPrice"></label>
+                <select asp-for="TypeOffPrice" asp-items="Html.GetEnumSelectList<Common.AllEnum.Commons.TypeOffPrice>()" class="form-control input-rounded SearchDropDown ">
+                    <option selected="selected" value="">لطفا انتخاب کنید</option>
+                </select>
+            </div>
+            <div class="col-md-4 mt-4">
+                <label asp-for="PermittedNumber"></label>
+                <input asp-for="PermittedNumber" type="text" class="form-control input-rounded" />
+            </div>
+            <div class="col-md-4 mt-4">
+                <label asp-for="StartDate"></label>
+                <input asp-for="StartDate" type="date" class="form-control input-rounded" />
+            </div>
+            <div class="col-md-4 mt-4">
+                <label asp-for="ExpireDate"></label>
+                <input asp-for="ExpireDate" type="date" class="form-control input-rounded" />
+            </div>
+            <div class="col-md-4 mt-4">
+                <label asp-for="Value"></label>
+                <input asp-for="Value" type="number" class="form-control input-rounded" />
+            </div>
+
+            <div class="col-md-4 mt-4">
+                <label asp-for="ForAll"></label>
+                <span>بلی</span>
+                <input type="radio" asp-for="ForAll" name="ForAll" value="true" />
+                <span>خیر</span>
+                <input type="radio" asp-for="ForAll" name="ForAll" value="false" />
+            </div>
+        </div>
+
+    </div>
+</div>
