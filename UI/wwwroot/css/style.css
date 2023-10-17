@@ -585,11 +585,12 @@ section {
   padding-top: 10px;
 }
 
-.why-us .box {
-  padding: 50px 30px;
-  box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
-  transition: all ease-in-out 0.3s;
-}
+    .why-us .box {
+        padding: 50px 30px;
+        box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
+        transition: all ease-in-out 0.3s;
+        min-height: 21rem;
+    }
 
 .why-us .box span {
   display: block;
@@ -1433,3 +1434,100 @@ section {
     margin: -20px 0 30px 0;
   }
 }
+
+.entry.entry-display:hover {
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.03), -5px 5px 10px rgba(0, 0, 0, 0.03);
+}
+.blog-posts article{
+    width:33%;
+}
+
+.blog-posts .entry {
+    color: #777;
+    font-size: 1.5rem;
+    line-height: 1.73;
+    letter-spacing: -.01em;
+    margin-bottom: 3rem;
+}
+.blog-posts .entry-media {
+    margin-bottom: 1.7rem;
+}
+
+.entry-media {
+    position: relative;
+    background-color: #ccc;
+    margin-bottom: 2.4rem;
+}
+    .entry-media > a {
+        position: relative;
+        display: block;
+    }
+
+    .entry-media img {
+        display: block;
+        max-width: none;
+        width: 100%;
+        height: auto;
+    }
+.entry.entry-display .entry-body {
+    padding: 0 2rem 2.5rem;
+}
+
+.text-center {
+    text-align: center !important;
+}
+.blog-posts .entry-meta {
+    font-weight: 400;
+}
+
+.text-center .entry-meta {
+    justify-content: center;
+}
+
+.blog-posts .entry-meta {
+    color: #cccccc;
+    margin-bottom: 0.8rem;
+}
+.blog-posts .entry-title {
+    font-weight: 600;
+}
+
+.blog-posts .entry-title {
+    color: #333333;
+    font-weight: 500;
+    font-size: 1.8rem;
+    letter-spacing: -.01em;
+    margin-bottom: 0.5rem;
+}
+.blog-posts .entry-title a {
+    color: #333333;
+    font-weight: 500;
+    font-size: 1.8rem;
+    letter-spacing: -.01em;
+    margin-bottom: 0.5rem;
+}
+.blog-posts .entry-content P {
+    padding-top: 10px;
+    font-size: 14px; 
+    color: #aaaaaa;
+}
+
+.more-btn {
+    font-family: "Raleway", sans-serif;
+    text-transform: uppercase;
+    font-weight: 500;
+    font-size: 14px;
+    letter-spacing: 1px;
+    display: inline-block;
+    padding: 10px 28px;
+    transition: 0.5s;
+    margin-top: 10px;
+    border: 2px solid #191919;
+    color: #191919;
+}
+
+      .more-btn:hover {
+        background: #cc1616;
+        color:white;
+        border: 2px solid #cc1616;
+    }

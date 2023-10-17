@@ -3,294 +3,199 @@
 @{
     ViewData["Title"] = "Royal Canyon Consulting";
 }
-
-<main class="main">
-    <div class="intro-section bg-lighter pt-5 pb-6">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="intro-slider-container slider-container-ratio slider-container-1 mb-2 mb-lg-0">
-                        <div class="intro-slider intro-slider-1 owl-carousel owl-simple owl-light owl-nav-inside" data-toggle="owl" data-owl-options='{
-                                        "nav": false,
-                                        "responsive": {
-                                            "768": {
-                                                "nav": true
-                                            }
-                                        }
-                                    }'>
-                            @foreach (var item in Model.Sliders)
-                            {
-                                <div class="intro-slide">
-                                    <figure class="slide-image">
-                                        <picture>
-                                            <source media="(max-width: 480px)" srcset="../images/slider/@item.Image">
-                                            <img src="~/images/slider/@item.Image" alt="Image Desc">
-                                        </picture>
-                                    </figure><!-- End .slide-image -->
-
-                                    <div class="intro-content">
-                                        <h3 class="intro-subtitle">@item.Title</h3><!-- End .h3 intro-subtitle -->
-                                        <h1 class="intro-title">@item.Description</h1><!-- End .intro-title -->
-
-                                        <a href="@item.Url" class="btn btn-outline-white">
-                                            <span>More</span>
-                                            <i class="icon-long-arrow-right"></i>
-                                        </a>
-                                    </div><!-- End .intro-content -->
-                                </div><!-- End .intro-slide -->
-
-                            }
-
-
-
-                        </div><!-- End .intro-slider owl-carousel owl-simple -->
-
-                        <span class="slider-loader"></span><!-- End .slider-loader -->
-                    </div><!-- End .intro-slider-container -->
-                </div><!-- End .col-lg-8 -->
-
-            </div><!-- End .row -->
-
-
-
-        </div><!-- End .container -->
-    </div><!-- End .bg-lighter -->
-    <div class="container">
-        <div class="heading text-center mb-3 mt-3">
-            <h2 class="title">
-                WELCOME TO ROYAL CANYON CONSULTING
-            </h2><!-- End .title -->
-
+<!-- ======= Hero Section ======= -->
+<section id="hero" class="d-flex align-items-center">
+    @foreach (var item in Model.Sliders)
+    {
+        <div class="container position-relative" data-aos="fade-up" data-aos-delay="500">
+            <h1>@item.Title</h1>
+            <h2>@item.Description</h2>
+            <a href="@item.Url" class="btn-get-started scrollto">Get Started</a>
         </div>
-        <hr>
-        <div class="row justify-content-center">
-            <div class="col-lg-4 col-sm-6">
-                <div class="icon-box icon-box-card text-center ">
-                    <span class="icon-box-icon">
-                        <i class="icon-rocket"></i>
-                    </span>
-                    <div class="icon-box-content">
-                        <h3 class="icon-box-title">RESIDENTIAL & COMMERCIAL INSPECTIONS</h3><!-- End .icon-box-title -->
-                        <p>We inspect residential and commercial buildings of all types and sizes. Choose a company with thousands of successful inspections</p>
-                    </div><!-- End .icon-box-content -->
-                </div><!-- End .icon-box -->
-            </div><!-- End .col-lg-4 col-sm-6 -->
+    }
 
-            <div class="col-lg-4 col-sm-6">
-                <div class="icon-box icon-box-card text-center  ">
-                    <span class="icon-box-icon">
-                        <i class="icon-rotate-left"></i>
-                    </span>
-                    <div class="icon-box-content">
-                        <h3 class="icon-box-title">PROPERTY DEVELOPMENT</h3><!-- End .icon-box-title -->
-                        <p>We are proud to invest on development of properties and/or facilitate our clients for their investments in Metro Vancouver on residential development projects.</p>
-                    </div><!-- End .icon-box-content -->
-                </div><!-- End .icon-box -->
-            </div><!-- End .col-lg-4 col-sm-6 -->
+</section><!-- End Hero -->
+<main id="main">
 
-            <div class="col-lg-4 col-sm-6">
-                <div class="icon-box icon-box-card text-center  ">
-                    <span class="icon-box-icon">
-                        <i class="icon-life-ring"></i>
-                    </span>
-                    <div class="icon-box-content">
-                        <h3 class="icon-box-title">REINFORCED SOIL STRUCTURES</h3><!-- End .icon-box-title -->
-                        <p>
-                            Consulting and supervision for soil reinforcement and stabilizations projects by using new methods like MSE & RSS and products like geosynthetic and/or steel strips with modular facing systems.
-
-                        </p>
-                    </div><!-- End .icon-box-content -->
-                </div><!-- End .icon-box -->
-            </div><!-- End .col-lg-4 col-sm-6 -->
-        </div><!-- End .row -->
-    </div><!-- End .container -->
-
-    <div class="mb-6"></div><!-- End .mb-6 -->
-
-    <div class="bg-light-2 pt-6 pb-5 mb-6 mb-lg-8">
+    <!-- ======= About Section ======= -->
+    <section id="about" class="about">
         <div class="container">
+
             <div class="row">
-                <div class="col-lg-5 mb-3 mb-lg-0">
-                    <h2 class="title">Who We Are</h2><!-- End .title -->
-                    <p class="lead   mb-3">
-
-                        Royal Canyon Consulting has been established in 2014 as a corporation.
-
-                        At the very beginning we started as a construction company. After delivering many successful projects, we have expanded the company and added to our specialties including property development and various types of residential and commercial buildings inspections.
+                <div class="col-lg-6 order-1 order-lg-2" data-aos="fade-left">
+                    <img src="~/img/about.jpg" class="img-fluid" alt="">
+                </div>
+                <div class="col-lg-6 pt-4 pt-lg-0 order-2 order-lg-1 content" data-aos="fade-right">
+                    <h3>WELCOME TO ROYAL CANYON CONSULTING</h3>
+                    <p class="fst-italic">
+                        Royal Canyon Consulting has been established in 2014 as a corporation. At the very beginning we started as a construction company. After delivering many successful projects, we have expanded the company and added to our specialties including property development and various types of residential and commercial buildings inspections.
                     </p>
+                    <ul>
+                        <li><i class="bi bi-check-circle"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat.</li>
+                        <li><i class="bi bi-check-circle"></i> Duis aute irure dolor in reprehenderit in voluptate velit.</li>
+                        <li><i class="bi bi-check-circle"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate trideta storacalaperda mastiro dolore eu fugiat nulla pariatur.</li>
+                    </ul>
+                    <p>
+                        Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+                        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+                        culpa qui officia deserunt mollit anim id est laborum
+                    </p>
+                </div>
+            </div>
 
-                    <a asp-action="Aboutus" asp-controller="Home" class="btn btn-sm btn-minwidth btn-outline-primary-2">
-                        <span>Read More</span>
-                        <i class="icon-long-arrow-right"></i>
-                    </a>
-                </div><!-- End .col-lg-5 -->
-
-                <div class="col-lg-6 offset-lg-1">
-                    <div class="about-images">
-                        <img src="~/images/about/img-1.png" alt="" class="about-img-front">
-                    </div><!-- End .about-images -->
-                </div><!-- End .col-lg-6 -->
-            </div><!-- End .row -->
-        </div><!-- End .container -->
-    </div>
-
-    @if (Model.LastArticles.Count > 0)
-    {
-
-        <div class="container">
-            <div class="heading heading-center mb-3">
-                <h2 class="title-lg">Articles</h2><!-- End .title -->
-
-
-            </div><!-- End .heading -->
-
-            <div class="tab-content tab-content-carousel">
-
-                <div class="owl-carousel owl-simple carousel-equal-height carousel-with-shadow" data-toggle="owl"
-                     data-owl-options='{
-                                "nav": false,
-                                "dots": true,
-                                "margin": 20,
-                                "loop": false,
-                                "responsive": {
-                                    "0": {
-                                        "items":2
-                                    },
-                                    "480": {
-                                        "items":2
-                                    },
-                                    "768": {
-                                        "items":3
-                                    },
-                                    "992": {
-                                        "items":4
-                                    },
-                                    "1200": {
-                                        "items":4,
-                                        "nav": true,
-                                        "dots": false
-                                    }
-                                }
-                            }'>
-                    @foreach (var item in Model.LastArticles)
-                    {
-                        <article class="entry entry-display">
-                            <figure class="entry-media">
-                                <a href="single.html">
-                                    <img src="~/images/blog/home/post-1.jpg" alt="image desc">
-                                </a>
-                            </figure><!-- End .entry-media -->
-
-                            <div class="entry-body pb-4 text-center">
-                                <div class="entry-meta">
-                                    <a href="#">@item.DateInsert
-                                </div><!-- End .entry-meta -->
-
-                                <h3 class="entry-title">
-                                    <a href="single.html">@item.Title.</a>
-                                </h3><!-- End .entry-title -->
-
-                                <div class="entry-content">
-                                    <p>@item.Sumary</p>
-                                    <a href="single.html" class="read-more">Read More</a>
-                                </div><!-- End .entry-content -->
-                            </div><!-- End .entry-body -->
-                        </article><!-- End .entry -->
-
-                    }
-
-                </div><!-- End .owl-carousel -->
-
-            </div><!-- End .tab-content -->
-            <div class="more-container text-center mb-0 mt-3">
-                <a asp-action="Index" asp-controller="Blog" asp-route-blogCategoryId="@Model.LastArticles.First().BlogCategoryId" class="btn btn-outline-darker btn-more"><span>View more articles</span><i class="icon-long-arrow-right"></i></a>
-            </div><!-- End .more-container -->
-        </div><!-- End .container -->
-    }
-
-
-    <div class="mb-5"></div><!-- End .mb-6 -->
-    @if (Model.LastArticles.Count > 0)
-    {
-        <div class="blog-posts pt-7 pb-7" style="background-color: #fafafa;">
-            <div class="container">
-                <h2 class="title-lg text-center mb-3 mb-md-4">From Our Blog</h2><!-- End .title-lg text-center -->
-
-                <div class="owl-carousel owl-simple carousel-with-shadow" data-toggle="owl"
-                     data-owl-options='{
-                            "nav": false,
-                            "dots": true,
-                            "items": 3,
-                            "margin": 20,
-                            "loop": false,
-                            "responsive": {
-                                "0": {
-                                    "items":1
-                                },
-                                "600": {
-                                    "items":2
-                                },
-                                "992": {
-                                    "items":3
-                                }
-                            }
-                        }'>
-
-                    @foreach (var item in Model.LastArticles)
-                    {
-                        <article class="entry entry-display">
-                            <figure class="entry-media">
-                                <a href="single.html">
-                                    <img src="~/images/blog/home/post-1.jpg" alt="image desc">
-                                </a>
-                            </figure><!-- End .entry-media -->
-
-                            <div class="entry-body pb-4 text-center">
-                                <div class="entry-meta">
-                                    <a href="#">@item.DateInsert
-                                </div><!-- End .entry-meta -->
-
-                                <h3 class="entry-title">
-                                    <a href="single.html">@item.Title</a>
-                                </h3><!-- End .entry-title -->
-
-                                <div class="entry-content">
-                                    <p>@item.Sumary </p>
-                                    <a asp-action="Aboutus" asp-controller="Home" asp-route-id="" class="read-more">Read More</a>
-                                </div><!-- End .entry-content -->
-                            </div><!-- End .entry-body -->
-                        </article><!-- End .entry -->
-
-                    }
-
-
-
-                </div><!-- End .owl-carousel -->
-            </div><!-- container -->
-
-            <div class="more-container text-center mb-0 mt-3">
-                <a asp-action="Index" asp-controller="Blog" asp-route-blogCategoryId="@Model.LastBlog.First().BlogCategoryId" class="btn btn-outline-darker btn-more"><span>View more Blog</span><i class="icon-long-arrow-right"></i></a>
-            </div><!-- End .more-container -->
         </div>
-    }
-
-
-    <div class="cta cta-display bg-image pt-4 pb-4" style="background-image: url(../images/backgrounds/cta/bg-6.jpg);">
+    </section><!-- End About Section -->
+    <!-- ======= Why Us Section ======= -->
+    <section id="why-us" class="why-us">
         <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-md-10 col-lg-9 col-xl-8">
-                    <div class="row no-gutters flex-column flex-sm-row align-items-sm-center">
-                        <div class="col">
-                            <h3 class="cta-title text-white">Request an Inspection</h3><!-- End .cta-title -->
-                            <p class="cta-desc text-white">Everything You need to Know About the Property</p><!-- End .cta-desc -->
-                        </div><!-- End .col -->
 
-                        <div class="col-auto">
-                            <a asp-action="Index" asp-controller="CounselingRequest" class="btn btn-outline-white"><span>Request</span><i class="icon-long-arrow-right"></i></a>
-                        </div><!-- End .col-auto -->
-                    </div><!-- End .row no-gutters -->
-                </div><!-- End .col-md-10 col-lg-9 -->
-            </div><!-- End .row -->
-        </div><!-- End .container -->
-    </div><!-- End .cta -->
-</main><!-- End .main -->
+            <div class="row">
+
+                <div class="col-lg-4" data-aos="fade-up">
+                    <div class="box">
+                        <span>01</span>
+                        <h4>RESIDENTIAL & COMMERCIAL INSPECTIONS</h4>
+                        <p>We inspect residential and commercial buildings of all types and sizes. Choose a company with thousands of successful inspections</p>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 mt-4 mt-lg-0" data-aos="fade-up" data-aos-delay="150">
+                    <div class="box">
+                        <span>02</span>
+                        <h4>PROPERTY DEVELOPMENT</h4>
+                        <p>We are proud to invest on development of properties and/or facilitate our clients for their investments in Metro Vancouver on residential development projects.</p>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 mt-4 mt-lg-0" data-aos="fade-up" data-aos-delay="300">
+                    <div class="box">
+                        <span>03</span>
+                        <h4>REINFORCED SOIL STRUCTURES</h4>
+                        <p>Consulting and supervision for soil reinforcement and stabilizations projects by using new methods like MSE & RSS and products like geosynthetic and/or steel strips with modular facing systems. </p>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section><!-- End Why Us Section -->
+    <!-- ======= Blog Section ======= -->
+    <section id="blog-posts" class="blog-posts">
+        <div class="container">
+
+            <div class="section-title">
+                <span>Articles</span>
+                <h2>Articles</h2> 
+            </div>
+
+            <div class="row">
+
+                @if (Model.LastArticles.Count > 0)
+                {
+  
+                    <div class="row">
+                         
+                            @foreach (var item in Model.LastArticles)
+                            {
+                                <article class="entry entry-display">
+                                    <figure class="entry-media">
+                                        <a href="single.html">
+                                            <img src="~/img/portfolio/portfolio-1.jpg" alt="image desc">
+                                        </a>
+                                    </figure><!-- End .entry-media -->
+
+                            <div class="entry-body pb-4 text-center">
+                                        <div class="entry-meta">
+                                            <a href="#">@item.DateInsert
+                                        </div><!-- End .entry-meta -->
+
+                                <h3 class="entry-title">
+                                            <a href="single.html">@item.Title.</a>
+                                        </h3><!-- End .entry-title -->
+
+                                <div class="entry-content">
+                                            <p>@item.Sumary    TSSDFGSDFGDSFGDF</p>
+                                            <a href="single.html" class="read-more">Read More</a>
+                                        </div><!-- End .entry-content -->
+                            </div><!-- End .entry-body -->
+                        </article>
+
+                                <!-- End .entry -->
+                            }
+
+
+                        </div><!-- End .tab-content -->
+                    <div class="more-container text-center mb-0 mt-3">
+                            <a asp-action="Index" asp-controller="Blog" asp-route-blogCategoryId="@Model.LastArticles.First().BlogCategoryId" class="more-btn"><span>View more articles</span><i class="icon-long-arrow-right"></i></a>
+                        </div><!-- End .more-container -->
+       
+
+                    <!-- End .container -->
+                }
+
+            </div>
+
+        </div>
+    </section><!-- End Services Section -->
+
+        <!-- ======= Blog Section ======= -->
+    <section id="blog-posts" class="blog-posts">
+        <div class="container">
+
+            <div class="section-title">
+                <span>Blog</span>
+                <h2>Blog</h2> 
+            </div>
+
+            <div class="row">
+
+                @if (Model.LastArticles.Count > 0)
+                {
+  
+                    <div class="row">
+                         
+                            @foreach (var item in Model.LastBlog)
+                            {
+                                <article class="entry entry-display">
+                                    <figure class="entry-media">
+                                        <a href="single.html">
+                                            <img src="~/img/portfolio/portfolio-1.jpg" alt="image desc">
+                                        </a>
+                                    </figure><!-- End .entry-media -->
+
+                            <div class="entry-body pb-4 text-center">
+                                        <div class="entry-meta">
+                                            <a href="#">@item.DateInsert
+                                        </div><!-- End .entry-meta -->
+
+                                <h3 class="entry-title">
+                                            <a href="single.html">@item.Title.</a>
+                                        </h3><!-- End .entry-title -->
+
+                                <div class="entry-content">
+                                            <p>@item.Sumary    TSSDFGSDFGDSFGDF</p>
+                                            <a href="single.html" class="read-more">Read More</a>
+                                        </div><!-- End .entry-content -->
+                            </div><!-- End .entry-body -->
+                        </article>
+
+                                <!-- End .entry -->
+                            }
+
+
+                        </div><!-- End .tab-content -->
+                    <div class="more-container text-center mb-0 mt-3">
+                            <a asp-action="Index" asp-controller="Blog" asp-route-blogCategoryId="@Model.LastArticles.First().BlogCategoryId" class="more-btn"><span>View more articles</span><i class="icon-long-arrow-right"></i></a>
+                        </div><!-- End .more-container -->
+       
+
+                    <!-- End .container -->
+                }
+
+            </div>
+
+        </div>
+    </section><!-- End Services Section -->
+
+</main>
+ 

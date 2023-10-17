@@ -29,7 +29,7 @@ namespace Data.Repositories.Public
         public async Task<List<SliderDTO>> GetAllAsync()
         {
             var data = await TableNoTracking.ProjectTo<SliderDTO>(_mapper.ConfigurationProvider).Where(c => c.IsActive).OrderByDescending(x=> x.DateInsert)
-                .Take(2)
+                .Take(1)
                 .ToListAsync();
             return data;
         }
