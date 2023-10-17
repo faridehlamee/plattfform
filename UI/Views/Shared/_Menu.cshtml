@@ -1,37 +1,42 @@
-﻿
-
-@inject Data.Contracts.Common.IMenuRepository _menuRepository;
+﻿@inject Data.Contracts.Common.IMenuRepository _menuRepository;
 @{
 
     var menudata = await _menuRepository.GetAllActive();
 
 }
 
-@foreach (var item in menudata)
-{
-    @if (item.CltSubMenu.Count != 0)
-    {
-        <li>
-            <a href="@item.URL" class="sf-with-ul">  @item.Title</a>
+<nav id="navbar" class="navbar">
 
-            <ul>
-                @foreach (var item2 in item.CltSubMenu)
-                {
+    <ul>
 
-                    <li><a href="@item2.URL">@item2.SubTitle</a></li>
-                }
+        @foreach (var item in menudata)
+        {
+            @if (item.CltSubMenu.Count != 0)
+            {
+                <li class="dropdown">
+                    <a href="@item.URL" class="sf-with-ul">  @item.Title</a>
+                    <a href="#"><span> @item.Title</span> <i class="bi bi-chevron-down"></i></a>
 
+                    <ul>
+                        @foreach (var item2 in item.CltSubMenu)
+                        {
 
-
-            </ul>
-        </li>
-    }
-    else
-    {
-        <li>
-            <a href="@item.URL" >  @item.Title</a>
-        </li>
-    }
+                            <li><a href="@item2.URL">@item2.SubTitle</a></li>
+                        }
 
 
-}
+
+                    </ul>
+                </li>
+            }
+            else
+            {
+                <li><a class="nav-link scrollto " href="@item.URL"> @item.Title</a></li>
+            }
+
+
+        }
+    </ul>
+
+    <i class="bi bi-list mobile-nav-toggle"></i>
+</nav><!-- .navbar -->
