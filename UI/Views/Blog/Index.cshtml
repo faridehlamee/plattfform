@@ -1,80 +1,49 @@
 ﻿@model Data.DTO.Blog.BlogDTO
 @{
-    ViewData["Title"] ="آموزشگاه فورته |"+Model.BlogCategoryName;
+    ViewData["Title"] = Model.BlogCategoryName;
 }
 
 
-<div class="content">
-    <!-- start bradcrumb -->
-    <div class="category-bread">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-12">
-                    <div class="product-meta-breadcrumb shadow-sm">
-                        <nav>
-                            <ol class="breadcrumb mb-0">
-                                <li class="breadcrumb-item">
-                                    <a href="#">خانه</a>
-                                </li>
-                                <li class="breadcrumb-item">
-                                    <a href="#">@Model.BlogCategoryName</a>
-                                </li>
-                            </ol>
-                        </nav>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- end bradcrumb -->
-    <!-- start category -->
-    <div class="category">
-        <div class="container-fluid">
-            @*<div class="filter-items shadow-box">
-                <div class="items">
-                    <div class="count">
-                        <a href="#" class="sidebar-toggler"><i class="icon-bars"></i>فیلتر ها</a>
-                    </div>
-                    <div class="count">
-                        <p>مشاهده  <span class="fw-bold total-blog">3</span> نتیجه</p>
+
+<main id="main">
+
+    @await Html.PartialAsync("_Breadcrumbs")
+
+
+    <section class="inner-page">
+        <div class="container">
+            <section id="blog-posts" class="blog-posts">
+                <div class="container">
+                    <div class="section-title">
+                        <span>@ViewData["Title"] </span>
+                        <h2>@ViewData["Title"] </h2>
                     </div>
 
-                </div>
-            </div>*@
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="category-item">
-                        <div class="row" id="lstblog">
+                    <div class="row" id="lstblog">
 
 
-
-
+                    </div><!-- End .tab-content -->
+                    <div class="more-container text-center mb-0 mt-3">
+                        <div class="filter-items shadow-box">
+                            <nav aria-label="Page navigation example" id="paged">
+                                <ul class="pagination justify-content-center">
+                                </ul>
+                            </nav>
                         </div>
-                    </div>
+                    </div><!-- End .more-container -->
+                    <!-- End .container -->
+
+
                 </div>
-            </div>
+            </section><!-- End Services Section -->
 
-            <div class="filter-items shadow-box">
-                <nav aria-label="Page navigation example" id="paged">
-                    <ul class="pagination justify-content-center">
-                        <li class="page-item disabled">
-                            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">قبلی</a>
-                        </li>
-                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item"><a class="page-link" href="#">بعدی</a></li>
-                    </ul>
-                </nav>
-            </div>
+
+
         </div>
-    </div>
+    </section>
 
-</div>
-
-
-<div class="sidebar-filter-overlay"></div><!-- End .sidebar-filter-overlay -->
-<aside class="sidebar-shop sidebar-filter sidebar-filter-banner">
+</main><!-- End #main -->
+<aside class="sidebar-shop sidebar-filter sidebar-filter-banner d-none">
     <div class="sidebar sidebar-shop mt-4">
         <div class="category-filter">
             <div class="category-filter-box">
@@ -118,13 +87,13 @@
 
             filter_data(1);
         });
-        function filter_data(pageNum, pageSize) {
 
+        function filter_data(pageNum, pageSize) {
+            debugger
             //$('#loading').css("display", "block");
             var categoryCategoryIds = get_filter('blogcategory-control-input');
            // var search = document.getElementById('search').value;
             $("#lstblog").html('');
-            $(".total-blog").html('');
             //$("#lstFilter").html('');
             $("#paged").html('');
             $.ajax({
@@ -134,42 +103,40 @@
                     page: pageNum, BlogCategoryIds: categoryCategoryIds
                 },
                 success: function(response) {
-                    $('#loading').css("display", "none");
-                    $("#NumShow").html(response.count);
-                    $(".total-blog").html(response.TotalProduct)
                     $("#lstblog").html('');
-                    // $("#lstFilter").html('');
                     var prooductContent = '';
-                    var FilterContent = '';
 
                     if (response.Resualt.length == 0) {
                         prooductContent += ' <div class="col-md-12"> <img width="100%"  src="../../Content/assets/img/Product Not Found.png" /></div>';
                     } else {
                         for (var i = 0; i < response.Resualt.length; i++) {
-                            prooductContent += 
-                                 '<div class="col-md-3 col-sm-6 col-6" >'+
-                                    '<div class="card blog-content-item shadow-box">'+
-                                        '<div class="card-image">'+
-                                            '<img src="https://dashboard.forteacademy.ir/images/blog/' + response.Resualt[i].Image + '" class="card-img-top" alt="">'+
-                                                '<div class="card-hover">'+
-                                                   '<a onclick="goto(' + response.Resualt[i].Id +')">مشاهده</a>'+
-                                                '</div>'+
-                                        '</div>'+
-                                            '<a onclick="goto(' + response.Resualt[i].Id +')">'+
-                                                '<div class="card-body">'+
-                                                    '<h5 class="card-title fw-bold">' + response.Resualt[i].Title + '</h5>'+
-                                                     '<p class="card-text text-muted">' + response.Resualt[i].Sumary + '</p>'+
-                                                '</div>'+
-                                                '<div class="card-footer d-flex align-items-center justify-content-between">'+
-                                                    '<div class="cat">'+
-                                                           '<a class="blog-tag" onclick="goto(' + response.Resualt[i].Id +')">' + response.Resualt[i].BlogCategoryName + '</a>'+
-                                                    '</div>'+
-                                                '</div>'+
-                                            '</a>'+
-                                    '</div>'+
-                                   '</div>'
+                            prooductContent +=
 
 
+
+
+                            '<article class="entry entry-display">' +
+                                '<figure class="entry-media">' +
+                                '<a onclick="goto(' + response.Resualt[i].Id + ')">' +
+                                '<img src="../img/portfolio/portfolio-1.jpg" alt="image desc"/>' +
+                                '</a>' +
+                                '</figure>' +
+
+                                '<div class="entry-body pb-4 text-center">' +
+                                '<div class="entry-meta">' +
+                                '<a onclick="goto(' + response.Resualt[i].Id + ')">' + response.Resualt[i].DateInsert + '</a>' +
+                                '</div>' +
+
+                                '<h3 class="entry-title">' +
+                                '<a onclick="goto(' + response.Resualt[i].Id + ')">' + response.Resualt[i].Title + '</a>' +
+                                '</h3>' +
+
+                                '<div class="entry-content">' +
+                                '<p>' + response.Resualt[i].Sumary + '</p>' +
+                                '<a onclick="goto(' + response.Resualt[i].Id + ')" class="read-more">Read More</a>' +
+                                '</div>' +
+                                '</div>' +
+                                '</article>'
 
                         }
                         $("#lstblog").append(prooductContent);
@@ -226,16 +193,16 @@
             template = template + '<nav aria-label="Page navigation example"><ul class="pagination justify-content-center">';
             if (currentPage == 1) {
 
-                template = template + '<li class="page-item disabled"><a class="page-link" href="#" tabindex="-1" aria-disabled="true">قبلی</a></li>'
+                template = template + '<li class="page-item disabled"><a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a></li>'
 
             } else {
-                template = template + '<li class="page-item "><a class="page-link" onclick="filter_data(' + BackwardOne + ')" tabindex="-1" aria-disabled="true">قبلی</a></li>'
+                template = template + '<li class="page-item "><a class="page-link" onclick="filter_data(' + BackwardOne + ')" tabindex="-1" aria-disabled="true">Previous</a></li>'
             }
 
             var numberingLoop = "";
             for (var i = 0; i < PageNumberArray.length; i++) {
                 if (currentPage == PageNumberArray[i]) {
-                    numberingLoop = numberingLoop +'<li class="page-item active" > <a class="page-link" onclick="filter_data(' + PageNumberArray[i] + ')">' + PageNumberArray[i] + '</a></li >'
+                    numberingLoop = numberingLoop + '<li class="page-item active" > <a class="page-link" onclick="filter_data(' + PageNumberArray[i] + ')">' + PageNumberArray[i] + '</a></li >'
 
                 } else {
                     numberingLoop = numberingLoop + '<li class="page-item" > <a class="page-link" onclick="filter_data(' + PageNumberArray[i] + ')">' + PageNumberArray[i] + '</a></li >'
@@ -245,14 +212,14 @@
             if (currentPage != TotalPages) {
 
 
-                template = template + numberingLoop +'<li class="page-item" > <a class="page-link" onclick="filter_data(' + ForwardOne + ')">بعدی</a></li ></ul>'
+                template = template + numberingLoop + '<li class="page-item" > <a class="page-link" onclick="filter_data(' + ForwardOne + ')">Next</a></li ></ul>'
             } else {
-                template = template + numberingLoop + '<li class="page-item disabled"><a class="page-link" href="#">بعدی</a></li></ul>'
+                template = template + numberingLoop + '<li class="page-item disabled"><a class="page-link" href="#">Next</a></li></ul>'
 
             }
 
             $("#paged").append(template);
-            $('#selectedId').change(function() {
+            $('#selectedId').change(function () {
                 filter_data(1, $(this).val());
             });
         }

@@ -1531,3 +1531,8 @@ section {
         color:white;
         border: 2px solid #cc1616;
     }
+
+.active > .page-link, .page-link.active {
+    background: #cc1616;
+    border-color: #cc1616;  
+}

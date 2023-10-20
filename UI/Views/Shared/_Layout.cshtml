@@ -58,8 +58,8 @@
     <section id="topbar" class="d-flex align-items-center">
         <div class="container d-flex justify-content-center justify-content-md-between">
             <div class="contact-info d-flex align-items-center">
-                <i class="bi bi-envelope-fill"></i><a href="mailto:contact@example.com">info@example.com</a>
-                <i class="bi bi-phone-fill phone-icon"></i> +1 5589 55488 55
+                <i class="bi bi-envelope-fill"></i><a href="mailto:contact@example.com">info@royalcanyon.com</a>
+                <i class="bi bi-phone-fill phone-icon"></i> +1 (604) 500-0303
             </div>
             <div class="social-links d-none d-md-block">
                 <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
@@ -69,29 +69,29 @@
             </div>
         </div>
     </section>
-    @await Html.PartialAsync("_Header")
+@await Html.PartialAsync("_Header")
 
 
 
-    @RenderBody()
+@RenderBody()
 
 
 
-    @await Html.PartialAsync("_Footer")
-    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+@await Html.PartialAsync("_Footer")
+<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
-    <!-- Vendor JS Files -->
-    <script src="~/vendor/aos/aos.js"></script>
-    <script src="~/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="~/vendor/glightbox/js/glightbox.min.js"></script>
-    <script src="~/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-    <script src="~/vendor/swiper/swiper-bundle.min.js"></script>
-    <script src="~/vendor/php-email-form/validate.js"></script>
+<!-- Vendor JS Files -->
+<script src="~/vendor/jquery.min.js"></script>
+<script src="~/vendor/aos/aos.js"></script>
+<script src="~/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="~/vendor/glightbox/js/glightbox.min.js"></script>
+<script src="~/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+<script src="~/vendor/swiper/swiper-bundle.min.js"></script>
 
-    <!-- Template Main JS File -->
-    <script src="~/js/main.js"></script>
-    @await RenderSectionAsync("Scripts", required: false)
-    @await Component.InvokeAsync("NToastNotify")
+<!-- Template Main JS File -->
+<script src="~/js/main.js"></script>
+@await RenderSectionAsync("Scripts", required: false)
+@await Component.InvokeAsync("NToastNotify")
 
 </body>
 
