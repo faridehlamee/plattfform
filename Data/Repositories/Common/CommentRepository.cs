@@ -20,7 +20,7 @@ namespace Data.Repositories.Public
     {
         private readonly IMapper _mapper;
 
-        public CommentRepository(IMapper mapper , KiatechDbContext dbContext, IHttpContextAccessor contextAccessor)
+        public CommentRepository(IMapper mapper , RoyalCanyonDBContext dbContext, IHttpContextAccessor contextAccessor)
         : base(dbContext, contextAccessor)
         {
             _mapper = mapper;

@@ -19,7 +19,7 @@ namespace Data.Repositories.Product
     {
         private readonly IMapper _mapper;
 
-        public ProductTypeRepository(IMapper Mapper, KiatechDbContext dbContext, IHttpContextAccessor contextAccessor)
+        public ProductTypeRepository(IMapper Mapper, RoyalCanyonDBContext dbContext, IHttpContextAccessor contextAccessor)
             : base(dbContext, contextAccessor)
         {
             _mapper = Mapper;

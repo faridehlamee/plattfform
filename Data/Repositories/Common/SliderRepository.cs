@@ -20,7 +20,7 @@ namespace Data.Repositories.Public
     {
         private readonly IMapper _mapper;
 
-        public SliderRepository(IMapper Mapper, KiatechDbContext dbContext, IHttpContextAccessor contextAccessor)
+        public SliderRepository(IMapper Mapper, RoyalCanyonDBContext dbContext, IHttpContextAccessor contextAccessor)
         : base(dbContext, contextAccessor)
         {
             _mapper = Mapper;

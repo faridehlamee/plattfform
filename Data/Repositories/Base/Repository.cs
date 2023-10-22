@@ -16,19 +16,19 @@ namespace Data.Repositories
 {
     public class Repository<TEntity> : IRepository<TEntity> where TEntity : class, IEntity
     {
-        protected readonly KiatechDbContext DbContext;
+        protected readonly RoyalCanyonDBContext DbContext;
         private readonly IHttpContextAccessor _contextAccessor;
         public DbSet<TEntity> Entities { get; }
         public virtual IQueryable<TEntity> Table => Entities;
         public virtual IQueryable<TEntity> TableNoTracking => Entities.AsNoTracking();
 
-        public Repository(KiatechDbContext dbContext, IHttpContextAccessor contextAccessor)
+        public Repository(RoyalCanyonDBContext dbContext, IHttpContextAccessor contextAccessor)
         {
             DbContext = dbContext;
             Entities = DbContext.Set<TEntity>(); // City => Cities
             _contextAccessor = contextAccessor;
         }
-        public Repository(KiatechDbContext dbContext)
+        public Repository(RoyalCanyonDBContext dbContext)
         {
             DbContext = dbContext;
             Entities = DbContext.Set<TEntity>(); // City => Cities

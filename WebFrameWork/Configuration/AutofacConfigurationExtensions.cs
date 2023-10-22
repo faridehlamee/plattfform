@@ -22,7 +22,7 @@ namespace WebFrameWork.Configuration
 
             var commonAssembly = typeof(SiteSettings).Assembly;
             var entitiesAssembly = typeof(IEntity).Assembly;
-            var dataAssembly = typeof(KiatechDbContext).Assembly;
+            var dataAssembly = typeof(RoyalCanyonDBContext).Assembly;
             var servicesAssembly = typeof(JwtService).Assembly;
 
             containerBuilder.RegisterAssemblyTypes(commonAssembly, entitiesAssembly, dataAssembly, servicesAssembly)

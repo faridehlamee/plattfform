@@ -9,7 +9,7 @@ namespace Data.Repositories.WorkFlow
     {
         private readonly IMapper _mapper;
 
-        public WorkFlowRepository(KiatechDbContext dbContext, IMapper Mapper, IHttpContextAccessor contextAccessor)
+        public WorkFlowRepository(RoyalCanyonDBContext dbContext, IMapper Mapper, IHttpContextAccessor contextAccessor)
         : base(dbContext , contextAccessor)
         {
             _mapper = Mapper;

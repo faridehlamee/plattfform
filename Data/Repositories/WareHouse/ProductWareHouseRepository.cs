@@ -25,7 +25,7 @@ namespace Data.Repositories.WareHouse
         private readonly IMapper _mapper;
         private readonly ILogger<ProductWareHouseRepository> _logger;
 
-        public ProductWareHouseRepository(IMapper Mapper , ILogger<ProductWareHouseRepository> logger,  KiatechDbContext dbContext, IHttpContextAccessor contextAccessor)
+        public ProductWareHouseRepository(IMapper Mapper , ILogger<ProductWareHouseRepository> logger,  RoyalCanyonDBContext dbContext, IHttpContextAccessor contextAccessor)
         : base(dbContext, contextAccessor)
         {
             _mapper = Mapper;

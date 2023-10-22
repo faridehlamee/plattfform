@@ -28,7 +28,7 @@ namespace Data.Repositories.OfferItem
 
         public OfferItemRepository(
             IMapper Mapper,
-            KiatechDbContext dbContext, 
+            RoyalCanyonDBContext dbContext, 
             IHttpContextAccessor contextAccessor)
             : base(dbContext , contextAccessor)
         {

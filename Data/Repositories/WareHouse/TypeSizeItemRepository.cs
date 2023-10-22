@@ -26,7 +26,7 @@ namespace Data.Repositories.WareHouse
         private readonly IRepository<Entites.Entities.Product.Product> _productRepository;
         private readonly IMapper _mapper;
 
-        public TypeSizeItemRepository(KiatechDbContext dbContext ,IRepository<StoreType> StoreTypeRepository, 
+        public TypeSizeItemRepository(RoyalCanyonDBContext dbContext ,IRepository<StoreType> StoreTypeRepository, 
             IRepository<Entites.Entities.Product.Product> ProductRepository, IMapper Mapper, IHttpContextAccessor contextAccessor)
         : base(dbContext, contextAccessor)
         {

@@ -7,7 +7,7 @@ namespace Data.Repositories.Public
 {
     public class SubMenuRepository : Repository<SubMenu>, ISubMenuRepository, IScopedDependency
     {
-        public SubMenuRepository(KiatechDbContext dbContext, IHttpContextAccessor contextAccessor)
+        public SubMenuRepository(RoyalCanyonDBContext dbContext, IHttpContextAccessor contextAccessor)
         : base(dbContext, contextAccessor)
         {
         }

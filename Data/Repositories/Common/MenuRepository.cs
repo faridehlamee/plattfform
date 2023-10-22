@@ -24,7 +24,7 @@ namespace Data.Repositories.Public
         private readonly IMapper _mapper;
         private readonly IMemoryCache _memoryCache;
 
-        public MenuRepository(IMapper Mapper, KiatechDbContext dbContext, IHttpContextAccessor contextAccessor ,IMemoryCache memoryCache)
+        public MenuRepository(IMapper Mapper, RoyalCanyonDBContext dbContext, IHttpContextAccessor contextAccessor ,IMemoryCache memoryCache)
         : base(dbContext , contextAccessor)
         {
             _mapper = Mapper;

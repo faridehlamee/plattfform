@@ -27,7 +27,7 @@ namespace DashBoard.Controllers.SiteSetting
             this._emailService = emailService;
         }
         public IActionResult Index() { return View(); }
-        public async Task<JsonResult> ListAsync(SearchDTO model, EmailDTO Search, CancellationToken cancellationToken)
+        public async Task<JsonResult> ListAsync(SearchDTO model,EmailDTO Search, CancellationToken cancellationToken)
         {
 
             var dto = await _emailRepository.GetPaging(model, Search);

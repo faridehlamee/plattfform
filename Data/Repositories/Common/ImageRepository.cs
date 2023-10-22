@@ -18,7 +18,7 @@ namespace Data.Repositories.Public
 {
     public class ImageRepository : Repository<Entites.Entities.Image>, IImageRepository, IScopedDependency
     {
-        public ImageRepository(KiatechDbContext dbContext, IHttpContextAccessor contextAccessor)
+        public ImageRepository(RoyalCanyonDBContext dbContext, IHttpContextAccessor contextAccessor)
         : base(dbContext, contextAccessor)
         {
            

@@ -19,7 +19,7 @@ namespace Data.Repositories.BaseProduct
 {
     public class DetailsRepository : Repository<Details>, IDetailsRepository, IScopedDependency
     {
-        public DetailsRepository(KiatechDbContext dbContext, IHttpContextAccessor contextAccessor)
+        public DetailsRepository(RoyalCanyonDBContext dbContext, IHttpContextAccessor contextAccessor)
             : base(dbContext, contextAccessor)
         {
         }

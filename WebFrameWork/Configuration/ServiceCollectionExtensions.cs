@@ -29,7 +29,7 @@ namespace WebFrameWork.Configuration
     {
         public static void AddDbContext(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddDbContext<KiatechDbContext>(option => {
+            services.AddDbContext<RoyalCanyonDBContext>(option => {
                 option.UseSqlServer(configuration.GetConnectionString("SqlServer"), builder => builder.UseRowNumberForPaging());
             });
         }

@@ -24,7 +24,7 @@ namespace Data.Repositories.Financial
     {
         private readonly IMapper _mapper;
 
-        public PriceCenterItemRepository(KiatechDbContext dbContext, IMapper mapper, IHttpContextAccessor contextAccessor)
+        public PriceCenterItemRepository(RoyalCanyonDBContext dbContext, IMapper mapper, IHttpContextAccessor contextAccessor)
             : base(dbContext, contextAccessor)
         {
             _mapper = mapper;

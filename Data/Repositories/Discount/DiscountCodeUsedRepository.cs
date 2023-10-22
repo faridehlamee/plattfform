@@ -17,7 +17,7 @@ namespace Data.Repositories.Discount
     {
         private readonly IMapper _mapper;
 
-        public DiscountCodeUsedRepository(IMapper Mapper , KiatechDbContext dbContext, IHttpContextAccessor contextAccessor)
+        public DiscountCodeUsedRepository(IMapper Mapper , RoyalCanyonDBContext dbContext, IHttpContextAccessor contextAccessor)
             : base(dbContext, contextAccessor)
         {
             _mapper = Mapper;

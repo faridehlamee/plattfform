@@ -47,8 +47,8 @@ namespace Services.Services.Email
                 mailMsg.IsBodyHtml = USE_HTML;
 
                 SmtpClient smtp = new SmtpClient();
-                smtp.Port = 25;
-                //  smtp.Port = 26;
+             //   smtp.Port = 25;
+                 smtp.Port = 26;
                 smtp.Host = SMTP_SERVER;
                 smtp.Credentials = new System.Net.NetworkCredential(FROM, FROM_PWD);
                 smtp.Send(mailMsg);

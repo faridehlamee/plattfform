@@ -34,7 +34,7 @@ namespace Data.Repositories.Product
         private readonly ICommentRepository _commentRepository;
 
         public ProductRepository(IMapper Mapper, IProductWareHouseRepository productWareHouseRepository, IProductDetailRepository ProductDetailRepository, ICommentRepository commentRepository,
-            IOfferItemRepository OfferItemRepository  , IImageRepository imageRepository,KiatechDbContext dbContext, IHttpContextAccessor contextAccessor)
+            IOfferItemRepository OfferItemRepository  , IImageRepository imageRepository,RoyalCanyonDBContext dbContext, IHttpContextAccessor contextAccessor)
             : base(dbContext , contextAccessor)
         {
             _mapper = Mapper;

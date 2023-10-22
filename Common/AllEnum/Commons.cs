@@ -184,5 +184,20 @@ namespace Common.AllEnum
             [Display(Name = "کد تخفیف")]
             discount = 2
         }
+        public enum InfoSite
+        {
+            [Description("Aboutus")]
+            [Display(Name = "Aboutus")]
+            Aboutus = 1,
+            [Description("Mobile")]
+            [Display(Name = "Mobile")]
+            Mobile = 2,
+            [Description("Summary")]
+            [Display(Name = "Summary")]
+            Summary = 3,
+            [Description("Email")]
+            [Display(Name = "Email")]
+            Email = 4
+        }
     }
 }

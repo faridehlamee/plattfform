@@ -18,7 +18,7 @@ namespace Data.Repositories.Wallet
     {
         private readonly IMapper _mapper;
 
-        public WalletHistoryRepository(IMapper Mapper, KiatechDbContext dbContext, IHttpContextAccessor contextAccessor)
+        public WalletHistoryRepository(IMapper Mapper, RoyalCanyonDBContext dbContext, IHttpContextAccessor contextAccessor)
             : base(dbContext, contextAccessor)
         {
             _mapper = Mapper;

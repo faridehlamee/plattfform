@@ -25,7 +25,7 @@ namespace Data.Repositories.Recharge
     {
         private readonly IMapper _mapper;
 
-        public RechargeRepository(KiatechDbContext dbContext , IMapper mapper ,IHttpContextAccessor contextAccessor)
+        public RechargeRepository(RoyalCanyonDBContext dbContext , IMapper mapper ,IHttpContextAccessor contextAccessor)
             : base(dbContext , contextAccessor)
         {
             _mapper = mapper;

@@ -18,7 +18,7 @@ namespace Data.Repositories.Financial
 {
     public class PriceRepository : Repository<Price_Log>, IPriceRepository, IScopedDependency
     {
-        public PriceRepository(KiatechDbContext dbContext, IHttpContextAccessor contextAccessor)
+        public PriceRepository(RoyalCanyonDBContext dbContext, IHttpContextAccessor contextAccessor)
             : base(dbContext, contextAccessor)
         {
         }

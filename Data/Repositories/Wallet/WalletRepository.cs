@@ -18,7 +18,7 @@ namespace Data.Repositories.Wallet
     {
         private readonly IWalletHistoryRepository _walletHistoryRepository;
 
-        public WalletRepository(KiatechDbContext dbContext , IWalletHistoryRepository WalletHistoryRepository, IHttpContextAccessor contextAccessor)
+        public WalletRepository(RoyalCanyonDBContext dbContext , IWalletHistoryRepository WalletHistoryRepository, IHttpContextAccessor contextAccessor)
             : base(dbContext  , contextAccessor)
         {
             _walletHistoryRepository = WalletHistoryRepository;

@@ -16,29 +16,33 @@ using Entites.Entities;
 
 namespace Data.Repositories.Public
 {
-    public class EmailRepository : Repository<Email>, IEmailRepository, IScopedDependency
+    public class InfoSiteRepository : Repository<Entites.Entities.InfoSite>, IInfoSiteRepository, IScopedDependency
     {
         private readonly IMapper _mapper; 
 
-        public EmailRepository(RoyalCanyonDBContext dbContext,
+        public InfoSiteRepository(RoyalCanyonDBContext dbContext,
             IMapper Mapper, IHttpContextAccessor contextAccessor)
         : base(dbContext, contextAccessor)
         {
             _mapper = Mapper; 
         }
 
-
-        public async Task<Pagedata<EmailDTO>> GetPaging(SearchDTO model, EmailDTO Search)
+        public Task<List<InfoSiteDTO>> GetAllAsync()
         {
-            var data = new Pagedata<EmailDTO>();
+            throw new NotImplementedException();
+        }
+
+        public async Task<Pagedata<InfoSiteDTO>> GetPaging(SearchDTO model, InfoSiteDTO Search)
+        {
+            var data = new Pagedata<InfoSiteDTO>();
             var query = TableNoTracking.Where(c => c.IsActive);
             //query = Filter(query, EmailDTO);
-            data.Resualt = await query.Select(c => new EmailDTO
+            data.Resualt = await query.Select(c => new InfoSiteDTO
             {
                 Id = c.Id,
-                Fullname= c.Fullname,
-                EmailAddress =c.EmailAddress,
-                Subject=c.Subject,
+               // Fullname= c.Fullname,
+               // EmailAddress =c.EmailAddress,
+            //    Subject=c.Subject,
                 DateInsert = c.DateInsert
             }).Skip(model.take * (model.page - 1))
                  .Take(model.take).ToListAsync();

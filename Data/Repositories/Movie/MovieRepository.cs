@@ -24,7 +24,7 @@ namespace Data.Repositories.Movie
     {
         private readonly IMapper _mapper;
 
-        public MovieRepository(KiatechDbContext dbContext, IMapper Mapper, IHttpContextAccessor contextAccessor)
+        public MovieRepository(RoyalCanyonDBContext dbContext, IMapper Mapper, IHttpContextAccessor contextAccessor)
         : base(dbContext , contextAccessor)
         {
             _mapper = Mapper;

@@ -24,7 +24,7 @@ namespace Data.Repositories.FavoriteProduct
     {
         private readonly IMapper _mapper;
 
-        public FavoriteProductRepository(KiatechDbContext dbContext, IMapper Mapper, IHttpContextAccessor contextAccessor)
+        public FavoriteProductRepository(RoyalCanyonDBContext dbContext, IMapper Mapper, IHttpContextAccessor contextAccessor)
         : base(dbContext, contextAccessor)
         {
             _mapper = Mapper;

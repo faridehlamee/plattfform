@@ -17,7 +17,7 @@ namespace Data.Repositories.User
     {
         private readonly IMapper _mapper;
 
-        public IdentificationCode_logRepository(KiatechDbContext dbContext, IMapper Mapper, IHttpContextAccessor contextAccessor)
+        public IdentificationCode_logRepository(RoyalCanyonDBContext dbContext, IMapper Mapper, IHttpContextAccessor contextAccessor)
             : base(dbContext , contextAccessor)
         {
             _mapper = Mapper;

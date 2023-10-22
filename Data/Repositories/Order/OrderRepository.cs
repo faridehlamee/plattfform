@@ -31,7 +31,7 @@ namespace Data.Repositories.Order
 
         private readonly IMapper _mapper;
 
-        public OrderRepository(KiatechDbContext dbContext, IMapper mapper, IHttpContextAccessor contextAccessor)
+        public OrderRepository(RoyalCanyonDBContext dbContext, IMapper mapper, IHttpContextAccessor contextAccessor)
             : base(dbContext, contextAccessor)
         {
             _mapper = mapper;

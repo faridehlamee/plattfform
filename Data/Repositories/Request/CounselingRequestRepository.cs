@@ -23,7 +23,7 @@ namespace Data.Repositories.Request
     {
         private readonly IMapper _mapper;
 
-        public CounselingRequestRepository(KiatechDbContext dbContext, IMapper Mapper, IHttpContextAccessor contextAccessor)
+        public CounselingRequestRepository(RoyalCanyonDBContext dbContext, IMapper Mapper, IHttpContextAccessor contextAccessor)
         : base(dbContext , contextAccessor)
         {
             _mapper = Mapper;

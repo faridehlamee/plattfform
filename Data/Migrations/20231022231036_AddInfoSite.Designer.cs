@@ -9,9 +9,9 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Data.Migrations
 {
-    [DbContext(typeof(KiatechDbContext))]
-    [Migration("20230930090408_init")]
-    partial class init
+    [DbContext(typeof(RoyalCanyonDBContext))]
+    [Migration("20231022231036_AddInfoSite")]
+    partial class AddInfoSite
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -320,103 +320,6 @@ namespace Data.Migrations
                     b.ToTable("Comments", "CO");
                 });
 
-            modelBuilder.Entity("Entites.Entities.Courses.Course", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("CourseCategoryId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("CourseLevel")
-                        .HasColumnType("int");
-
-                    b.Property<long>("CreatorId")
-                        .HasColumnType("bigint");
-
-                    b.Property<DateTime>("DateInsert")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("DateUpdate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Group")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("HasDegree")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("HasExam")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Image")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("NumberStudent")
-                        .HasColumnType("int");
-
-                    b.Property<string>("PeriodOfTime")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("ProductId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Summery")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("language")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CourseCategoryId");
-
-                    b.HasIndex("ProductId");
-
-                    b.ToTable("Courses", "CU");
-                });
-
-            modelBuilder.Entity("Entites.Entities.Courses.CourseCategory", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<long>("CreatorId")
-                        .HasColumnType("bigint");
-
-                    b.Property<DateTime>("DateInsert")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("DateUpdate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Image")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("CourseCategories", "CU");
-                });
-
             modelBuilder.Entity("Entites.Entities.Details", b =>
                 {
                     b.Property<int>("Id")
@@ -606,193 +509,6 @@ namespace Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Emails", "CO");
-                });
-
-            modelBuilder.Entity("Entites.Entities.Exams.AnswerSheet", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<long>("CreatorId")
-                        .HasColumnType("bigint");
-
-                    b.Property<DateTime>("DateInsert")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("DateUpdate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("ExamerId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Index")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("QuestionId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TrueAnswer")
-                        .HasColumnType("int");
-
-                    b.Property<int>("UserAnswer")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ExamerId");
-
-                    b.HasIndex("QuestionId");
-
-                    b.ToTable("AnswerSheets", "EX");
-                });
-
-            modelBuilder.Entity("Entites.Entities.Exams.Exam", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<long>("CreatorId")
-                        .HasColumnType("bigint");
-
-                    b.Property<DateTime>("DateInsert")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("DateUpdate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("ExamTime")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Owner")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("QuestionNumber")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TotalScore")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Exams", "EX");
-                });
-
-            modelBuilder.Entity("Entites.Entities.Exams.ExamQuestion", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("Answer")
-                        .HasColumnType("int");
-
-                    b.Property<long>("CreatorId")
-                        .HasColumnType("bigint");
-
-                    b.Property<DateTime>("DateInsert")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("DateUpdate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("ExamId")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("QuestionLabel")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("choiceA")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("choiceB")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("choiceC")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("choiceD")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ExamId");
-
-                    b.ToTable("ExamQuestions", "EX");
-                });
-
-            modelBuilder.Entity("Entites.Entities.Exams.Examer", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<long>("CreatorId")
-                        .HasColumnType("bigint");
-
-                    b.Property<DateTime>("DateInsert")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("DateUpdate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("EndDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("ExamId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("FalseQueston")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<bool?>("IsDone")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsStart")
-                        .HasColumnType("bit");
-
-                    b.Property<decimal?>("Score")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<DateTime?>("StartDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TrueQuestion")
-                        .HasColumnType("int");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ExamId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Examers", "EX");
                 });
 
             modelBuilder.Entity("Entites.Entities.FAQ", b =>
@@ -1023,6 +739,39 @@ namespace Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Images", "CO");
+                });
+
+            modelBuilder.Entity("Entites.Entities.InfoSite", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<long>("CreatorId")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime>("DateInsert")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DateUpdate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsCheck")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("Key")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Value")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("InfoSites", "CO");
                 });
 
             modelBuilder.Entity("Entites.Entities.Menu.Menu", b =>
@@ -1507,124 +1256,6 @@ namespace Data.Migrations
                     b.ToTable("OrderPriceLogs", "SAL");
                 });
 
-            modelBuilder.Entity("Entites.Entities.Plans.Plan", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<long>("CreatorId")
-                        .HasColumnType("bigint");
-
-                    b.Property<DateTime>("DateInsert")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("DateUpdate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("EnName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Image")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsPaid")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsPublic")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Period")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Plans");
-                });
-
-            modelBuilder.Entity("Entites.Entities.Plans.PlanCategory", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<long>("CreatorId")
-                        .HasColumnType("bigint");
-
-                    b.Property<DateTime>("DateInsert")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("DateUpdate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("PlanCategories");
-                });
-
-            modelBuilder.Entity("Entites.Entities.Plans.PlanItem", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<long>("CreatorId")
-                        .HasColumnType("bigint");
-
-                    b.Property<DateTime>("DateInsert")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("DateUpdate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("ExerciseId")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("Number")
-                        .HasColumnType("int");
-
-                    b.Property<int>("NumberSet")
-                        .HasColumnType("int");
-
-                    b.Property<int>("PlanId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("SuperSet")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(1)");
-
-                    b.Property<int>("state")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("PlanItems");
-                });
-
             modelBuilder.Entity("Entites.Entities.Portfolio", b =>
                 {
                     b.Property<int>("Id")
@@ -2036,71 +1667,6 @@ namespace Data.Migrations
                     b.ToTable("CounselingRequests", "RE");
                 });
 
-            modelBuilder.Entity("Entites.Entities.Request.RequestHeader", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("ApplicantId")
-                        .HasColumnType("int");
-
-                    b.Property<long>("CreatorId")
-                        .HasColumnType("bigint");
-
-                    b.Property<DateTime>("DateInsert")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("DateUpdate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("EntityId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("File")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Index")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsDone")
-                        .HasColumnType("bit");
-
-                    b.Property<int?>("OrderId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("RequestType")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("TeacherCurriculumId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TeacherId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Title")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ApplicantId");
-
-                    b.HasIndex("OrderId");
-
-                    b.HasIndex("TeacherCurriculumId");
-
-                    b.HasIndex("TeacherId");
-
-                    b.ToTable("RequestHeaders", "RE");
-                });
-
             modelBuilder.Entity("Entites.Entities.Service", b =>
                 {
                     b.Property<int>("Id")
@@ -2264,165 +1830,6 @@ namespace Data.Migrations
                     b.HasIndex("StoreTypeId");
 
                     b.ToTable("StoreTypeDetails", "BPR");
-                });
-
-            modelBuilder.Entity("Entites.Entities.Teachers.Teacher", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Brand")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<long>("CreatorId")
-                        .HasColumnType("bigint");
-
-                    b.Property<DateTime>("DateInsert")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("DateUpdate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Expert")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("ProfileImage")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("StartDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("ToDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Teachers", "TE");
-                });
-
-            modelBuilder.Entity("Entites.Entities.Teachers.TeacherCourse", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("CourseId")
-                        .HasColumnType("int");
-
-                    b.Property<long>("CreatorId")
-                        .HasColumnType("bigint");
-
-                    b.Property<DateTime>("DateInsert")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("DateUpdate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("TeacherId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CourseId");
-
-                    b.HasIndex("TeacherId");
-
-                    b.ToTable("TeacherCourses", "TE");
-                });
-
-            modelBuilder.Entity("Entites.Entities.Teachers.TeacherCurriculum", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("CourseId")
-                        .HasColumnType("int");
-
-                    b.Property<long>("CreatorId")
-                        .HasColumnType("bigint");
-
-                    b.Property<DateTime>("DateInsert")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("DateUpdate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsFull")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("TeacherId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Title")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CourseId");
-
-                    b.HasIndex("TeacherId");
-
-                    b.ToTable("TeacherCurricula", "TE");
-                });
-
-            modelBuilder.Entity("Entites.Entities.Teachers.TeacherCurriculumTime", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<long>("CreatorId")
-                        .HasColumnType("bigint");
-
-                    b.Property<DateTime>("DateInsert")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("DateUpdate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Day")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("EndTime")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("StartTime")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("TeacherCurriculumId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("TeacherCurriculumId");
-
-                    b.ToTable("TeacherCurriculumTimes", "TE");
                 });
 
             modelBuilder.Entity("Entites.Entities.Team", b =>
@@ -3279,23 +2686,6 @@ namespace Data.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("Entites.Entities.Courses.Course", b =>
-                {
-                    b.HasOne("Entites.Entities.Courses.CourseCategory", "CourseCategory")
-                        .WithMany()
-                        .HasForeignKey("CourseCategoryId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("Entites.Entities.Product.Product", "Product")
-                        .WithMany()
-                        .HasForeignKey("ProductId");
-
-                    b.Navigation("CourseCategory");
-
-                    b.Navigation("Product");
-                });
-
             modelBuilder.Entity("Entites.Entities.DetailsItem", b =>
                 {
                     b.HasOne("Entites.Entities.Details", "Details")
@@ -3331,55 +2721,6 @@ namespace Data.Migrations
                         .IsRequired();
 
                     b.Navigation("Discount");
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("Entites.Entities.Exams.AnswerSheet", b =>
-                {
-                    b.HasOne("Entites.Entities.Exams.Examer", "Examer")
-                        .WithMany("ListAnswer")
-                        .HasForeignKey("ExamerId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("Entites.Entities.Exams.ExamQuestion", "Question")
-                        .WithMany()
-                        .HasForeignKey("QuestionId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Examer");
-
-                    b.Navigation("Question");
-                });
-
-            modelBuilder.Entity("Entites.Entities.Exams.ExamQuestion", b =>
-                {
-                    b.HasOne("Entites.Entities.Exams.Exam", "Exam")
-                        .WithMany()
-                        .HasForeignKey("ExamId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Exam");
-                });
-
-            modelBuilder.Entity("Entites.Entities.Exams.Examer", b =>
-                {
-                    b.HasOne("Entites.Entities.Exams.Exam", "Exam")
-                        .WithMany()
-                        .HasForeignKey("ExamId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("Entites.Entities.User.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Exam");
 
                     b.Navigation("User");
                 });
@@ -3639,37 +2980,6 @@ namespace Data.Migrations
                     b.Navigation("ProductWareHouse");
                 });
 
-            modelBuilder.Entity("Entites.Entities.Request.RequestHeader", b =>
-                {
-                    b.HasOne("Entites.Entities.User.User", "Applicant")
-                        .WithMany()
-                        .HasForeignKey("ApplicantId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("Entites.Entities.Order", "Order")
-                        .WithMany()
-                        .HasForeignKey("OrderId");
-
-                    b.HasOne("Entites.Entities.Teachers.TeacherCurriculum", "TeacherCurriculum")
-                        .WithMany()
-                        .HasForeignKey("TeacherCurriculumId");
-
-                    b.HasOne("Entites.Entities.Teachers.Teacher", "Teacher")
-                        .WithMany()
-                        .HasForeignKey("TeacherId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Applicant");
-
-                    b.Navigation("Order");
-
-                    b.Navigation("Teacher");
-
-                    b.Navigation("TeacherCurriculum");
-                });
-
             modelBuilder.Entity("Entites.Entities.StoreType", b =>
                 {
                     b.HasOne("Entites.Entities.GenderProductType", "GenderProductType")
@@ -3698,66 +3008,6 @@ namespace Data.Migrations
                     b.Navigation("Details");
 
                     b.Navigation("StoreType");
-                });
-
-            modelBuilder.Entity("Entites.Entities.Teachers.Teacher", b =>
-                {
-                    b.HasOne("Entites.Entities.User.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("Entites.Entities.Teachers.TeacherCourse", b =>
-                {
-                    b.HasOne("Entites.Entities.Courses.Course", "Course")
-                        .WithMany()
-                        .HasForeignKey("CourseId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("Entites.Entities.Teachers.Teacher", "Teacher")
-                        .WithMany()
-                        .HasForeignKey("TeacherId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Course");
-
-                    b.Navigation("Teacher");
-                });
-
-            modelBuilder.Entity("Entites.Entities.Teachers.TeacherCurriculum", b =>
-                {
-                    b.HasOne("Entites.Entities.Courses.Course", "Course")
-                        .WithMany()
-                        .HasForeignKey("CourseId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("Entites.Entities.Teachers.Teacher", "Teacher")
-                        .WithMany()
-                        .HasForeignKey("TeacherId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Course");
-
-                    b.Navigation("Teacher");
-                });
-
-            modelBuilder.Entity("Entites.Entities.Teachers.TeacherCurriculumTime", b =>
-                {
-                    b.HasOne("Entites.Entities.Teachers.TeacherCurriculum", "TeacherCurriculum")
-                        .WithMany("ListTeacherCurriculumTime")
-                        .HasForeignKey("TeacherCurriculumId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("TeacherCurriculum");
                 });
 
             modelBuilder.Entity("Entites.Entities.ViewPage", b =>
@@ -3925,11 +3175,6 @@ namespace Data.Migrations
                     b.Navigation("ListDetailsItem");
                 });
 
-            modelBuilder.Entity("Entites.Entities.Exams.Examer", b =>
-                {
-                    b.Navigation("ListAnswer");
-                });
-
             modelBuilder.Entity("Entites.Entities.Menu.Menu", b =>
                 {
                     b.Navigation("CltSubMenu");
@@ -3942,11 +3187,6 @@ namespace Data.Migrations
                     b.Navigation("Discount");
 
                     b.Navigation("ProductWareHouses");
-                });
-
-            modelBuilder.Entity("Entites.Entities.Teachers.TeacherCurriculum", b =>
-                {
-                    b.Navigation("ListTeacherCurriculumTime");
                 });
 
             modelBuilder.Entity("Entities.Entities.Post.PostCategory", b =>

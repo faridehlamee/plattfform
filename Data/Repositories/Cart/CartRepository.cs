@@ -31,7 +31,7 @@ namespace Data.Repositories.Cart
         private readonly IMemoryCache _memoryCash;
         private readonly IHttpContextAccessor _contextAccessor;
 
-        public CartRepository(IMapper Mapper, IProductWareHouseRepository productWareHouseRepository, IMemoryCache memoryCash , KiatechDbContext dbContext, IHttpContextAccessor contextAccessor)
+        public CartRepository(IMapper Mapper, IProductWareHouseRepository productWareHouseRepository, IMemoryCache memoryCash , RoyalCanyonDBContext dbContext, IHttpContextAccessor contextAccessor)
             : base(dbContext, contextAccessor)
         {
             _mapper = Mapper;

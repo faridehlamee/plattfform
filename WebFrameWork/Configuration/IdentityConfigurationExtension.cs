@@ -36,7 +36,7 @@ namespace WebFrameWork.Configuration
                 //identityOptions.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
                 //identityOptions.Lockout.AllowedForNewUsers = false;
             })
-              .AddEntityFrameworkStores<KiatechDbContext>()
+              .AddEntityFrameworkStores<RoyalCanyonDBContext>()
               .AddDefaultTokenProviders();
         }
     }

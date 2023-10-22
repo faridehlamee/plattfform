@@ -31,7 +31,7 @@ namespace Data.Repositories.Order
         private readonly IPriceRepository _priceRepository;
         private readonly IDiscountRepository _discountRepository;
 
-        public OrderDetailRepository(KiatechDbContext dbContext, IMapper mapper, IDiscountRepository discountRepository,
+        public OrderDetailRepository(RoyalCanyonDBContext dbContext, IMapper mapper, IDiscountRepository discountRepository,
             IPriceRepository priceRepository, IHttpContextAccessor contextAccessor)
             : base(dbContext, contextAccessor)
         {

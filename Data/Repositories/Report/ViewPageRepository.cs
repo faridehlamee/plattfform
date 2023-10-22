@@ -17,7 +17,7 @@ namespace Data.Repositories.Report
         private readonly IMapper _mapper;
         private readonly IHttpContextAccessor _contextAccessor;
 
-        public ViewPageRepository(KiatechDbContext dbContext, IMapper mapper, IHttpContextAccessor contextAccessor)
+        public ViewPageRepository(RoyalCanyonDBContext dbContext, IMapper mapper, IHttpContextAccessor contextAccessor)
             : base(dbContext, contextAccessor)
         {
             _mapper = mapper;

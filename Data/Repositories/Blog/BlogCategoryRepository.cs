@@ -17,7 +17,7 @@ namespace Data.Repositories.Blog
     {
         private readonly IMapper _mapper;
 
-        public BlogCategoryRepository(KiatechDbContext dbContext, IMapper Mapper, IHttpContextAccessor contextAccessor)
+        public BlogCategoryRepository(RoyalCanyonDBContext dbContext, IMapper Mapper, IHttpContextAccessor contextAccessor)
         : base(dbContext, contextAccessor)
         {
             _mapper = Mapper;

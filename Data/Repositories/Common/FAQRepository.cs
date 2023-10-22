@@ -20,7 +20,7 @@ namespace Data.Repositories.Public
     {
         private readonly IMapper _mapper;
 
-        public FAQRepository(KiatechDbContext dbContext, IMapper Mapper, IHttpContextAccessor contextAccessor)
+        public FAQRepository(RoyalCanyonDBContext dbContext, IMapper Mapper, IHttpContextAccessor contextAccessor)
         : base(dbContext , contextAccessor)
         {
             _mapper = Mapper;

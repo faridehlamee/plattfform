@@ -22,7 +22,7 @@ namespace Data.Repositories.WorkFlow
     {
         private readonly IMapper _mapper;
 
-        public WorkFlowHistoryRepository(KiatechDbContext dbContext, IMapper Mapper, IHttpContextAccessor contextAccessor)
+        public WorkFlowHistoryRepository(RoyalCanyonDBContext dbContext, IMapper Mapper, IHttpContextAccessor contextAccessor)
         : base(dbContext , contextAccessor)
         {
             _mapper = Mapper;

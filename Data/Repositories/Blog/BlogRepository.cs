@@ -17,7 +17,7 @@ namespace Data.Repositories.Blog
     public class BlogRepository : Repository<Entites.Entities.Blog>, IBlogRepository, IScopedDependency
     {
         private readonly IMapper _mapper;
-        public BlogRepository(KiatechDbContext dbContext, IMapper Mapper, IHttpContextAccessor contextAccessor)
+        public BlogRepository(RoyalCanyonDBContext dbContext, IMapper Mapper, IHttpContextAccessor contextAccessor)
         : base(dbContext, contextAccessor)
         {
             _mapper = Mapper;

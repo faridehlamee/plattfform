@@ -13,7 +13,7 @@ namespace Data.Repositories.Product
 {
     public class GuideRepository : Repository<Guide>, IGuideRepository, IScopedDependency
     {
-        public GuideRepository(KiatechDbContext dbContext, IHttpContextAccessor contextAccessor)
+        public GuideRepository(RoyalCanyonDBContext dbContext, IHttpContextAccessor contextAccessor)
             : base(dbContext, contextAccessor)
         {
         }

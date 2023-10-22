@@ -24,7 +24,7 @@ namespace Data.Repositories.Discount
 
         public DiscountRepository(
             IMapper Mapper ,
-            KiatechDbContext dbContext, 
+            RoyalCanyonDBContext dbContext, 
             IHttpContextAccessor contextAccessor,
             IOrderRepository orderRepository,
             IDiscountCodeUsedRepository discountCodeUsedRepository

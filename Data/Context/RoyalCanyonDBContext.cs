@@ -13,9 +13,9 @@ using System.Threading.Tasks;
 
 namespace Data
 {
-    public class KiatechDbContext : IdentityDbContext<User , Role , int>
+    public class RoyalCanyonDBContext : IdentityDbContext<User , Role , int>
     {
-        public KiatechDbContext(DbContextOptions options) : base(options)
+        public RoyalCanyonDBContext(DbContextOptions options) : base(options)
         {
 
         }

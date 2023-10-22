@@ -15,7 +15,7 @@ namespace Data.Repositories.Offer
     {
         private readonly IMapper _mapper;
 
-        public OfferRepository(IMapper Mapper , KiatechDbContext dbContext, IHttpContextAccessor contextAccessor)
+        public OfferRepository(IMapper Mapper , RoyalCanyonDBContext dbContext, IHttpContextAccessor contextAccessor)
             : base(dbContext, contextAccessor)
         {
             _mapper = Mapper;
