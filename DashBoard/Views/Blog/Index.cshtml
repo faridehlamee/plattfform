@@ -81,21 +81,21 @@
     },
     columns: [
         {
-            field: "BlogCategoryName",
-            title: "دسته ",
-            width: "110px"
-        }, {
-            field: "Title",
-            title: "نام",
-            width: "110px"
-        },{
-            title: "عملیات",
+            title: "Action",
             width: 100,
             template:
 
             "<a onclick='Remove(#=Id#)' asp-route-id='#=Id#' class='btn btn-danger btn-rounded'>حذف</a> " +
             "<a href='@Url.Action("EditPage", controllerName)/?Id=#=Id#' class='btn btn-primary btn-rounded'>ویرایش</a> "
-         }
+         }, {
+            field: "BlogCategoryName",
+            title: "Category ",
+            width: "110px"
+        }, {
+            field: "Title",
+            title: "Title",
+            width: "110px"
+        }
     ]
     });
     }

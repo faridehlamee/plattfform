@@ -1,6 +1,6 @@
 ﻿@model Data.DTO.User.UserDTO
     @{
-        ViewData["Title"] = "کاربران";
+        ViewData["Title"] = "User";
         Layout = "~/Views/Shared/_Layout.cshtml";
         var controllerName = this.ViewContext.RouteData.Values["controller"].ToString();
     }
@@ -17,11 +17,11 @@
                     <a class="btn btn-primary  btn-rounded ml-4" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
 
                         <i class="fa fa-filter mr-2" aria-hidden="true"></i>
-                        جست و جو
+                        Search
                     </a>
                     <a href="@Url.Action("Create",controllerName )" class="btn btn-success btn-rounded">
                                     <i class="fa fa-plus mr-2" aria-hidden="true"></i>
-                        ثبت @ViewData["Title"]
+                        Add @ViewData["Title"]
                     </a>
 
                     <div class="collapse" id="collapseExample">
@@ -58,7 +58,7 @@
 
                                 <hr />
                                 <div class="row">
-                                    <button type="button" class="btn m-btn--pill m-btn--air btn-success mr-2 color-white cursor-pointer" onclick="search()">تایید</button>
+                                    <button type="button" class="btn m-btn--pill m-btn--air btn-success mr-2 color-white cursor-pointer" onclick="search()">Save</button>
                                 </div>
                             </form>
 
@@ -68,7 +68,7 @@
                     </div>
                 </div>
                 <div class="col-12">
-                    <div class="k-rtl  shadow mt-4">
+                    <div class="shadow mt-4">
                         <div id="List"></div>
                     </div>
 
@@ -126,34 +126,33 @@
                     this.expandRow(this.tbody.find("tr.k-master-row").first());
                 },
                 columns: [
-
+                    
                     {
-                        field: "FirstName",
-                        title: "نام ",
-                        width: "110px"
-                    }, {
-                        field: "LastName",
-                        title: "نام خانوادگی",
-                        width: "110px"
-                    }, {
-                        template: "#=PertianDate(DateInsert)#",
-                        field: "DateInsert",
-                        title: "تاریخ ثبت",
-                        width: "110px"
-                    },{
-                        field: "PhoneNumber",
-                        title: "موبایل ",
-                        width: "110px"
-                    },
-                    {
-                    title: "عملیات",
+                    title: "Action",
                     width: 100,
                     template:
 
                         "<a  onclick='Remove(#=Id#)' asp-route-id='#=Id#' class='btn'><i class='fa fa-trash' aria-hidden='true'></i></a>   |" +
                         "<a href='@Url.Action("EditPage", controllerName)/?Id=#=Id#'  class='btn' ><i class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   |"+
-                        "<a href='@Url.Action("ChangePassword", controllerName)/?Id=#=Id#' class='btn'><i class='fa fa-lock' aria-hidden='true'></i></a>" 
+                        "<a href='@Url.Action("ChangePassword", controllerName)/?Id=#=Id#' class='btn'><i class='fa fa-lock' aria-hidden='true'></i></a>"
 
+                    }, {
+                        field: "FirstName",
+                        title: "First Name ",
+                        width: "110px"
+                    }, {
+                        field: "LastName",
+                        title: "Last Name",
+                        width: "110px"
+                    }, {
+                        template: "#=PertianDate(DateInsert)#",
+                        field: "DateInsert",
+                        title: "Registration Date",
+                        width: "110px"
+                    },{
+                        field: "PhoneNumber",
+                        title: "Phone Number ",
+                        width: "110px"
                     }
 
 

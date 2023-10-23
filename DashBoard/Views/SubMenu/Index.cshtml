@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewData["Title"] = "زیر منو";
+    ViewData["Title"] = "Sub Menu";
     Layout = "~/Views/Shared/_Layout.cshtml";
     var controllerName = this.ViewContext.RouteData.Values["controller"].ToString();
 }
@@ -18,11 +18,11 @@
                 <div class="row page-item ml-4">
                     <div class="dt-buttons">
                         <a href="@Url.Action("Create",controllerName )" class="btn btn-success btn-rounded">
-                            ثبت @ViewData["Title"]
+                            Add @ViewData["Title"]
                         </a>
                     </div>
                 </div>
-                <div class="k-rtl  shadow">
+                <div class="shadow">
                     <div id="List"></div>
 
                 </div>
@@ -65,29 +65,29 @@
                     this.expandRow(this.tbody.find("tr.k-master-row").first());
                 },
                 columns: [
+                    
                     {
-                        field: "Menu.Title",
-                        title: "موضوع ",
-                        width: "110px"
-                    },
-                    {
-                        field: "SubTitle",
-                        title: "موضوع ",
-                        width: "110px"
-                    },
-                    {
-                        field: "Level",
-                        title: "لول ",
-                        width: "110px"
-                    },
-                    {
-                    title: "عملیات",
+                    title: "Action",
                     width: 100,
                     template:
 
                         "<a  onclick='Remove(#=Id#)' asp-route-id='#=Id#' class='btn btn-danger btn-rounded'>حذف</a> " +
                         "<a href='@Url.Action("EditPage", controllerName)/?Id=#=Id#' class='btn btn-primary btn-rounded' >ویرایش</a> "
 
+                    }, {
+                        field: "Menu.Title",
+                        title: "Menu Title ",
+                        width: "110px"
+                    },
+                    {
+                        field: "SubTitle",
+                        title: "SubTitle ",
+                        width: "110px"
+                    },
+                    {
+                        field: "Level",
+                        title: "Level ",
+                        width: "110px"
                     }
 
 

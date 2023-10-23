@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewData["Title"] = "اسلایدر";
+    ViewData["Title"] = "Slider";
     Layout = "~/Views/Shared/_Layout.cshtml";
     var controllerName = this.ViewContext.RouteData.Values["controller"].ToString();
 }
@@ -18,11 +18,11 @@
                 <div class="row page-item ml-4">
                     <div class="dt-buttons">
                         <a href="@Url.Action("Create",controllerName )" class="btn btn-success btn-rounded">
-                            ثبت @ViewData["Title"]
+                            Add @ViewData["Title"]
                         </a>
                     </div>
                 </div>
-                <div class="k-rtl  shadow">
+                <div class="shadow">
                     <div id="List"></div>
 
                 </div>
@@ -65,20 +65,21 @@
                     this.expandRow(this.tbody.find("tr.k-master-row").first());
                 },
                 columns: [
-
+                    
                     {
-                        field: "Title",
-                        title: "موضوع ",
-                        width: "110px"
-                    },
-                    {
-                    title: "عملیات",
+                    title: "Action",
                     width: 100,
                     template:
 
-                        "<a  onclick='Remove(#=Id#)' asp-route-id='#=Id#' class='btn btn-danger btn-rounded'>حذف</a> " +
-                        "<a href='@Url.Action("EditPage", controllerName)/?Id=#=Id#' class='btn btn-primary btn-rounded' >ویرایش</a> "
+                        "<a  onclick='Remove(#=Id#)' asp-route-id='#=Id#' class='btn btn-danger btn-rounded'>Delete</a> " +
+                        "<a href='@Url.Action("EditPage", controllerName)/?Id=#=Id#' class='btn btn-primary btn-rounded' >Edit</a> "
 
+                    }
+                    ,
+                    {
+                        field: "Title",
+                        title: "Title ",
+                        width: "110px"
                     }
 
 
@@ -95,7 +96,7 @@
                            data: { id: Id },
                            success: function () {
                                debugger;
-                               toastr.success(' حذف شد')
+                               toastr.success('Deleted')
                                $("#List").data("kendoGrid").dataSource.read();
                            }
                        });

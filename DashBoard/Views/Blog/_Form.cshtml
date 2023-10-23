@@ -12,40 +12,40 @@
     <div class="form-group">
         <div class="row">
             <div class="col-md-6">
-                <label asp-for="BlogCategoryId">نام دسته</label>
+                <label asp-for="BlogCategoryId">Category</label>
                 <select asp-for="BlogCategoryId" asp-items="Model.ListBlogCategory" class="form-control input-rounded SearchDropDown">
-                    <option>انتخاب نمایید</option>
+                    <option></option>
                 </select>
             </div>
             <div class="col-md-6">
-                <label asp-for="Title">موضوع </label>
+                <label asp-for="Title">Title </label>
                 <input asp-for="Title" type="text" class="form-control input-rounded" />
             </div>
         </div>
 
         <div class="row">
             <div class="col-md-12">
-                <label asp-for="Sumary">خلاصه</label>
+                <label asp-for="Sumary">Sumary</label>
                 <textarea asp-for="Sumary" class="form-control input-rounded">@Model.Sumary</textarea>
             </div>
         </div>
         <div class="row">
             <div class="col-md-12">
-                <label asp-for="Description">توضیح</label>
+                <label asp-for="Description">Description</label>
                 <textarea asp-for="Description" class="form-control input-rounded">@Model.Description</textarea>
             </div>
         </div>
         <div class="row">
             <div class="col-md-4">
-                <label asp-for="Image">تصویر</label>
+                <label asp-for="Image">Photo</label>
                 <input asp-for="Image" type="file" class="form-control input-rounded" />
             </div>
         </div>
         <div class="row">
-            <div class="col-md-6">
+            @*<div class="col-md-6">
                 <label asp-for="AparatID"></label>
                 <input asp-for="AparatID" type="text" class="form-control input-rounded" />
-            </div>
+            </div>*@
             <div class="col-md-6">
                 <label asp-for="AparatLink"> </label>
                 <input asp-for="AparatLink" type="text" class="form-control input-rounded" />

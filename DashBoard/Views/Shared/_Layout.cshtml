@@ -204,9 +204,9 @@
                         <ul id="sidebarnav">
                             <li class="nav-devider mb-4"></li>
                             <li>
-                                <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-tachometer"></i><span class="hide-menu">System management </span></a>
+                                <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-tachometer"></i><span class="hide-menu">System Management </span></a>
                                 <ul aria-expanded="false" class="collapse">
-                                    <li><a asp-controller="Home" asp-action="Index">management </a></li>
+                                    <li><a asp-controller="Home" asp-action="Index">Management </a></li>
                                     <li><a href="http://royalcanyon.ca/"> Main Site</a></li>
                                     <li><a asp-controller="User" asp-action="Index">Users</a></li>
                                     <li>@*<a asp-controller="IdentificationCodeRule" asp-action="Index">قوانین کد معرف</a>*@</li>
@@ -214,8 +214,8 @@
                                     @if (User.IsInRole("Admin"))
                                     {
 
-                                        <li><a asp-controller="RoleManager" asp-action="Index">RoleManager</a></li>
-                                        <li><a asp-controller="Claim" asp-action="Index"> Claim</a></li>
+                                        <li><a asp-controller="RoleManager" asp-action="Index">Role Manager</a></li>
+                                        @*<li><a asp-controller="Claim" asp-action="Index"> Claim</a></li>*@
                                     }
 
                                 </ul>

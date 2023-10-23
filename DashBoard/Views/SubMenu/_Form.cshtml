@@ -12,15 +12,15 @@
     <div class="form-group">
         <div class="row">
             <div class="col-md-6">
-                <label asp-for="MenuId">سردسته</label>
+                <label asp-for="MenuId">Main Manu</label>
                 <select asp-for="MenuId" asp-items="Model.MenuList" class="form-control input-rounded SearchDropDown">
-                    <option>انتخاب نمایید</option>
+                    <option></option>
                 </select>
             </div>
             <div class="col-md-6">
-                <label asp-for="ParentId">پدر</label>
+                <label asp-for="ParentId">Parent</label>
                 <select asp-for="ParentId" asp-items="Model.ListSubMenu" class="form-control input-rounded SearchDropDown">
-                    <option>انتخاب نمایید</option>
+                    <option></option>
                 </select>
             </div>
             
@@ -28,18 +28,18 @@
         </div>
         <div class="row">
             <div class="col-md-6">
-                <label asp-for="SubTitle">زیر منو</label>
+                <label asp-for="SubTitle">Su Menu</label>
                 <input asp-for="SubTitle" type="text" class="form-control input-rounded" />
             </div>
             <div class="col-md-6">
-                <label asp-for="URL">آردسURL</label>
+                <label asp-for="URL">URL</label>
                 <input asp-for="URL" type="text" class="form-control input-rounded" />
             </div>
         </div>
       
         <div class="row">
             <div class="col-md-6">
-                <label asp-for="Level">سطح</label>
+                <label asp-for="Level">Level</label>
                 <input asp-for="Level" type="text" class="form-control input-rounded" />
             </div>
         </div>
