@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Data.Migrations
 {
     [DbContext(typeof(RoyalCanyonDBContext))]
-    [Migration("20231022231036_AddInfoSite")]
-    partial class AddInfoSite
+    [Migration("20231024075031_addimage")]
+    partial class addimage
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -1687,6 +1687,9 @@ namespace Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Icone")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Image")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsActive")
