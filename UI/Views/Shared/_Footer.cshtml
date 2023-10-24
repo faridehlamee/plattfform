@@ -2,8 +2,17 @@
 @{
 
     var menudata = await _menuRepository.GetAllActive();
+    //  var servicedata = await _menuRepository.GetServices();
 
 }
+@inject Data.Contracts.Common.IServiceRepository _serviceRepository;
+@{
+
+    var servicedata = await _serviceRepository.GetServices();
+    //  var servicedata = await _menuRepository.GetServices();
+
+}
+
 <!-- ======= Footer ======= -->
 <footer id="footer">
     <div class="footer-top">
@@ -17,16 +26,15 @@
                             North Vancouver, BC
                             <br>
                             CANADA
-  
+
                             <strong>Phone:</strong> +1 (604) 500-0303<br>
                             <strong>Email:</strong> info@royalcanyon.ca<br>
                         </p>
                         <div class="social-links mt-3">
-                            <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
-                            <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
-                            <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
-                            <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
-                            <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+
+                            <a href="https://www.facebook.com/AmirBehkish?mibextid=9R9pXO" class="facebook"><i class="bi bi-facebook"></i></a>
+                            <a href="https://www.instagram.com/amir_behkish.phd/" class="instagram"><i class="bi bi-instagram"></i></a>
+                            <a href="https://www.linkedin.com/in/amir-behkish-phd-chi-asct-rhi-68547441/" class="linkedin"><i class="bi bi-linkedin"></i></a>
                         </div>
                     </div>
                 </div>
@@ -42,17 +50,24 @@
                             }
                         }
 
+
                     </ul>
                 </div>
 
                 <div class="col-lg-3 col-md-6 footer-links">
                     <h4>Our Services</h4>
                     <ul>
-                        <li><i class="bx bx-chevron-right"></i> <a asp-action="Index" asp-controller="Service" >Web Design</a></li>
-                        <li><i class="bx bx-chevron-right"></i> <a asp-action="Index" asp-controller="Service">Web Development</a></li>
-                        <li><i class="bx bx-chevron-right"></i> <a asp-action="Index" asp-controller="Service">Product Management</a></li>
-                        <li><i class="bx bx-chevron-right"></i> <a asp-action="Index" asp-controller="Service">Marketing</a></li>
-                        <li><i class="bx bx-chevron-right"></i> <a asp-action="Index" asp-controller="Service">Graphic Design</a></li>
+                        @foreach (var item in servicedata)
+                            {
+
+                                    <li><i class="bx bx-chevron-right"></i> <a asp-action="Index" asp-controller="Service">@item.Name </a></li>
+
+                            }
+                        @*<li><i class="bx bx-chevron-right"></i> <a asp-action="Index" asp-controller="Service">Web Design</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a asp-action="Index" asp-controller="Service">Web Development</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a asp-action="Index" asp-controller="Service">Product Management</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a asp-action="Index" asp-controller="Service">Marketing</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a asp-action="Index" asp-controller="Service">Graphic Design</a></li>*@
                     </ul>
                 </div>
 
@@ -67,7 +82,7 @@
             &copy; Copyright <strong><span>ROYAL CANYON</span></strong>. All Rights Reserved
         </div>
         <div class="credits">
-               Designed by <a href="https://kiatechsoftware.com/">Kiatech Software</a>
+            Designed by <a href="https://kiatechsoftware.com/">Kiatech Software</a>
         </div>
     </div>
 </footer><!-- End Footer -->

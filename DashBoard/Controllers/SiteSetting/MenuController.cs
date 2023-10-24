@@ -38,7 +38,7 @@ namespace DashBoard.Controllers.SiteSetting
         public IActionResult Index() { return View(); }
         public async Task<JsonResult> ListAsync(CancellationToken cancellationToken)
         {
-            var dto = await _menuRepository.TableNoTracking.ProjectTo<MenuDTO>(_mapper.ConfigurationProvider)
+            var dto = await _menuRepository.TableNoTracking.ProjectTo<ServiceDTO>(_mapper.ConfigurationProvider)
                 .Where(c => c.IsActive)
                 .ToListAsync();
 
@@ -47,11 +47,11 @@ namespace DashBoard.Controllers.SiteSetting
 
         public  IActionResult Create()
         {
-            var data = new MenuDTO();
+            var data = new ServiceDTO();
               return View(data);
         }
         [HttpPost]
-        public async Task<IActionResult> CreateAsync(MenuDTO model)
+        public async Task<IActionResult> CreateAsync(ServiceDTO model)
         {
             var form = await Request.ReadFormAsync();
             if (form.Files.Count > 0)
@@ -67,13 +67,13 @@ namespace DashBoard.Controllers.SiteSetting
         }
         public async Task<IActionResult> Editpage(int Id)
         {
-            var data = await _menuRepository.TableNoTracking.ProjectTo<MenuDTO>(_mapper.ConfigurationProvider)
+            var data = await _menuRepository.TableNoTracking.ProjectTo<ServiceDTO>(_mapper.ConfigurationProvider)
               .SingleOrDefaultAsync(p => p.Id == Id, CancellationToken.None);
 
             return View(data);
         }
         [HttpPost]
-        public async Task<IActionResult> EditAsync(MenuDTO model, CancellationToken cancellationToken)
+        public async Task<IActionResult> EditAsync(ServiceDTO model, CancellationToken cancellationToken)
         {
             var data = await _menuRepository.GetByIdAsync(cancellationToken, model.Id);
             var form = await Request.ReadFormAsync();

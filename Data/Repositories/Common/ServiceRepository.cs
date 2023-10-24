@@ -20,29 +20,29 @@ using Data.DTO.Common;
 
 namespace Data.Repositories.Public
 {
-    public class MenuRepository : Repository<Menu>, IMenuRepository, IScopedDependency
+    public class ServiceRepository : Repository<Service>, IServiceRepository, IScopedDependency
     {
         private readonly IMapper _mapper;
         private readonly IMemoryCache _memoryCache;
 
-        public MenuRepository(IMapper Mapper, RoyalCanyonDBContext dbContext, IHttpContextAccessor contextAccessor ,IMemoryCache memoryCache)
+        public ServiceRepository(IMapper Mapper, RoyalCanyonDBContext dbContext, IHttpContextAccessor contextAccessor ,IMemoryCache memoryCache)
         : base(dbContext , contextAccessor)
         {
             _mapper = Mapper;
             this._memoryCache = memoryCache;
         }
      
-        public async Task<List<MenuDTO>> GetAllActive()
+        public async Task<List<DTO.Common.ServiceDTO>> GetServices()
         {
             await ReloadData();
            // var cashData = new List<MenuDTO>();
-            if (_memoryCache.TryGetValue(CacheKeys.Menu, out List<MenuDTO> cashData))
+            if (_memoryCache.TryGetValue(CacheKeys.Menu, out List<DTO.Common.ServiceDTO> cashData))
             {
                 return cashData;
             }
             else
             {
-                var data = await base.TableNoTracking.Where(c => c.IsActive).ProjectTo<MenuDTO>(_mapper.ConfigurationProvider).OrderBy(v => v.Level).ToListAsync();
+                var data = await base.TableNoTracking.Where(c => c.IsActive).ProjectTo<DTO.Common.ServiceDTO>(_mapper.ConfigurationProvider).OrderBy(v => v.Name).ToListAsync();
                 var cacheEntryOptions = new MemoryCacheEntryOptions()
                    // Set cache entry size by extension method.
                    .SetSize(1)
@@ -64,7 +64,7 @@ namespace Data.Repositories.Public
         {
 
            
-                var data = await base.TableNoTracking.Where(c => c.IsActive).ProjectTo<MenuDTO>(_mapper.ConfigurationProvider).OrderBy(v => v.Level).ToListAsync();
+                var data = await base.TableNoTracking.Where(c => c.IsActive).ProjectTo<DTO.Common.ServiceDTO>(_mapper.ConfigurationProvider).OrderBy(v => v.Name).ToListAsync();
                 var cacheEntryOptions = new MemoryCacheEntryOptions()
                    // Set cache entry size by extension method.
                    .SetSize(1)
@@ -81,33 +81,6 @@ namespace Data.Repositories.Public
 
 
         }
-        //public async Task<List<ServiceDTO>> GetServices()
-        //{
-        //    await ReloadData();
-        //    // var cashData = new List<MenuDTO>();
-        //    if (_memoryCache.TryGetValue(CacheKeys.Menu, out List<ServiceDTO> cashData))
-        //    {
-        //        return cashData;
-        //    }
-        //    else
-        //    {
-        //        var data = await TableNoTracking.Where(c => c.IsActive).ProjectTo<ServiceDTO>(_mapper.ConfigurationProvider).OrderBy(v => v.Name).ToListAsync();
-        //        var cacheEntryOptions = new MemoryCacheEntryOptions()
-        //           // Set cache entry size by extension method.
-        //           .SetSize(1)
-        //           // Keep in cache for this time, reset time if accessed.
-        //           .SetSlidingExpiration(TimeSpan.FromMinutes(15));
-
-        //        // Set cache entry size via property.
-        //        // cacheEntryOptions.Size = 1;
-
-        //        // Save data in cache.
-        //        _memoryCache.Set(CacheKeys.Menu, data, cacheEntryOptions);
-        //        return data;
-        //    }
-
-
-        //}
 
 
 
