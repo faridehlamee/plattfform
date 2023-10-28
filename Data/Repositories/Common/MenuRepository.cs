@@ -75,7 +75,7 @@ namespace Data.Repositories.Public
                 // cacheEntryOptions.Size = 1;
 
                 // Save data in cache.
-                _memoryCache.Set(CacheKeys.Cart, data, cacheEntryOptions);
+                _memoryCache.Set(CacheKeys.Menu, data, cacheEntryOptions);
               
            
 

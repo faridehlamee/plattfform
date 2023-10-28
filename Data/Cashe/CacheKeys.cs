@@ -10,6 +10,7 @@ namespace Data.Cashe
     {
         public static string Entry => "_Entry";
         public static string Menu => "_Menu";
+        public static string Service => "_Service";
         public static string Cart => "_Cart";
         public static string CallbackEntry => "_Callback";
         public static string CallbackMessage => "_CallbackMessage";

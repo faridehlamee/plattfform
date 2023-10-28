@@ -36,13 +36,13 @@ namespace Data.Repositories.Public
         {
             await ReloadData();
            // var cashData = new List<MenuDTO>();
-            if (_memoryCache.TryGetValue(CacheKeys.Menu, out List<DTO.Common.ServiceDTO> cashData))
+            if (_memoryCache.TryGetValue(CacheKeys.Service, out List<DTO.Common.ServiceDTO> cashData))
             {
                 return cashData;
             }
             else
             {
-                var data = await base.TableNoTracking.Where(c => c.IsActive).ProjectTo<DTO.Common.ServiceDTO>(_mapper.ConfigurationProvider).OrderBy(v => v.Name).ToListAsync();
+                var data = await TableNoTracking.Where(c => c.IsActive).ProjectTo<DTO.Common.ServiceDTO>(_mapper.ConfigurationProvider).OrderBy(v => v.Name).Take(5).ToListAsync();
                 var cacheEntryOptions = new MemoryCacheEntryOptions()
                    // Set cache entry size by extension method.
                    .SetSize(1)
@@ -53,7 +53,7 @@ namespace Data.Repositories.Public
                 // cacheEntryOptions.Size = 1;
 
                 // Save data in cache.
-                _memoryCache.Set(CacheKeys.Menu, data, cacheEntryOptions);
+                _memoryCache.Set(CacheKeys.Service, data, cacheEntryOptions);
                 return data;
             }
            
@@ -64,7 +64,7 @@ namespace Data.Repositories.Public
         {
 
            
-                var data = await base.TableNoTracking.Where(c => c.IsActive).ProjectTo<DTO.Common.ServiceDTO>(_mapper.ConfigurationProvider).OrderBy(v => v.Name).ToListAsync();
+                var data = await TableNoTracking.Where(c => c.IsActive).ProjectTo<DTO.Common.ServiceDTO>(_mapper.ConfigurationProvider).OrderBy(v => v.Name).Take(5).ToListAsync();
                 var cacheEntryOptions = new MemoryCacheEntryOptions()
                    // Set cache entry size by extension method.
                    .SetSize(1)
@@ -75,7 +75,7 @@ namespace Data.Repositories.Public
                 // cacheEntryOptions.Size = 1;
 
                 // Save data in cache.
-                _memoryCache.Set(CacheKeys.Cart, data, cacheEntryOptions);
+                _memoryCache.Set(CacheKeys.Service, data, cacheEntryOptions);
               
            
 
